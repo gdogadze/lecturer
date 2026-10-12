@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>კვირა 1. თანამედროვე .NET ეკოსისტემა</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+  <header class="mast">
+    <div class="mast-inner">
+      <p class="mast-kicker">სოხუმის სახელმწიფო უნივერსიტეტი · ინფორმატიკა · COMP M205-1</p>
+      <p class="mast-week">კვირა 1 · ლექცია 2 სთ · ლაბორატორია 1 სთ</p>
+      <h1>შესავალი. თანამედროვე .NET ეკოსისტემა</h1>
+      <p class="mast-lead">დღეს სამ რამეს გაყოფთ: ენას, პლატფორმას და რედაქტორს. ბოლოს ერთ პატარა პროგრამას გაუშვებთ.</p>
+    </div>
+  </header>
+
+  <nav class="crumbs">
+    <a href="../index.html">კურსი</a>
+    <a href="../reference/dotnet-map.html">ცნობარი: რუკა</a>
+    <a href="0002-devops-cicd.html">შემდეგი: CI/CD</a>
+  </nav>
+
+  <main class="sheet">
+    <p class="lead">სილაბუსის პირველი შედეგი ამ საათიდან იწყება: სტუდენტი აღწერს თანამედროვე .NET-ს. აღწერა აქ კონკრეტულია. ახალ პროექტს იწყებთ .NET 10-ზე, კოდში კი C# 12-ის ორ ფორმას წერთ.</p>
+
+    <details class="lecturer">
+      <summary>ლექტორისთვის · გახსნა, დაახლოებით 4 წუთი</summary>
+      <p>ჰკითხეთ დარბაზს: ვინ დაწერა რამე C#-ზე, ვინ Java-ზე ან Python-ზე, ვინ ზის Mac-ზე და ვინ Windows-ზე. პასუხი გიჩვენებთ, რამდენი დრო დაუთმოთ <code>Main</code>-ს. სლაიდები უკვე გაქვთ: <code>lectures/week-01</code>. ეს გვერდი იგივე არგუმენტია, სავარჯიშოებით.</p>
+    </details>
+
+    <h2><span class="num">01</span>სამი სხვადასხვა რამეა</h2>
+    <p>პროგრამას წერთ ენით. პლატფორმა მას აწყობს და გაუშვებს. რედაქტორი არის მაგიდა, სადაც ტექსტი იწერება. მაგიდის გამოცვლა ენას არ ცვლის.</p>
+    <ul class="cards">
+      <li>
+        <strong>C#</strong>
+        <span>ენა</span>
+        <p>ამ ენით იწერება პროგრამა. Java-ს მსგავსად აქვს კლასი, მეთოდი და ტიპი.</p>
+      </li>
+      <li>
+        <strong>.NET</strong>
+        <span>პლატფორმა</span>
+        <p>გაუშვებს კოდს და მისცემს ბიბლიოთეკებს: ფაილს, ქსელს, JSON-ს.</p>
+      </li>
+      <li>
+        <strong>IDE</strong>
+        <span>რედაქტორი</span>
+        <p>Visual Studio, Rider, VS Code, Cursor. ოთხივე იგივე <code>dotnet</code>-ს იძახებს.</p>
+      </li>
+    </ul>
+    <p class="aside">წყარო: <a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/implementations">.NET implementations</a>. Microsoft აქ პლატფორმას და ენას ცალ-ცალკე აღწერს.</p>
+
+    <h3>დაალაგეთ, ჩანაწერის გარეშე</h3>
+    <p>ჯერ თქვით პასუხი, მერე დააჭირეთ. არასწორ ღილაკს თავისი ახსნა აქვს. სწორს მაშინ დაინახავთ, როცა მას დააჭერთ.</p>
+    <ul class="bins">
+      <li class="bin-item" data-expect="language" data-yes="ენაა. ეს სინტაქსია, პლატფორმის სახელი კი არა." data-no="ეს ჩანაწერის ფორმაა. მას პლატფორმა არ ჰქვია და რედაქტორშიც არ დგას.">
+        <p><code>[10, 9, 8]</code></p>
+        <div class="bin-actions">
+          <button type="button" data-pick="language">ენა</button>
+          <button type="button" data-pick="platform">პლატფორმა</button>
+          <button type="button" data-pick="editor">რედაქტორი</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+      <li class="bin-item" data-expect="platform" data-yes="პლატფორმაა. ბრძანება SDK-ს ეკუთვნის, რომელ რედაქტორშიც არ უნდა იჯდეთ." data-no="ეს ბრძანება რედაქტორს არ ეკუთვნის. იგივე ხაზი მუშაობს Visual Studio-შიც და Cursor-შიც.">
+        <p><code>dotnet run</code></p>
+        <div class="bin-actions">
+          <button type="button" data-pick="editor">რედაქტორი</button>
+          <button type="button" data-pick="language">ენა</button>
+          <button type="button" data-pick="platform">პლატფორმა</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+      <li class="bin-item" data-expect="editor" data-yes="რედაქტორია. C#-ს წინადადებას წერისას სთავაზობს. ენა მის გარეშეც იგივეა." data-no="IntelliSense მაგიდის თვისებაა. პლატფორმა მის გარეშეც აწყობს პროექტს.">
+        <p>IntelliSense</p>
+        <div class="bin-actions">
+          <button type="button" data-pick="platform">პლატფორმა</button>
+          <button type="button" data-pick="editor">რედაქტორი</button>
+          <button type="button" data-pick="language">ენა</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+      <li class="bin-item" data-expect="platform" data-yes="პლატფორმის ბიბლიოთეკების მაღაზიაა. პაკეტი რედაქტორზე არ არის მიბმული." data-no="NuGet არც ენაა და არც რედაქტორი. პაკეტს პროექტი იღებს, <code>dotnet add package</code>-ით.">
+        <p>NuGet</p>
+        <div class="bin-actions">
+          <button type="button" data-pick="language">ენა</button>
+          <button type="button" data-pick="editor">რედაქტორი</button>
+          <button type="button" data-pick="platform">პლატფორმა</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+      <li class="bin-item" data-expect="editor" data-yes="რედაქტორია. Mac-ზე სრული Visual Studio არ გვჭირდება. SDK იგივე რჩება." data-no="Cursor მაგიდაა. მასში დაწერილი C# სხვა ენა არ ხდება.">
+        <p>Cursor</p>
+        <div class="bin-actions">
+          <button type="button" data-pick="editor">რედაქტორი</button>
+          <button type="button" data-pick="platform">პლატფორმა</button>
+          <button type="button" data-pick="language">ენა</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+    </ul>
+
+    <h2><span class="num">02</span>სამი სახელი, ერთი დღევანდელი არჩევანი</h2>
+    <p>Microsoft დღეს სამ იმპლემენტაციას ასახელებს: თანამედროვე .NET-ს, .NET Framework-ს და Mono-ს. ამ კურსის პროექტს <code>dotnet</code> SDK აწყობს. Unity C#-ს იყენებს, მაგრამ იქ runtime სხვაა. ის ამ კურსის .NET არ არის.</p>
+    <ul class="stack">
+      <li>
+        <strong>.NET Framework</strong>
+        <span>4.8 · მხოლოდ Windows</span>
+        <p>არსებული Windows აპისთვის. Web Forms და Workflow აქ რჩება. ახალი შესაძლებლობა ამ ხაზს აღარ ემატება.</p>
+      </li>
+      <li>
+        <strong>.NET Core</strong>
+        <span>2016–3.1 · ხაზი დასრულდა</span>
+        <p>გადაწერილი პლატფორმა იყო, უკვე Linux-ზეც. ახალ პროექტს ამ სახელით აღარ ვქმნით.</p>
+      </li>
+      <li class="mark">
+        <strong>.NET 10</strong>
+        <span>ახალი პროექტი · LTS</span>
+        <p>ერთი პლატფორმა Windows-ზე, Linux-ზე და macOS-ზე. მხარდაჭერა 2028 წლის 14 ნოემბრამდეა.</p>
+      </li>
+    </ul>
+    <p>სიტყვა Core დღეს ორ სახელში რჩება: ASP.NET Core და Entity Framework Core. პროდუქტს, რომელზეც ახალ პროექტს ვიწყებთ, Core აღარ ჰქვია. სახელი .NET 5-იდან მოიხსნა.</p>
+    <p>ლუწი ნომერი გრძელ მხარდაჭერას იღებს, სამ წელს. ამას LTS ჰქვია. კენტი ნომერი ორ წელს იღებს. ამას STS ჰქვია. ხარისხი ერთია. განსხვავება ვადაა. .NET 8 და .NET 9 ორივე 2026 წლის 10 ნოემბერს რჩება მხარდაჭერის გარეშე. ახალ პროექტს .NET 9-ზე არ ვიწყებთ.</p>
+    <p class="aside">თარიღები: <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">.NET support policy</a>, განახლებული 2026 წლის 8 სექტემბერს. Framework-ზე დარჩენის მიზეზები: <a href="https://learn.microsoft.com/en-us/dotnet/standard/choosing-core-framework-server">Choose between .NET and .NET Framework</a>.</p>
+
+    <details class="lecturer">
+      <summary>ლექტორისთვის · დაახლოებით 8 წუთი</summary>
+      <p>ცხრილი სლაიდზეა, აქ მოკლედ. ხმამაღლა წაიკითხეთ ბოლო წინადადება Core-ზე. თუ ლაბორატორიაში 10 არ დგას, 8-ზეც დღევანდელი დემო ეშვება. 9-ს ნუ დააყენებინებთ.</p>
+    </details>
+
+    <section class="quiz" data-quiz data-answer="b">
+      <p class="prompt">ახალ პროექტს დღეს სად იწყებთ?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="Framework 4.8 არსებულ Windows აპს რჩება. ახალი პროექტის ხაზი ის აღარ არის.">Framework 4.8-ზე, ძველი Windows აპისთვის</button>
+        <button type="button" data-choice="b" data-why="კი. .NET 10 არის მოქმედი LTS, მხარდაჭერით 2028 წლის 14 ნოემბრამდე.">მიმდინარე LTS-ზე, ანუ .NET 10-ზე</button>
+        <button type="button" data-choice="c" data-why=".NET 9 მოკლე ხაზია და 2026 წლის 10 ნოემბერს სრულდება. ახალს აქ არ ვიწყებთ.">.NET 9-ზე, მოკლე მხარდაჭერის ხაზზე</button>
+        <button type="button" data-choice="d" data-why="Core 3.1-ის მხარდაჭერა 2022 წელს დამთავრდა. სახელი ისტორიაა.">ძველ Core 3.1-ის დახურულ ხაზზე</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h2><span class="num">03</span>რა ხდება გაშვებისას</h2>
+    <p>თქვენ წერთ ზედა ფენას. დანარჩენი პლატფორმაა.</p>
+    <ol class="flow">
+      <li>C#<span>თქვენი კოდი</span></li>
+      <li>Roslyn<span>კომპილატორი</span></li>
+      <li>IL<span>შუალედური კოდი</span></li>
+      <li>JIT<span>გაშვებისას</span></li>
+      <li>CPU<span>პროცესორი</span></li>
+    </ol>
+    <p>Roslyn C#-ს IL-ად აქცევს. IL ჯერ პროცესორის ბრძანება არ არის. გაშვებისას JIT მას პროცესორის ენაზე თარგმნის. Runtime ამ დროს მეხსიერებასაც თავად ასუფთავებს.</p>
+    <p>სამი პრაქტიკული განსხვავება Framework-სა და დღევანდელ .NET-ს შორის საკმარისია.</p>
+    <ol>
+      <li>Framework მხოლოდ Windows-ზე ეშვება. .NET 8 და .NET 10 ეშვება Windows-ზე, Linux-ზე და macOS-ზე. სერვერი ხშირად Linuxია.</li>
+      <li>აპი იყენებს დაყენებულ runtime-ს, ან გამოქვეყნებისას runtime-ს თან იღებს. .NET 8 და .NET 10 ერთ მანქანაზე ერთად დგას.</li>
+      <li>ძველ ვებ აპს IIS სჭირდება. ASP.NET Core-ს თავისი სერვერი ჰყავს, Kestrel. იგივე სერვისი კონტეინერშიც ეშვება. კონტეინერს მე-6 კვირას დავუბრუნდებით.</li>
+    </ol>
+
+    <h2><span class="num">04</span>პროექტი ორი ფაილია</h2>
+    <p>კონსოლის ახალი პროექტის <code>csproj</code> მოკლეა. <code>TargetFramework</code> წყვეტს, რომელ პლატფორმაზე იგება პროექტი. ენის ნაგულისხმევი ვერსიაც აქედან მოდის. Visual Studio-ში ამ ვერსიას სამიზნის შეცვლით ირჩევენ, ცალკე გადამრთველით კი არა.</p>
+    <pre><code>&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;OutputType&gt;Exe&lt;/OutputType&gt;
+    &lt;TargetFramework&gt;net10.0&lt;/TargetFramework&gt;
+  &lt;/PropertyGroup&gt;
+&lt;/Project&gt;</code></pre>
+    <p>Microsoft-ის მაგალითით, .NET 6 ნაგულისხმევად C# 10-ია და .NET 9 ნაგულისხმევად C# 13. იგივე ნაბიჯით .NET 8 არის C# 12, .NET 10 არის C# 14. სილაბუსის ენა C# 12-ია. დღევანდელი ორი ფორმა სწორედ C# 12-ია, ამიტომ <code>net8.0</code>-ზეც იგება და <code>net10.0</code>-ზეც. <code>LangVersion</code>-ს <code>latest</code> ნუ მიანიჭებთ: მაშინ სხვადასხვა მანქანა სხვადასხვა ენას აიღებს.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version">Configure C# language version</a>. C# 12-ის სია: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12">What's new in C# 12</a>.</p>
+
+    <h3>ძველი წიგნი და ახალი შაბლონი</h3>
+    <p>ქართულ დამხმარეში და ძველ სახელმძღვანელოში <code>Main</code>-ს ნახავთ. ახალი შაბლონი იმ წერტილს თვითონ ქმნის. ორივე ერთს ბეჭდავს. <code>using System</code> ახალ ფაილში აღარ წერია: შაბლონი მას ფარულად რთავს.</p>
+    <div class="pair">
+      <figure>
+        <figcaption>წიგნში</figcaption>
+        <pre><code>using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("გამარჯობა");
+    }
+}</code></pre>
+      </figure>
+      <figure>
+        <figcaption>ახალი შაბლონი</figcaption>
+        <pre><code>Console.WriteLine("გამარჯობა");</code></pre>
+      </figure>
+    </div>
+
+    <h3>ხუთი ბრძანება</h3>
+    <table>
+      <thead>
+        <tr><th>ბრძანება</th><th>რას აკეთებს</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>dotnet --version</code></td><td>რომელი SDK გიყენიათ. გვინდა 10-ით დაწყებული ნომერი.</td></tr>
+        <tr><td><code>dotnet new console</code></td><td>ახალი კონსოლის პროექტი.</td></tr>
+        <tr><td><code>dotnet build</code></td><td>აწყობა, გაშვების გარეშე.</td></tr>
+        <tr><td><code>dotnet run</code></td><td>აწყობა და გაშვება. რედაქტორის ღილაკი ამას იძახებს.</td></tr>
+        <tr><td><code>dotnet add package</code></td><td>NuGet პაკეტის დამატება. დღეს არ გვჭირდება.</td></tr>
+      </tbody>
+    </table>
+    <p>დეველოპერის მანქანაზე SDK გვინდა, მარტო runtime კი არა. თუ <code>dotnet new</code> ვერ იძებნება, ხშირად runtime დგას და SDK არა.</p>
+
+    <h2><span class="num">05</span>C# 12: ორი ფორმა, რომელსაც დღეს წერთ</h2>
+    <p>სილაბუსი C# 12-ს ასახელებს. აქედან იწყება ის ჩანაწერი, რომელსაც ყოველდღიურად ვიყენებთ. დანარჩენი სიახლეები, <code>ref readonly</code>, inline arrays და Experimental, დღეს მხოლოდ სახელებია.</p>
+
+    <h3>კონსტრუქტორი კლასის თავში</h3>
+    <p>მარცხენა კლასი ისაა, რაც OOP-დან უკვე იცით. მარჯვენა იგივე კლასია. პარამეტრები კლასის სახელთან წერია და მთელ სხეულში ჩანს.</p>
+    <div class="pair">
+      <figure>
+        <figcaption>რაც უკვე იცით</figcaption>
+        <pre><code>class Student
+{
+    public string Name { get; }
+    public int Year { get; }
+
+    public Student(string name, int year)
+    {
+        Name = name;
+        Year = year;
+    }
+}</code></pre>
+      </figure>
+      <figure>
+        <figcaption>C# 12</figcaption>
+        <pre><code>class Student(string name, int year)
+{
+    public string Name { get; } = name;
+    public int Year { get; } = year;
+}</code></pre>
+      </figure>
+    </div>
+    <p><code>name</code> თვისება არ არის. ის პარამეტრია. თვისებას თვითონ ანიჭებთ: <code>Name = name</code>. რეგისტრს მნიშვნელობა აქვს. ჩანაწერის ტიპზე, <code>record</code>-ზე, კომპილატორი პარამეტრისგან საჯარო თვისებას თვითონ ქმნის. ჩვეულებრივ კლასზე ამას არ აკეთებს.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12">What's new in C# 12</a>, განყოფილება Primary constructors.</p>
+
+    <section class="quiz" data-quiz data-answer="d">
+      <p class="prompt"><code>class Student(string name, int year)</code>-ში <code>name</code> რა არის?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="ეს record-ის ქცევაა. ჩვეულებრივ კლასზე კომპილატორი თვისებას თვითონ არ ქმნის.">თვისება, პარამეტრი კი არა</button>
+        <button type="button" data-choice="b" data-why="შენახვა შეიძლება გაჩნდეს, თუ პარამეტრს სხეულში იყენებთ. სახელი მაინც პარამეტრის სახელია, ველის კი არა.">ფარული ველი კლასის შიგნით</button>
+        <button type="button" data-choice="c" data-why="კონსტრუქტორს მეთოდი არ ჰქვია. name მისი პარამეტრია.">მეთოდი, რომელსაც კლასი იძახებს</button>
+        <button type="button" data-choice="d" data-why="კი. პარამეტრი სხეულში ჩანს. თვისება მხოლოდ მაშინ ჩნდება, როცა Name = name წერთ.">პარამეტრი, თვისება კი არა</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h3>სია კვადრატული ფრჩხილით</h3>
+    <pre><code>int[] scores = [10, 9, 8];
+List&lt;string&gt; names = ["ანა", "გიორგი", "ნინო"];
+int[] withBonus = [..scores, 7];</code></pre>
+    <p>ფრჩხილები ერთნაირია. ტიპი მარცხნივ წერია, და კომპილატორი იქიდან ხვდება, მასივი სჭირდება თუ <code>List</code>. <code>..</code> მეორე კოლექციას შიგნით შლის. ძველი <code>new int[] { 10, 9, 8 }</code> კვლავ მუშაობს. <code>var</code>-ს ამ ფრჩხილებით ვერ მიანიჭებთ: ფორმას თავისი ტიპი არ აქვს, სანამ მარცხნივ არ ეტყვით.</p>
+
+    <section class="quiz" data-quiz data-answer="c">
+      <p class="prompt">ერთი და იგივე <code>[...]</code> მასივს ქმნის თუ სიას?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="ფრჩხილი მხოლოდ ელემენტებს ატარებს. მასივი თუ სია, მარცხენა ტიპი წყვეტს.">ფრჩხილი, რომელიც მარჯვნივ დგას</button>
+        <button type="button" data-choice="b" data-why="ორი წერტილი მეორე კოლექციას შიგნით შლის. ახალი კოლექციის სახეს ის არ ირჩევს.">ორი წერტილი, ანუ spread</button>
+        <button type="button" data-choice="c" data-why="კი. int[] მასივია, List სიაა. ფრჩხილი ორივესთან ერთია.">ტიპი, რომელიც მარცხნივ წერია</button>
+        <button type="button" data-choice="d" data-why="შაბლონი Main-ს მალავს. კოლექციის სახეს ის არ ირჩევს.">შაბლონი, რომელიც Main-ს მალავს</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <details class="lecturer">
+      <summary>ლექტორისთვის · თუ დრო რჩება, ხუთი წუთი. თუ ჩამორჩებით, გამოტოვეთ</summary>
+      <p>კიდევ ორი C# 12, მოკლედ. მეტსახელი: <code>using Grades = System.Collections.Generic.List&lt;int&gt;;</code>. ლამბდას ნაგულისხმევი პარამეტრი: <code>(string name = "მეგობარო") =&gt; ...</code>. C# 13 და 14 დღეს ერთი წინადადებაა: ენა წინ წავიდა, დღევანდელი ლაბორატორია კი 12-ის ფორმებზე დგას.</p>
+    </details>
+
+    <h2><span class="num">06</span>რედაქტორი მაგიდაა</h2>
+    <p>აირჩიეთ ერთი და მას მიეჩვიეთ. კურსი ოთხივეს იღებს, იმ პირობით, რომ <code>dotnet --version</code> მუშაობს.</p>
+    <table>
+      <thead>
+        <tr><th></th><th>Visual Studio</th><th>Rider</th><th>VS Code</th><th>Cursor</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>სისტემა</th><td>Windows</td><td>ყველა</td><td>ყველა</td><td>ყველა</td></tr>
+        <tr><th>რაშია ძლიერი</th><td>დებაგერი, დიზაინერი, Hot Reload</td><td>რეფაქტორინგი</td><td>მსუბუქი რედაქტორი</td><td>იგივე, AI ჩათით</td></tr>
+        <tr><th>რა გჭირდებათ</th><td>.NET workload</td><td>სტუდენტის ლიცენზია</td><td>C# Dev Kit</td><td>C# Dev Kit</td></tr>
+      </tbody>
+    </table>
+    <p>.NET 10-ს Visual Studio 2026 სჭირდება, ვერსია 18.0 ან უფრო ახალი. VS Code თავისთავად C#-ს არ კითხულობს: ოფიციალური გაფართოებაა C# Dev Kit. სამივე მსუბუქ რედაქტორში ჯერ SDK უნდა იყოს დაყენებული. რედაქტორი SDK-ს არ მოჰყვება.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/core/install/windows">Install .NET on Windows</a>. Rider-ის სასწავლო ლიცენზია: <a href="https://www.jetbrains.com/community/education/">JetBrains for Education</a>.</p>
+
+    <div class="callout">
+      <p>AI-ს სთხოვეთ ახსნა, იდეა, ან შეცდომის ტექსტის გაშიფვრა. კოდი, რომელსაც ხმამაღლა ვერ ხსნით, ჯერ თქვენი არ არის. ქვიზი და გამოცდა ხელსაწყოს გარეშეა.</p>
+    </div>
+
+    <h2><span class="num">07</span>ლაბორატორია</h2>
+    <p>ელოდებიან სამ სტრიქონს, შემდეგ კი მეოთხეს, რომელიც თქვენ დაამატეთ.</p>
+    <pre><code>ანა — 1 კურსი
+გიორგი — 1 კურსი
+ნინო — 2 კურსი</code></pre>
+    <pre><code>List&lt;Student&gt; group =
+[
+    new Student("ანა", 1),
+    new Student("გიორგი", 1),
+    new Student("ნინო", 2),
+];
+
+foreach (var student in group)
+    Console.WriteLine(student);
+
+class Student(string name, int year)
+{
+    public string Name { get; } = name;
+    public int Year { get; } = year;
+
+    public override string ToString() =&gt;
+        $"{Name} — {Year} კურსი";
+}</code></pre>
+    <p>ტოპ-ლეველ კოდში კლასი ფაილის ბოლოში წერია. <code>ToString</code>-ში <code>Year</code> თვისებაა, <code>year</code> პარამეტრი.</p>
+
+    <h3>ჯერ აქ შეამოწმეთ, მერე ტერმინალში</h3>
+    <form class="checker" data-need="class Student(|კონსტრუქტორი კლასის თავში,[|კვადრატული ფრჩხილი,new Student(|new Student,WriteLine|ბეჭდვა" data-done="ფორმა სწორია. ახლა იგივე ფაილი გაუშვით dotnet run-ით.">
+      <p class="prompt">ჩასვით თქვენი <code>Program.cs</code>. შემმოწმებელი კომპილატორი არ არის. ის ოთხ ნიშანს ეძებს.</p>
+      <textarea spellcheck="false" aria-label="Program.cs"></textarea>
+      <button type="submit">შეამოწმე</button>
+      <ul class="checker-list"></ul>
+      <p class="checker-result" role="status"></p>
+    </form>
+
+    <ol class="ticks" data-store="lesson-01">
+      <li><label><input type="checkbox"> <span><code>dotnet --version</code> აჩვენებს 10-ს. თუ 8-ია, დღევანდელი დავალება მაინც სრულდება.</span></label></li>
+      <li><label><input type="checkbox"> <span><code>dotnet new console -n HelloCourse -f net10.0</code>. თუ 10 ვერ იპოვა: <code>-f net8.0</code>.</span></label></li>
+      <li><label><input type="checkbox"> <span><code>Program.cs</code> ჩანაცვლდა დემოს კოდით და <code>dotnet run</code> ბეჭდავს სამ სტრიქონს.</span></label></li>
+      <li><label><input type="checkbox"> <span>დაამატეთ მეოთხე სტუდენტი. ხელახლა გაშვებისას ოთხი სტრიქონი იბეჭდება.</span></label></li>
+    </ol>
+    <p>SDK, არა მარტო runtime: <a href="https://dotnet.microsoft.com/download">dotnet.microsoft.com/download</a>. Mac-ზე <code>brew install --cask dotnet-sdk</code> იმავე SDK-ს დებს.</p>
+
+    <h3>სახლში, მომავალ შეხვედრამდე</h3>
+    <ol>
+      <li>გაუშვით <code>dotnet --version</code> და ჩაწერეთ ნომერი.</li>
+      <li>შექმენით კონსოლის პროექტი და გაუშვით ცარიელი შაბლონი.</li>
+      <li>ჩაამატეთ <code>Student</code> და სია, როგორც დემოშია, პლუს თქვენი მეოთხე სტუდენტი.</li>
+      <li>ერთ აბზაცში: რომელი რედაქტორი აირჩიეთ, და რატომ.</li>
+    </ol>
+
+    <h2><span class="num">08</span>ხუთი წინადადება</h2>
+    <ol>
+      <li>C# ენაა, .NET პლატფორმაა, IDE რედაქტორია.</li>
+      <li>ახალი პროექტი .NET 10-ზე იწყება. Framework არსებულ Windows აპს რჩება.</li>
+      <li>პროექტი არის <code>csproj</code> და <code>Program.cs</code>. ეშვება <code>dotnet run</code>-ით.</li>
+      <li>C# 12-ში კონსტრუქტორი კლასის თავში წერია, სია კი კვადრატული ფრჩხილით.</li>
+      <li>რედაქტორი ნებისმიერია. კოდი თქვენ უნდა გესმოდეთ.</li>
+    </ol>
+    <p>შემდეგი კვირა იგივე პროექტს ავტომატურ შემოწმებას ამატებს: <a href="0002-devops-cicd.html">DevOps და CI/CD</a>. რუკა ერთ გვერდზე: <a href="../reference/dotnet-map.html">ცნობარი</a>.</p>
+
+    <h3>წაიკითხეთ პირველადი წყარო</h3>
+    <p>ამ გაკვეთილის წყარო არის <a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/implementations">.NET implementations</a>. ლაბორატორიის სინტაქსისთვის გვერდით გახსენით <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12">What's new in C# 12</a>.</p>
+    <ul class="sources">
+      <li><a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">.NET support policy</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/choosing-core-framework-server">.NET თუ .NET Framework</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version">C# language version</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/dotnet/core/install/windows">Install .NET</a></li>
+    </ul>
+  </main>
+
+  <footer class="teacher">
+    <div class="teacher-inner">
+      <p>ლექტორო, თუ დარბაზში კითხვა გაჩნდა და ამ გვერდზე პასუხი არ დგას, მომწერეთ ჩათში. სტუდენტის ფორმულირებაც მოიტანეთ. შემდეგ გაკვეთილს იქიდან ავაწყობთ.</p>
+    </div>
+  </footer>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

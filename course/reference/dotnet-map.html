@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ცნობარი. .NET-ის რუკა</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+  <header class="mast">
+    <div class="mast-inner">
+      <p class="mast-kicker">COMP M205-1 · ცნობარი</p>
+      <h1>.NET-ის რუკა</h1>
+      <p class="mast-lead">კვირა 1, ერთ გვერდზე. თარიღები 2026 წლის 8 სექტემბრის კალენდრიდანაა.</p>
+    </div>
+  </header>
+  <nav class="crumbs">
+    <a href="../index.html">კურსი</a>
+    <a href="../lessons/0001-modern-dotnet.html">გაკვეთილი</a>
+    <a href="cicd.html">ცნობარი: CI</a>
+  </nav>
+  <main class="sheet">
+    <h2>სამი სიტყვა</h2>
+    <table>
+      <thead><tr><th>სიტყვა</th><th>რა არის</th><th>ამ კურსში</th></tr></thead>
+      <tbody>
+        <tr><td>C#</td><td>ენა</td><td>პროგრამის ტექსტი</td></tr>
+        <tr><td>.NET</td><td>პლატფორმა</td><td>აწყობა, გაშვება, ბიბლიოთეკა</td></tr>
+        <tr><td>IDE</td><td>რედაქტორი</td><td>Visual Studio, Rider, VS Code, Cursor</td></tr>
+      </tbody>
+    </table>
+
+    <h2>რომელზე იწყება ახალი პროექტი</h2>
+    <table>
+      <thead>
+        <tr><th>ხაზი</th><th>სახეობა</th><th>მხარდაჭერის დასასრული</th><th>ახალი პროექტი</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>.NET 10</td><td>LTS, 3 წელი</td><td>2028-11-14</td><td class="now">აქ</td></tr>
+        <tr><td>.NET 9</td><td>STS, 2 წელი</td><td>2026-11-10</td><td>არა</td></tr>
+        <tr><td>.NET 8</td><td>LTS, 3 წელი</td><td>2026-11-10</td><td>მხოლოდ თუ 10 არ დგას</td></tr>
+        <tr><td>Framework 4.8</td><td>Windows</td><td>Windows-თან ერთად</td><td>არსებული აპისთვის</td></tr>
+      </tbody>
+    </table>
+    <p class="aside">ლუწი ნომერი LTS-ია, კენტი STS. ხარისხი ერთია. <a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">პოლიტიკა</a>.</p>
+
+    <h2>ენა სამიზნეს მისდევს</h2>
+    <table>
+      <thead><tr><th>TargetFramework</th><th>ნაგულისხმევი C#</th></tr></thead>
+      <tbody>
+        <tr><td><code>net8.0</code></td><td>C# 12</td></tr>
+        <tr><td><code>net9.0</code></td><td>C# 13</td></tr>
+        <tr><td><code>net10.0</code></td><td>C# 14</td></tr>
+      </tbody>
+    </table>
+    <p>დღევანდელი ორი ფორმა C# 12-ია, ამიტომ <code>net8.0</code>-ზეც იგება. <code>LangVersion</code> ნუ იქნება <code>latest</code>.</p>
+
+    <h2>ორი ფორმა</h2>
+    <pre><code>class Student(string name, int year)
+{
+    public string Name { get; } = name;
+    public int Year { get; } = year;
+}
+
+int[] scores = [10, 9, 8];
+int[] withBonus = [..scores, 7];</code></pre>
+    <p><code>name</code> პარამეტრია. <code>Name</code> თვისებაა. ფრჩხილის სახეს მარცხენა ტიპი წყვეტს.</p>
+
+    <h2>ბრძანებები</h2>
+    <table>
+      <thead><tr><th>ბრძანება</th><th>შედეგი</th></tr></thead>
+      <tbody>
+        <tr><td><code>dotnet --version</code></td><td>SDK-ს ნომერი. გვინდა 10.</td></tr>
+        <tr><td><code>dotnet new console -n HelloCourse -f net10.0</code></td><td>კონსოლის პროექტი</td></tr>
+        <tr><td><code>dotnet run</code></td><td>აწყობა და გაშვება</td></tr>
+      </tbody>
+    </table>
+    <p>SDK დეველოპერის მანქანაზეა. Runtime მხოლოდ გაშვებისთვისაა.</p>
+    <p><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/implementations">.NET implementations</a> · <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12">C# 12</a></p>
+  </main>
+</body>
+</html>
