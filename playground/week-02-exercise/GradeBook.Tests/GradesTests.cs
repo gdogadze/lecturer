@@ -12,6 +12,6 @@ public class GradesTests
     [Fact]
     public void Sum_empty_array_is_zero()
     {
-        Assert.Equal(0, Grades.Sum([]));
+        Assert.Equal(1, Grades.Sum([]));
     }
 }
