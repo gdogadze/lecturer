@@ -11,7 +11,7 @@
     <div class="mast-inner">
       <p class="mast-kicker">COMP M205-1 · ცნობარი</p>
       <h1>CI, ერთ გვერდზე</h1>
-      <p class="mast-lead">კვირა 2. ფაილი აღწერს, გაშვება ასრულებს. დეპლოი ამ გვერდზე არ არის.</p>
+      <p class="mast-lead">კვირა 2. ფაილი აღწერს, გაშვება ასრულებს. დეპლოი ამ გვერდზე არ განიხილება.</p>
     </div>
   </header>
   <nav class="crumbs">
@@ -20,20 +20,20 @@
     <a href="dotnet-map.html">ცნობარი: .NET</a>
   </nav>
   <main class="sheet">
-    <h2>ორი სიტყვა</h2>
+    <h2>ძირითადი ტერმინები</h2>
     <table>
-      <thead><tr><th>სიტყვა</th><th>რა არის</th></tr></thead>
+      <thead><tr><th>ტერმინი</th><th>რა არის</th></tr></thead>
       <tbody>
         <tr><td>CI</td><td>ყოველ ცვლილებაზე აწყობა და ტესტი</td></tr>
-        <tr><td>CD</td><td>შემოწმებული აწყობის გარემოზე გაშვება</td></tr>
-        <tr><td>workflow</td><td>ფაილი, რომელიც ნაბიჯებს წერს</td></tr>
-        <tr><td>pipeline</td><td>იმ ფაილის გაშვება</td></tr>
+        <tr><td>CD</td><td>შემოწმებული აწყობის გარემოში გაშვება</td></tr>
+        <tr><td>workflow</td><td>ფაილი, რომელიც ნაბიჯებს აღწერს</td></tr>
+        <tr><td>pipeline</td><td>ამ ფაილის შესრულება</td></tr>
       </tbody>
     </table>
 
     <h2>სამი ფაილი</h2>
     <table>
-      <thead><tr><th>მასპინძელი</th><th>ფაილი</th><th>SDK-ს ნაბიჯი</th></tr></thead>
+      <thead><tr><th>სისტემა</th><th>ფაილი</th><th>SDK-ს ნაბიჯი</th></tr></thead>
       <tbody>
         <tr><td>GitHub Actions</td><td><code>.github/workflows/ci.yml</code></td><td><code>actions/setup-dotnet@v6</code></td></tr>
         <tr><td>Azure Pipelines</td><td><code>azure-pipelines.yml</code></td><td><code>UseDotNet@2</code></td></tr>
@@ -56,8 +56,8 @@ jobs:
           dotnet-version: "10.0.x"
       - run: dotnet format --verify-no-changes
       - run: dotnet test --configuration Release</code></pre>
-    <p>რიგი: ჯერ კოდი, მერე SDK, მერე შემოწმება. <code>dotnet test</code> წითელდება, თუ ტესტი წითელია. <code>dotnet format --verify-no-changes</code> წითელდება, თუ ფორმატერი ფაილს შეცვლიდა.</p>
-    <p class="aside">ვერსიების წყაროა <a href="https://github.com/actions/setup-dotnet">setup-dotnet</a>, არა GitHub-ის ძველი .NET 6-ის მაგალითი.</p>
+    <p>თანმიმდევრობა: ჯერ კოდი, შემდეგ SDK, შემდეგ შემოწმება. <code>dotnet test</code> წითლდება, თუ ტესტი ჩავარდა. <code>dotnet format --verify-no-changes</code> წითლდება, თუ ფორმატერი ფაილს შეცვლიდა.</p>
+    <p class="aside">ვერსიები აიღეთ <a href="https://github.com/actions/setup-dotnet">setup-dotnet</a>-იდან და არა GitHub-ის ძველი .NET 6-ის მაგალითიდან.</p>
 
     <h2>ლაბორატორიის ბრძანებები</h2>
     <pre><code>dotnet new sln -n GradeBook

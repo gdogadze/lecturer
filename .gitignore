@@ -1,1 +1,8 @@
 .DS_Store
+
+# .NET
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+.vs/

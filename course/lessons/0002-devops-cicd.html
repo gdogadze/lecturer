@@ -12,7 +12,7 @@
       <p class="mast-kicker">სოხუმის სახელმწიფო უნივერსიტეტი · ინფორმატიკა · COMP M205-1</p>
       <p class="mast-week">კვირა 2 · ლექცია 2 სთ · ლაბორატორია 1 სთ</p>
       <h1>DevOps და CI/CD</h1>
-      <p class="mast-lead">გასულ კვირას პროგრამა თქვენს მანქანაზე გაეშვა. დღეს იმას დაამატებთ, რომ ყოველი ცვლილება თავად იწყობა და თავად მოწმდება.</p>
+      <p class="mast-lead">გასულ კვირას პროგრამა თქვენს მანქანაზე გაეშვა. დღეს დაამატებთ ავტომატიზაციას: ყოველი ცვლილება თავისით აიწყობა და შემოწმდება.</p>
     </div>
   </header>
 
@@ -23,24 +23,24 @@
   </nav>
 
   <main class="sheet">
-    <p class="lead">სილაბუსის ამ კვირის შედეგი ერთი ჩვევაა. გუნდის კოდი საერთო საცავში შედის, და იქვე ეშვება აწყობა, ტესტი და სტილის შემოწმება. GitHub Actions, Azure Pipelines და Jenkins სამი მასპინძელია ერთი და იმავე საქმისთვის.</p>
+    <p class="lead">სილაბუსის ამ კვირის შედეგი ერთი ჩვევაა: გუნდის კოდი საერთო საცავში შედის და იქვე ეშვება აწყობა, ტესტირება და სტილის შემოწმება. GitHub Actions, Azure Pipelines და Jenkins სამი სხვადასხვა სისტემაა ერთი და იმავე საქმისთვის.</p>
 
     <details class="lecturer">
       <summary>ლექტორისთვის · გახსნა, დაახლოებით 5 წუთი</summary>
-      <p>წინაპირობაა გასული ლაბორატორია: <code>dotnet run</code> მუშაობს. თუ ვინმეს SDK არ დგას, დღევანდელი საათი იქ ჩერდება. Git-ის სრულ კურსს ნუ დაიწყებთ. საკმარისია: საცავი, commit, push. დეპლოის დღეს არ ვაკეთებთ. Cloud მე-6 კვირაა.</p>
+      <p>წინაპირობაა გასული ლაბორატორია: <code>dotnet run</code> მუშაობს. თუ ვინმეს SDK არ აქვს დაყენებული, მისთვის დღევანდელი საათი იქვე წყდება. Git-ის სრულ კურსს ნუ დაიწყებთ. საკმარისია: საცავი, commit, push. დეპლოის დღეს არ ვაკეთებთ. Cloud მე-6 კვირის თემაა.</p>
     </details>
 
     <h2><span class="num">01</span>რატომ მოწმდება ყოველი ცვლილება</h2>
-    <p>ადამიანი ხშირად დიდხანს წერს საკუთარ ტოტში და ბოლოს აერთიანებს. მაშინ კონფლიქტი, გატეხილი აწყობა და ორმაგი სამუშაო ერთად მოდის. Continuous integration ამას წინ ეწევა: საერთო კოდში შესული ყოველი ცვლილება აწყობას და ტესტს იწვევს.</p>
-    <p>Microsoft-ის განმარტებით, CI არის ავტომატური აწყობა და ტესტი ყოველ ჯერზე, როცა კოდი საცავში შედის. შეცდომა იმ დღეს ჩანს, როცა ის დაიწერა. ერთი კვირის შემდეგ იმავე შეცდომის პოვნა ძვირია, იმიტომ რომ ავტორს უკვე აღარ ახსოვს, რატომ შეცვალა ის სტრიქონი.</p>
+    <p>დეველოპერი ხშირად დიდხანს მუშაობს საკუთარ ბრენჩზე და ბოლოს აერთიანებს. მაშინ კონფლიქტები, გაფუჭებული აწყობა და ორმაგი სამუშაო ერთდროულად ჩნდება. Continuous integration ამას თავიდან გვაცილებს: საერთო კოდში შეტანილი ყოველი ცვლილება იწვევს აწყობასა და ტესტირებას.</p>
+    <p>Microsoft-ის განმარტებით, CI არის ავტომატური აწყობა და ტესტი ყოველ ჯერზე, როცა კოდი საცავში შედის. შეცდომა იმავე დღეს ჩანს, როცა დაიწერა. ერთი კვირის შემდეგ შეცდომის პოვნა ძვირი ჯდება, რადგან ავტორს აღარ ახსოვს, რატომ შეცვალა ეს სტრიქონი.</p>
     <p class="aside"><a href="https://learn.microsoft.com/en-us/devops/develop/what-is-continuous-integration">What is continuous integration</a>.</p>
 
     <section class="quiz" data-quiz data-answer="c">
       <p class="prompt">ამ კურსში CI რას ნიშნავს?</p>
       <div class="choices">
-        <button type="button" data-choice="a" data-why="ხელით ატვირთვა CI არ არის. აზრი სწორედ ისაა, რომ შემოწმება ადამიანის მეხსიერებაზე არ დგას.">კოდის ხელით ატვირთვა შორეულ სერვერზე</button>
-        <button type="button" data-choice="b" data-why="პროდაქშენზე გაშვება უკვე CD-ის ნაწილია. CI იქამდე ამოწმებს, რომ აწყობა და ტესტი მწვანეა.">მხოლოდ პროდაქშენზე გაშვების ბოლო ნაბიჯი</button>
-        <button type="button" data-choice="c" data-why="კი. ყოველი ცვლილება იწვევს აწყობას და ტესტს. წითელი შედეგი კოდს საერთო ხაზში არ ტოვებს მშვიდად.">ყოველ ცვლილებაზე აწყობა და ტესტი</button>
+        <button type="button" data-choice="a" data-why="ხელით ატვირთვა CI არ არის. აზრი სწორედ ისაა, რომ შემოწმება ადამიანის მეხსიერებაზე არ იყოს დამოკიდებული.">კოდის ხელით ატვირთვა დისტანციურ სერვერზე</button>
+        <button type="button" data-choice="b" data-why="პროდაქშენში გაშვება უკვე CD-ის ნაწილია. CI მანამდე ამოწმებს, რომ აწყობა და ტესტი მწვანეა.">პროდაქშენში გაშვების ბოლო ნაბიჯი</button>
+        <button type="button" data-choice="c" data-why="კი. ყოველი ცვლილება იწვევს აწყობას და ტესტს. წითელი შედეგი ხარვეზიან კოდს უყურადღებოდ არ ტოვებს.">ყოველ ცვლილებაზე აწყობა და ტესტი</button>
         <button type="button" data-choice="d" data-why="რედაქტორის ღილაკი თქვენს მანქანაზეა. CI მაშინაც ეშვება, როცა რედაქტორი დახურულია.">რედაქტორში მწვანე ღილაკის ხელით დაჭერა</button>
       </div>
       <p class="feedback" hidden></p>
@@ -50,9 +50,9 @@
     <p>GitHub-ზე ამ ფაილს workflow ჰქვია. ის დგას <code>.github/workflows/</code> საქაღალდეში და YAML-ია. გაშვებულ პროცესს pipeline ჰქვია. ფაილი აღწერს, გაშვება ასრულებს.</p>
     <p>workflow შედგება job-ებისგან. job შედგება step-ებისგან. დღევანდელ ლაბორატორიას ერთი job ყოფნის. სამი ნაბიჯი საკმარისია.</p>
     <ol>
-      <li><code>actions/checkout</code> საცავის კოდს მოაქვს მანქანაზე, რომელიც აწყობას გაუშვებს. ამ მანქანას runner ჰქვია.</li>
-      <li><code>actions/setup-dotnet</code> მითითებულ SDK-ს აყენებს. runner-ზე შეიძლება სხვა ვერსია უკვე იდგეს. ჩვენ 10.0.x-ს ვეუბნებით, რომ ლაბორატორია და სერვერი ერთ პლატფორმაზე იდგეს.</li>
-      <li><code>dotnet test</code> აღადგენს პაკეტებს, აწყობს და ტესტს გაუშვებს. თუ ტესტი წითელია, ნაბიჯი წითელია და pipeline წითელია.</li>
+      <li><code>actions/checkout</code> საცავის კოდს იმ მანქანაზე ჩამოიტანს, რომელიც აწყობას გაუშვებს. ამ მანქანას runner ჰქვია.</li>
+      <li><code>actions/setup-dotnet</code> მითითებულ SDK-ს აყენებს. runner-ზე შეიძლება სხვა ვერსია უკვე იყოს დაყენებული. ჩვენ ვთხოვთ 10.0.x-ს, რომ ლაბორატორიაც და სერვერიც ერთსა და იმავე ვერსიაზე მუშაობდეს.</li>
+      <li><code>dotnet test</code> აღადგენს პაკეტებს, აწყობს პროექტს და უშვებს ტესტებს. თუ ტესტი ჩავარდა, ნაბიჯიც და pipeline-იც წითლდება.</li>
     </ol>
     <pre><code>name: build and test
 
@@ -67,27 +67,27 @@ jobs:
         with:
           dotnet-version: "10.0.x"
       - run: dotnet test --configuration Release</code></pre>
-    <p><code>on: [push, pull_request]</code> ნიშნავს: ეშვება, როცა კოდი შედის, და მაშინაც, როცა ვინმე შერწყმას სთხოვს. <code>ubuntu-latest</code> Linux-ის runner-ია. იგივე ბრძანება თქვენს Windows-ზეც და Mac-ზეც მუშაობს. ამიტომ გასული კვირის პლატფორმა დღეს გამოგვადგება.</p>
-    <p class="aside">ფაილის ადგილი და ნაბიჯების ფორმა: <a href="https://docs.github.com/en/actions/tutorials/build-and-test-code/net">Building and testing .NET</a>. იქაური მაგალითები ძველ ვერსიებზე დგას. დღევანდელი ნომრები აქედანაა: <a href="https://github.com/actions/setup-dotnet">setup-dotnet README</a>, <code>checkout@v7</code> და <code>setup-dotnet@v6</code>.</p>
+    <p><code>on: [push, pull_request]</code> ნიშნავს: ეშვება, როცა კოდი იგზავნება (push), და მაშინაც, როცა ვინმე შერწყმას ითხოვს (pull request). <code>ubuntu-latest</code> Linux-ის runner-ია. იგივე ბრძანება თქვენს Windows-ზეც და Mac-ზეც მუშაობს. ამიტომ გასულ კვირას შესწავლილი პლატფორმა დღესაც გამოგვადგება.</p>
+    <p class="aside">ფაილის ადგილი და ნაბიჯების ფორმა: <a href="https://docs.github.com/en/actions/tutorials/build-and-test-code/net">Building and testing .NET</a>. იქაური მაგალითები ძველ ვერსიებს იყენებს. დღევანდელი ნომრები აქედანაა: <a href="https://github.com/actions/setup-dotnet">setup-dotnet README</a>, <code>checkout@v7</code> და <code>setup-dotnet@v6</code>.</p>
 
     <section class="quiz" data-quiz data-answer="a">
       <p class="prompt">GitHub Actions-ის ფაილი სად დგას?</p>
       <div class="choices">
         <button type="button" data-choice="a" data-why="კი. საქაღალდე .github/workflows-ია, ფაილი YAML. GitHub ამ გზას თვითონ კითხულობს.">.github/workflows საქაღალდეში, YAML ფაილად</button>
         <button type="button" data-choice="b" data-why="csproj სამიზნე პლატფორმას ამბობს. pipeline-ის ნაბიჯები იქ არ წერია.">პროექტის csproj ფაილის შიგნით</button>
-        <button type="button" data-choice="c" data-why="Program.cs პროგრამაა. შემოწმების აღწერა ცალკე ფაილშია, რომ კოდმა თავი არ შეამოწმოს ჩუმად.">Program.cs ფაილის პირველ სტრიქონზე</button>
-        <button type="button" data-choice="d" data-why="NuGet პაკეტების სიაა. workflow მას იყენებს, მაგრამ იქ არ ცხოვრობს.">NuGet პაკეტის კონფიგურაციის ფაილში</button>
+        <button type="button" data-choice="c" data-why="Program.cs პროგრამის კოდია. შემოწმების აღწერა ცალკე ფაილში ინახება.">Program.cs ფაილის პირველ სტრიქონზე</button>
+        <button type="button" data-choice="d" data-why="ეს ფაილი პაკეტებს აღწერს. workflow იქ არ ინახება.">NuGet პაკეტის კონფიგურაციის ფაილში</button>
       </div>
       <p class="feedback" hidden></p>
     </section>
 
-    <h3>დააჭირეთ იმ რიგით, რომლითაც runner მუშაობს</h3>
-    <p>არასწორ ნაბიჯს ლოგი გეტყვით, რატომ გატყდა. სწორი რიგის შემდეგ დააჭირეთ „თავიდან“, თუ კიდევ გინდათ.</p>
-    <div class="runner" data-runner data-steps="checkout,sdk,test" data-done="Pipeline მწვანეა. კოდი ადგილზეა, SDK 10.0.x დგას, ტესტი გაეშვა." data-retry="ეს რიგი ვერ გაეშვება. წაიკითხეთ ლოგი და თავიდან სცადეთ.">
+    <h3>დააჭირეთ იმ თანმიმდევრობით, რომლითაც runner მუშაობს</h3>
+    <p>არასწორი ნაბიჯის შემთხვევაში ლოგი გეტყვით, რატომ ჩავარდა. სწორი თანმიმდევრობის პოვნის შემდეგ, თუ გსურთ, დააჭირეთ „თავიდან“.</p>
+    <div class="runner" data-runner data-steps="checkout,sdk,test" data-done="Pipeline მწვანეა. კოდი ჩამოტანილია, SDK 10.0.x დაყენებულია, ტესტი გაეშვა." data-retry="ეს თანმიმდევრობა ვერ გაეშვება. წაიკითხეთ ლოგი და თავიდან სცადეთ.">
       <div class="runner-choices">
-        <button type="button" data-step="test" data-ok="dotnet test გაეშვა." data-bad="ტესტი ბოლოსაა. მანამდე კოდი და SDK სჭირდება, თორემ მას პროექტი არ აქვს.">dotnet test</button>
-        <button type="button" data-step="checkout" data-ok="checkout-მა კოდი runner-ზე მოიტანა." data-bad="checkout პირველია მხოლოდ დასაწყისში. ახლა უკვე სხვა ნაბიჯის ჯერია.">actions/checkout</button>
-        <button type="button" data-step="sdk" data-ok="setup-dotnet-მა SDK 10.0.x დააყენა." data-bad="SDK მაშინ დგება, როცა კოდი უკვე ჩამოტანილია, და ტესტამდე.">actions/setup-dotnet</button>
+        <button type="button" data-step="test" data-ok="dotnet test გაეშვა." data-bad="ტესტი ბოლოს ეშვება. მანამდე კოდი და SDK გვჭირდება, თორემ გასაშვები პროექტი არ იქნება.">dotnet test</button>
+        <button type="button" data-step="checkout" data-ok="checkout-მა კოდი runner-ზე მოიტანა." data-bad="checkout მხოლოდ პირველი ნაბიჯია. ახლა სხვა ნაბიჯის ჯერია.">actions/checkout</button>
+        <button type="button" data-step="sdk" data-ok="setup-dotnet-მა SDK 10.0.x დააყენა." data-bad="SDK კოდის ჩამოტანის შემდეგ და ტესტამდე უნდა დაყენდეს.">actions/setup-dotnet</button>
       </div>
       <ol class="runner-log"></ol>
       <p class="runner-result" role="status"></p>
@@ -105,16 +105,16 @@ jobs:
       <p class="feedback" hidden></p>
     </section>
 
-    <h2><span class="num">03</span>სამი მასპინძელი, იგივე ბრძანება</h2>
-    <p>სილაბუსი სამ ინსტრუმენტს ასახელებს. ლაბორატორიაში ერთს წერთ, GitHub Actions-ს, იმიტომ რომ ანგარიში უფასოა და ფაილი საცავშია. დანარჩენი ორი იგივე <code>dotnet test</code>-ს იძახებს სხვა ფაილიდან.</p>
+    <h2><span class="num">03</span>სამი სისტემა, იგივე ბრძანება</h2>
+    <p>სილაბუსში სამი ინსტრუმენტია დასახელებული. ლაბორატორიაში ერთით, GitHub Actions-ით, ვიმუშავებთ, რადგან ანგარიში უფასოა და ფაილი საცავში ინახება. დანარჩენი ორიც იგივე <code>dotnet test</code>-ს უშვებს, ოღონდ სხვა ფაილიდან.</p>
     <table>
       <thead>
         <tr><th></th><th>GitHub Actions</th><th>Azure Pipelines</th><th>Jenkins</th></tr>
       </thead>
       <tbody>
         <tr><th>ფაილი</th><td><code>.github/workflows/*.yml</code></td><td><code>azure-pipelines.yml</code></td><td><code>Jenkinsfile</code></td></tr>
-        <tr><th>სად ეშვება</th><td>GitHub-ის runner</td><td>Microsoft-ის ან საკუთარი აგენტი</td><td>სერვერი, რომელსაც თვითონ მასპინძლობთ</td></tr>
-        <tr><th>SDK</th><td><code>setup-dotnet</code></td><td><code>UseDotNet@2</code></td><td>აგენტზე უკვე დგას, ან ნაბიჯი აყენებს</td></tr>
+        <tr><th>სად ეშვება</th><td>GitHub-ის runner</td><td>Microsoft-ის ან საკუთარი აგენტი</td><td>თქვენივე დაყენებული სერვერი</td></tr>
+        <tr><th>SDK</th><td><code>setup-dotnet</code></td><td><code>UseDotNet@2</code></td><td>აგენტზე უკვე დაყენებულია, ან ნაბიჯი აყენებს</td></tr>
       </tbody>
     </table>
 
@@ -148,11 +148,11 @@ steps:
 }</code></pre>
       </figure>
     </div>
-    <p>Azure-ში ტესტის ნაბიჯი შეიძლება სკრიპტიც იყოს და <code>DotNetCoreCLI@2</code> ამოცანაც. დღეს სკრიპტი გვინდა, რომ სამივე ფაილში ერთი ბრძანება წაიკითხოთ. Jenkins-ს აგენტი სჭირდება: მანქანა, სადაც Jenkins დგას. ამ კურსის ლაბორატორიაში იმ სერვერს არ ვდგამთ.</p>
+    <p>Azure-ში ტესტის ნაბიჯი შეიძლება სკრიპტიც იყოს და <code>DotNetCoreCLI@2</code> ამოცანაც. დღეს სკრიპტს ვიყენებთ, რათა სამივე ფაილში ერთი და იგივე ბრძანება დაინახოთ. Jenkins-ს აგენტი სჭირდება: მანქანა, რომელზეც ბრძანებები სრულდება. ამ კურსის ლაბორატორიაში Jenkins-ის სერვერს არ ვაყენებთ.</p>
     <p class="aside"><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops">Azure Pipelines for .NET</a>. <a href="https://www.jenkins.io/doc/book/pipeline/">Jenkins Pipeline</a>.</p>
 
     <h2><span class="num">04</span>ტესტი და სტილის შემოწმება</h2>
-    <p>ტესტი არის პატარა პროგრამა, რომელიც თქვენს კოდს იძახებს და პასუხს ადარებს. xUnit-ში ერთ შემოწმებას <code>[Fact]</code> ეწოდება. <code>Assert.Equal</code> წითელდება, თუ რიცხვები არ ემთხვევა. მაშინ <code>dotnet test</code> ნულს არ აბრუნებს, და pipeline-იც წითელდება.</p>
+    <p>ტესტი პატარა პროგრამაა, რომელიც თქვენს კოდს იძახებს და შედეგს მოსალოდნელ მნიშვნელობას ადარებს. xUnit-ში ერთ ტესტურ შემთხვევას <code>[Fact]</code> აღნიშნავს. <code>Assert.Equal</code> ვარდება, თუ მნიშვნელობები არ ემთხვევა. მაშინ <code>dotnet test</code> ნულისგან განსხვავებულ კოდს აბრუნებს და pipeline-იც წითლდება.</p>
     <pre><code>public class GradesTests
 {
     [Fact]
@@ -162,29 +162,29 @@ steps:
         Assert.Equal(27, Grades.Sum(scores));
     }
 }</code></pre>
-    <p>ფრჩხილები გასული კვირისაა. ტესტი ახალ თემას ძველ ფორმაში დებს, რომ C# 12 ცალკე თავად არ დარჩეს.</p>
-    <p>მეორე შემოწმება სტილია. <code>dotnet format --verify-no-changes</code> ფაილს არ ცვლის. თუ ფორმატერი რამეს შეცვლიდა, ბრძანება შეცდომით სრულდება. pipeline-ში ეს ნაბიჯი ნიშნავს: საცავში შევიდა კოდი, რომელიც შეთანხმებულ ჩანაწერს არ ემთხვევა. წესები <code>.editorconfig</code>-იდან იკითხება. ფაილის გარეშე მოქმედებს ნაგულისხმევი წესები.</p>
-    <p>Roslyn-ის ანალიზატორები კომპილაციის დროს გაფრთხილებას წერენ. მათი სრული კატალოგი დღეს არ გვჭირდება. საკმარისია იცოდეთ, რომ ხარისხის შემოწმება ორი სახისაა: ტესტი ამოწმებს პასუხს, ფორმატერი ამოწმებს ჩანაწერს. ორივე შეიძლება წითელ ნაბიჯად იქცეს.</p>
+    <p>კვადრატული ფრჩხილები გასული კვირიდანაა. ტესტი ახალ თემას ნაცნობ ფორმაში გვაჩვენებს, რომ C# 12 ცალკე თემად არ დარჩეს.</p>
+    <p>მეორე შემოწმება კოდის სტილია. <code>dotnet format --verify-no-changes</code> ფაილებს არ ცვლის. თუ ფორმატერი რამეს შეცვლიდა, ბრძანება შეცდომით სრულდება. pipeline-ში წითელი ნაბიჯი ნიშნავს, რომ საცავში შევიდა კოდი, რომელიც შეთანხმებულ სტილს არ შეესაბამება. წესები <code>.editorconfig</code> ფაილიდან იკითხება; თუ ის არ არსებობს, ნაგულისხმევი წესები გამოიყენება.</p>
+    <p>Roslyn-ის ანალიზატორები კომპილაციისას გაფრთხილებებს გვაძლევენ. მათი სრული კატალოგი დღეს არ გვჭირდება. საკმარისია იცოდეთ, რომ ხარისხის შემოწმება ორი სახისაა: ტესტი შედეგს ამოწმებს, ფორმატერი კი კოდის ჩაწერის სტილს. ორივე შეიძლება წითელ ნაბიჯად იქცეს.</p>
     <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format">dotnet format</a>.</p>
 
-    <h2><span class="num">05</span>CD ერთი ნაბიჯით შორსაა</h2>
-    <p>Continuous delivery იგივე ჯაჭვს აგრძელებს. აწყობა, რომელმაც ტესტი გაიარა, მიდის გარემოში: ჯერ საცდელში, მერე პროდაქშენში. Microsoft ამას ასე ყოფს: CI იწყებს, გამოშვების pipeline კი გარემოდან გარემოზე გადააქვს, ყოველ გარემოზე თავისი შემოწმებით.</p>
-    <p>დღევანდელ ლაბორატორიაში გარემო არ გვაქვს. <code>dotnet publish</code> არის ბრძანება, რომელიც გასაშვებ ფაილებს კრებს. სად აღწევს ის ფაილები, Azure-ში თუ სხვაგან, მე-6 და მე-7 კვირის თემაა. დღეს pipeline მწვანეა მაშინ, როცა ტესტი მწვანეა.</p>
+    <h2><span class="num">05</span>CD ერთი ნაბიჯით წინაა</h2>
+    <p>Continuous delivery იმავე ჯაჭვს აგრძელებს. აწყობა, რომელმაც ტესტები გაიარა, გადადის გარემოებში: ჯერ სატესტოში, შემდეგ პროდაქშენში. Microsoft ამას ასე ანაწილებს: CI პროცესს იწყებს, გამოშვების pipeline კი აწყობას ერთი გარემოდან მეორეში გადაიტანს და თითოეულ გარემოში საკუთარ შემოწმებას ატარებს.</p>
+    <p>დღევანდელ ლაბორატორიაში გარემო არ გვაქვს. <code>dotnet publish</code> ბრძანებაა, რომელიც გასაშვებ ფაილებს აგროვებს. სად გადავა ეს ფაილები, Azure-ში თუ სხვაგან, მე-6 და მე-7 კვირის თემაა. დღეს pipeline მწვანეა, როცა ტესტები მწვანეა.</p>
     <p class="aside"><a href="https://learn.microsoft.com/en-us/devops/deliver/what-is-continuous-delivery">What is continuous delivery</a>.</p>
 
     <section class="quiz" data-quiz data-answer="b">
       <p class="prompt">CD რას ამატებს CI-ს?</p>
       <div class="choices">
-        <button type="button" data-choice="a" data-why="მეტი ტესტი კვლავ CI-ია. გარემოზე გასვლა ჯერ არ მომხდარა.">მეტი ტესტის პროექტის დამატება</button>
-        <button type="button" data-choice="b" data-why="კი. შემოწმებული აწყობა მიდის გარემოში. დღევანდელი ლაბორატორია ამ ნაბიჯამდე ჩერდება.">შემოწმებული აწყობის გარემოზე გაშვება</button>
-        <button type="button" data-choice="c" data-why="რედაქტორი მაგიდაა. pipeline მას არ გადააქვს. runner ცალკე მანქანაა.">რედაქტორის სხვა მანქანაზე გადატანა</button>
-        <button type="button" data-choice="d" data-why="ხელით გასწორება შემოწმებას კი არა, კიდევ ერთ ადამიანის ნაბიჯს ამატებს. ფორმატერს pipeline თვითონ იძახებს.">კოდის სტილის ხელით გასწორება</button>
+        <button type="button" data-choice="a" data-why="მეტი ტესტი კვლავ CI-ია. გარემოში გაშვება ჯერ არ მომხდარა.">მეტი სატესტო პროექტის დამატება</button>
+        <button type="button" data-choice="b" data-why="კი. შემოწმებული აწყობა მიდის გარემოში. დღევანდელი ლაბორატორია ამ ნაბიჯამდე ჩერდება.">შემოწმებული აწყობის გარემოში გაშვება</button>
+        <button type="button" data-choice="c" data-why="pipeline რედაქტორს არსად გადაიტანს. runner ცალკე მანქანაა.">რედაქტორის სხვა მანქანაზე გადატანა</button>
+        <button type="button" data-choice="d" data-why="ხელით გასწორება ავტომატიზაციას კი არა, ადამიანის კიდევ ერთ ნაბიჯს ამატებს. ფორმატერს pipeline თავად უშვებს.">კოდის სტილის ხელით გასწორება</button>
       </div>
       <p class="feedback" hidden></p>
     </section>
 
     <h2><span class="num">06</span>ლაბორატორია</h2>
-    <p>ერთი საათი. ბოლოს <code>dotnet test</code> მწვანეა, workflow კი საცავში დგას. სერვერზე არაფერს ვტვირთავთ.</p>
+    <p>ერთი საათი. ბოლოს <code>dotnet test</code> მწვანე უნდა იყოს, workflow-ის ფაილი კი საცავში უნდა იდოს. სერვერზე არაფერს ვტვირთავთ.</p>
     <pre><code>mkdir GradeBook &amp;&amp; cd GradeBook
 dotnet new sln -n GradeBook
 dotnet new classlib -n GradeBook -f net10.0
@@ -193,7 +193,7 @@ dotnet sln add GradeBook/GradeBook.csproj
 dotnet sln add GradeBook.Tests/GradeBook.Tests.csproj
 dotnet add GradeBook.Tests reference GradeBook</code></pre>
     <p>თუ SDK 8-ია, ორივე <code>-f</code> ჩაანაცვლეთ <code>net8.0</code>-ით. კოდი C# 12-ია და იქაც იგება.</p>
-    <p><code>GradeBook/Grades.cs</code> ჩაანაცვლეთ ამით. შაბლონის <code>Class1.cs</code> წაშალეთ.</p>
+    <p><code>GradeBook/Grades.cs</code>-ის შიგთავსი ჩაანაცვლეთ ამით. შაბლონის <code>Class1.cs</code> წაშალეთ.</p>
     <pre><code>public static class Grades
 {
     public static int Sum(int[] scores)
@@ -204,12 +204,12 @@ dotnet add GradeBook.Tests reference GradeBook</code></pre>
         return total;
     }
 }</code></pre>
-    <p><code>GradeBook.Tests/GradesTests.cs</code> ჩაანაცვლეთ ზემოთ მოყვანილი ტესტით. შაბლონის <code>UnitTest1.cs</code> წაშალეთ, თორემ ცარიელი ტესტიც გაეშვება და სურათს აერევა.</p>
-    <p>გაუშვით <code>dotnet test</code>. ელოდებიან ერთ გამვლელ ტესტს. მერე <code>Assert.Equal</code>-ში 27 ჩაანაცვლეთ 99-ით, ისევ გაუშვით, და წითელი წაიკითხეთ. დააბრუნეთ 27. ეს წითელი არის ის, რასაც pipeline დაგიმალავთ, თუ ტესტი საცავში არ დგას.</p>
+    <p><code>GradeBook.Tests/GradesTests.cs</code>-ის შიგთავსი ჩაანაცვლეთ ზემოთ მოყვანილი ტესტით. შაბლონის <code>UnitTest1.cs</code> წაშალეთ, თორემ ცარიელი ტესტიც გაეშვება და შედეგს დააბნევს.</p>
+    <p>გაუშვით <code>dotnet test</code>. მოსალოდნელია ერთი გავლილი ტესტი. შემდეგ <code>Assert.Equal</code>-ში 27 შეცვალეთ 99-ით, ისევ გაუშვით და წაიკითხეთ წითელი შეტყობინება. დააბრუნეთ 27. ამ წითელ შედეგს ვერ დაინახავდით, თუ ტესტი საცავში არ იქნებოდა.</p>
 
-    <h3>workflow, სანამ GitHub-ზე ატვირთავთ</h3>
-    <form class="checker" data-need="actions/checkout|checkout,actions/setup-dotnet|setup-dotnet,10.0.x|SDK 10.0.x,dotnet test|dotnet test" data-done="ოთხი ნიშანი ადგილზეა. ფაილი შეგიძლიათ .github/workflows/ci.yml-ად შეინახოთ.">
-      <p class="prompt">ჩასვით თქვენი YAML. შემმოწმებელი GitHub არ არის. ის ოთხ ნიშანს ეძებს.</p>
+    <h3>workflow-ის შემოწმება GitHub-ზე ატვირთვამდე</h3>
+    <form class="checker" data-need="actions/checkout|checkout,actions/setup-dotnet|setup-dotnet,10.0.x|SDK 10.0.x,dotnet test|dotnet test" data-done="ოთხი ნიშანი ადგილზეა. ფაილი შეგიძლიათ .github/workflows/ci.yml სახელით შეინახოთ.">
+      <p class="prompt">ჩასვით თქვენი YAML. ეს შემმოწმებელი GitHub არ არის, ის მხოლოდ ოთხ ნიშანს ეძებს.</p>
       <textarea spellcheck="false" aria-label="ci.yml"></textarea>
       <button type="submit">შეამოწმე</button>
       <ul class="checker-list"></ul>
@@ -217,38 +217,38 @@ dotnet add GradeBook.Tests reference GradeBook</code></pre>
     </form>
 
     <ol class="ticks" data-store="lesson-02">
-      <li><label><input type="checkbox"> <span>Solution იქმნება, ორი პროექტით: ბიბლიოთეკა და xUnit.</span></label></li>
-      <li><label><input type="checkbox"> <span><code>dotnet test</code> ერთ ტესტს ამწვანებს.</span></label></li>
-      <li><label><input type="checkbox"> <span>99-ზე ტესტი წითელდება, 27-ზე ისევ მწვანდება.</span></label></li>
+      <li><label><input type="checkbox"> <span>შექმნილია solution ორი პროექტით: ბიბლიოთეკა და xUnit.</span></label></li>
+      <li><label><input type="checkbox"> <span><code>dotnet test</code>-ით ერთი ტესტი მწვანედ გადის.</span></label></li>
+      <li><label><input type="checkbox"> <span>99-ის შემთხვევაში ტესტი წითლდება, 27-ის შემთხვევაში ისევ მწვანდება.</span></label></li>
       <li><label><input type="checkbox"> <span><code>.github/workflows/ci.yml</code> შეიცავს checkout-ს, setup-dotnet-ს, <code>10.0.x</code>-ს და <code>dotnet test</code>-ს.</span></label></li>
-      <li><label><input type="checkbox"> <span>არასავალდებულო, თუ ანგარიში გაქვთ: push, და GitHub-ზე ჩანს გაშვებული workflow.</span></label></li>
+      <li><label><input type="checkbox"> <span>არასავალდებულოა (თუ GitHub-ის ანგარიში გაქვთ): გააკეთეთ push და GitHub-ზე ნახეთ გაშვებული workflow.</span></label></li>
     </ol>
 
     <h3>სახლში</h3>
     <ol>
-      <li>დაამატეთ მეორე <code>[Fact]</code>: ცარიელი მასივის ჯამი 0-ია.</li>
-      <li>ცარიელ მასივზე <code>Sum</code> დაწერეთ ისე, რომ ტესტი მწვანე დარჩეს. ახლანდელი კოდი ამას ისედაც აკეთებს. ტესტმა ეს ხმამაღლა უნდა თქვას.</li>
+      <li>დაამატეთ მეორე <code>[Fact]</code>: ცარიელი მასივის ჯამი 0-ის ტოლია.</li>
+      <li>დარწმუნდით, რომ <code>Sum</code> ცარიელ მასივზეც სწორად მუშაობს და ტესტი მწვანე რჩება. არსებული კოდი ამას უკვე აკეთებს, მაგრამ ტესტმა ეს აშკარად უნდა დაადასტუროს.</li>
       <li>workflow-ში, <code>dotnet test</code>-ის წინ, დაამატეთ ნაბიჯი <code>dotnet format --verify-no-changes</code>.</li>
     </ol>
-    <p>თუ GitHub-ის ანგარიში არ გაქვთ, ლაბორატორიაზე მოიტანეთ მწვანე <code>dotnet test</code> და YAML ფაილი. ანგარიშის გარეშე runner ვერ ეშვება. ლოკალური ტესტი მაინც თქვენია.</p>
+    <p>თუ GitHub-ის ანგარიში არ გაქვთ, ლაბორატორიაზე მოიტანეთ მწვანე <code>dotnet test</code> და YAML ფაილი. ანგარიშის გარეშე runner ვერ გაეშვება, მაგრამ ლოკალური ტესტი მაინც თქვენი შედეგია.</p>
 
     <h2><span class="num">07</span>ოთხი წინადადება</h2>
     <ol>
       <li>CI ყოველ ცვლილებაზე აწყობს და ამოწმებს.</li>
       <li>GitHub-ზე ეს ფაილი <code>.github/workflows</code>-შია. Azure-ში <code>azure-pipelines.yml</code>-ია. Jenkins-ში <code>Jenkinsfile</code>-ია.</li>
       <li>სამივეში ბრძანება ერთია: <code>dotnet test</code>.</li>
-      <li>CD შემოწმებულ აწყობას გარემოზე აყენებს. დღეს იქამდე არ მივდივართ.</li>
+      <li>CD შემოწმებულ აწყობას გარემოში აგზავნის. დღეს ამ ეტაპამდე არ მივდივართ.</li>
     </ol>
-    <p>შემდეგი კვირა არქიტექტურაა: SOLID, MVC და დამოკიდებულებების გადაცემა. რუკა ერთ გვერდზე: <a href="../reference/cicd.html">ცნობარი</a>. გასული კვირა: <a href="0001-modern-dotnet.html">ეკოსისტემა</a>.</p>
+    <p>შემდეგი კვირა არქიტექტურაა: SOLID, MVC და დამოკიდებულების ინექცია (dependency injection). რუკა ერთ გვერდზე: <a href="../reference/cicd.html">ცნობარი</a>. გასული კვირა: <a href="0001-modern-dotnet.html">ეკოსისტემა</a>.</p>
 
     <h3>წაიკითხეთ პირველადი წყარო</h3>
-    <p>ლაბორატორიის წყარო არის <a href="https://docs.github.com/en/actions/tutorials/build-and-test-code/net">Building and testing .NET</a>. ვერსიები კი <a href="https://github.com/actions/setup-dotnet">setup-dotnet-ის README</a>-დან აიღეთ, იმიტომ რომ სახელმძღვანელოს მაგალითი ძველ SDK-ზე დგას. განმარტებისთვის: <a href="https://learn.microsoft.com/en-us/devops/develop/what-is-continuous-integration">What is continuous integration</a>.</p>
-    <p>თუ pipeline გატყდა და ამ გვერდზე მიზეზი არ ჩანს, წაიკითხეთ წითელი ლოგი და კითხვა წაიღეთ <a href="https://www.reddit.com/r/dotnet/">r/dotnet</a>-ზე ან <a href="https://learn.microsoft.com/en-us/answers/tags/19/dotnet">Microsoft Q&amp;A</a>-ზე. ლოგის გარეშე კითხვას პასუხი არ აქვს.</p>
+    <p>ლაბორატორიის წყარო არის <a href="https://docs.github.com/en/actions/tutorials/build-and-test-code/net">Building and testing .NET</a>. ვერსიები კი <a href="https://github.com/actions/setup-dotnet">setup-dotnet-ის README</a>-დან აიღეთ, რადგან სახელმძღვანელოს მაგალითი ძველ SDK-ს იყენებს. განმარტებისთვის: <a href="https://learn.microsoft.com/en-us/devops/develop/what-is-continuous-integration">What is continuous integration</a>.</p>
+    <p>თუ pipeline გატყდა და ამ გვერდზე მიზეზი არ ჩანს, წაიკითხეთ წითელი ლოგი და კითხვა დასვით <a href="https://www.reddit.com/r/dotnet/">r/dotnet</a>-ზე ან <a href="https://learn.microsoft.com/en-us/answers/tags/19/dotnet">Microsoft Q&amp;A</a>-ზე. ლოგის გარეშე დასმულ კითხვას პასუხი არ ექნება.</p>
   </main>
 
   <footer class="teacher">
     <div class="teacher-inner">
-      <p>ლექტორო, თუ დარბაზში კითხვა გაჩნდა და ამ გვერდზე პასუხი არ დგას, მომწერეთ ჩათში. სტუდენტის ფორმულირებაც მოიტანეთ. შემდეგ გაკვეთილს იქიდან ავაწყობთ.</p>
+      <p>ლექტორო, თუ დარბაზში კითხვა გაჩნდა და ამ გვერდზე პასუხი არ დგას, მომწერეთ ჩატში. სტუდენტის ფორმულირებაც მოიტანეთ. შემდეგ გაკვეთილს მის საფუძველზე ავაგებთ.</p>
     </div>
   </footer>
   <script src="../assets/quiz.js"></script>

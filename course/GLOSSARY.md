@@ -36,11 +36,11 @@ _Avoid_: Current
 The `net10.0` or `net8.0` line in the project file. It chooses the platform and the default C# version.
 _Avoid_: LangVersion latest
 
-**კონსტრუქტორი კლასის თავში (primary constructor)**:
+**პირველადი კონსტრუქტორი (primary constructor)**:
 Constructor parameters written on the type name. On a class they are parameters, not properties, until the class assigns them.
 _Avoid_: record, when you mean an ordinary class
 
-**სია კვადრატული ფრჩხილით (collection expression)**:
+**კოლექცია კვადრატულ ფრჩხილებში (collection expression)**:
 The `[...]` form. The type on the left decides which collection is created. `..` spreads another collection into it.
 _Avoid_: array initializer, for this syntax
 
