@@ -59,3 +59,69 @@ _Avoid_: pipeline, for the file. Jenkins calls the file a pipeline too. There th
 **pipeline**:
 A run of that file: the steps actually executing.
 _Avoid_: workflow, for the run
+
+## Architecture
+
+**SRP**:
+A type has one reason to change.
+_Avoid_: one method, one file
+
+**OCP**:
+A module can gain behavior by adding a type, while the code that is already right stays unedited.
+_Avoid_: never edit anything
+
+**LSP**:
+An implementation of an interface must not surprise the code that uses the interface.
+_Avoid_: inheritance, when you mean any subtype
+
+**ISP**:
+An interface stays small enough that a caller does not depend on methods it does not use.
+_Avoid_: one method per interface, as a goal
+
+**DIP**:
+High-level code depends on an abstraction. The concrete type implements that abstraction and stays outside.
+_Avoid_: dependency injection, when you mean the direction of the arrow
+
+**Dependency Injection**:
+The object a class needs arrives through the constructor. The class does not construct it.
+_Avoid_: service locator, `new` of a collaborator
+
+**IoC**:
+Some outer code builds the object graph. The class being called does not.
+_Avoid_: Dependency Injection, when you mean the whole inversion. DI is the technique. IoC is the result
+
+**კონტეინერი (IServiceProvider)**:
+The object that creates registered services and passes them to constructors.
+_Avoid_: Docker, server, host
+
+**composition root**:
+The one place that registers concrete types. In this course it is `Program.cs`.
+_Avoid_: the service class, the test that passes a store by hand
+
+**transient**:
+A new instance on every request from the container.
+_Avoid_: scoped, singleton
+
+**scoped**:
+One instance for a scope. In a web app the scope is one request.
+_Avoid_: singleton, transient
+
+**singleton**:
+One instance for the life of the container.
+_Avoid_: static, when you mean a registered service
+
+**MVC**:
+Model, view, and controller. The view and the controller depend on the model.
+_Avoid_: MVVM
+
+**MVVM**:
+Model, view, and view model. The view knows the view model. The view model does not know the view.
+_Avoid_: MVC, code-behind
+
+**Clean Architecture**:
+Business rules sit in the center. Source dependencies point inward.
+_Avoid_: a four-project template, when you mean the dependency rule
+
+**dependency rule**:
+Code in an inner circle does not name a type from an outer circle.
+_Avoid_: layer, when the direction is missing

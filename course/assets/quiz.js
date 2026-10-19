@@ -107,6 +107,14 @@
     });
   });
 
+  document.querySelectorAll("button.reveal").forEach(function (button) {
+    var body = button.nextElementSibling;
+    button.addEventListener("click", function () {
+      body.hidden = false;
+      button.setAttribute("aria-expanded", "true");
+    });
+  });
+
   document.querySelectorAll(".ticks").forEach(function (list) {
     var key = "comp-m205-" + (list.dataset.store || "lab");
     var saved = {};

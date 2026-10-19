@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ცნობარი. SOLID</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+  <header class="mast">
+    <div class="mast-inner">
+      <p class="mast-kicker">COMP M205-1 · ცნობარი</p>
+      <h1>SOLID, ერთ გვერდზე</h1>
+      <p class="mast-lead">კვირა 3. ისარი აბსტრაქციისკენ მიდის. ფანჯარა და ვებსაიტი ამ გვერდზე არ იქმნება.</p>
+    </div>
+  </header>
+  <nav class="crumbs">
+    <a href="../index.html">კურსი</a>
+    <a href="../lessons/0003-solid-architecture.html">გაკვეთილი</a>
+    <a href="cicd.html">ცნობარი: CI</a>
+  </nav>
+  <main class="sheet">
+    <h2>ხუთი წესი</h2>
+    <table>
+      <thead><tr><th></th><th>წესი</th></tr></thead>
+      <tbody>
+        <tr><td>SRP</td><td>ცვლილების ერთი მიზეზი</td></tr>
+        <tr><td>OCP</td><td>გაფართოება ახალი კლასით, ძველი სწორი კოდის რედაქტირების გარეშე</td></tr>
+        <tr><td>LSP</td><td>რეალიზაციამ ინტერფეისის მომხმარებელი არ დააბნიოს</td></tr>
+        <tr><td>ISP</td><td>ინტერფეისი იმდენ მეთოდს შეიცავს, რამდენსაც მომხმარებელი იძახებს</td></tr>
+        <tr><td>DIP</td><td>მაღალი დონე აბსტრაქციაზე დგას, კონკრეტულ კლასზე კი არა</td></tr>
+      </tbody>
+    </table>
+    <p class="aside"><a href="https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html">Solid Relevance</a></p>
+
+    <h2>სამი რუკა</h2>
+    <table>
+      <thead><tr><th></th><th>შიგნით</th><th>გარეთ</th><th>ვინ იცნობს ვის</th></tr></thead>
+      <tbody>
+        <tr><td>MVC</td><td>Model</td><td>View, Controller</td><td>ხედი და კონტროლერი მოდელზე დგას</td></tr>
+        <tr><td>MVVM</td><td>Model</td><td>View, ViewModel</td><td>ხედი ViewModel-ს იცნობს. ViewModel ხედს არა</td></tr>
+        <tr><td>Clean Architecture</td><td>წესი და ინტერფეისი</td><td>ეკრანი, მაღაზია, კონტეინერი</td><td>დამოკიდებულება მხოლოდ შიგნით მიუთითებს</td></tr>
+      </tbody>
+    </table>
+
+    <h2>კონტეინერი</h2>
+    <p>DI: ობიექტი კონსტრუქტორით მოდის. IoC: გრაფს კონტეინერი აწყობს. კონტეინერი <code>IServiceProvider</code>-ა. რეგისტრაცია ერთ ადგილას იწერება, composition root-ში.</p>
+    <table>
+      <thead><tr><th>lifetime</th><th>რამდენი</th><th>ამ ლაბორატორიაში</th></tr></thead>
+      <tbody>
+        <tr><td>transient</td><td>ყოველ მოთხოვნაზე ახალი</td><td><code>GradingService</code></td></tr>
+        <tr><td>scoped</td><td>ერთ ფარგლებში ერთი</td><td>არ ვიყენებთ</td></tr>
+        <tr><td>singleton</td><td>კონტეინერზე ერთი</td><td><code>IGradeStore</code></td></tr>
+      </tbody>
+    </table>
+    <pre><code>var services = new ServiceCollection();
+services.AddSingleton&lt;IGradeStore, MemoryGradeStore&gt;();
+services.AddTransient&lt;GradingService&gt;();
+
+using ServiceProvider provider = services.BuildServiceProvider();
+GradingService grading = provider.GetRequiredService&lt;GradingService&gt;();</code></pre>
+    <p>ბიბლიოთეკა ამ პაკეტს არ იღებს. პაკეტი <code>Microsoft.Extensions.DependencyInjection</code>-ია, 10.0 ხაზი. 19 ოქტომბერი 2026: 10.0.13.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">Dependency injection in .NET</a> · <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-usage">Use dependency injection</a></p>
+
+    <h2>ლაბორატორიის ბრძანებები</h2>
+    <pre><code>dotnet new sln -n GradeBook
+dotnet new classlib -n GradeBook -f net10.0
+dotnet new console -n GradeBook.App -f net10.0
+dotnet new xunit -n GradeBook.Tests -f net10.0
+dotnet sln add GradeBook/GradeBook.csproj
+dotnet sln add GradeBook.App/GradeBook.App.csproj
+dotnet sln add GradeBook.Tests/GradeBook.Tests.csproj
+dotnet add GradeBook.App reference GradeBook
+dotnet add GradeBook.Tests reference GradeBook
+dotnet add GradeBook.App package Microsoft.Extensions.DependencyInjection
+dotnet add GradeBook.Tests package Microsoft.Extensions.DependencyInjection
+dotnet test
+dotnet run --project GradeBook.App</code></pre>
+  </main>
+</body>
+</html>

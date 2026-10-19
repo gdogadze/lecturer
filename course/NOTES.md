@@ -24,3 +24,6 @@ Match `lectures/week-01/`. Short spoken sentences. One idea, then a check. The w
 - Ask the room who has written C#, Java, or Python, and who is on Mac or Windows, before spending time on `Main`.
 - If the hour slips, cut the alias and lambda aside. Keep the primary constructor and the collection expression.
 - Week 1 does not start Git. Week 2 does not deploy.
+- Week 3 does not open a window and does not start an ASP.NET project. WinUI, WPF, and MAUI are week 4. The web week is later. MVC and MVVM are maps. The lab is constructor injection of `IGradeStore` on the week-2 GradeBook, registered with `Microsoft.Extensions.DependencyInjection` 10.0.13 (checked 19 October 2026). The class library does not reference the container.
+- If the hour slips, read the OCP, LSP, and ISP table and move to the container. Keep SRP, DIP, and the three names.
+- The published workflow tests week 2 and week 3 as separate jobs. The week-2 lesson still shows the single-job file students type.

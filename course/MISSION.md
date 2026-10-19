@@ -8,6 +8,8 @@ Master's students at Sokhumi State University need to leave COMP M205-1 able to 
 - A student can write a small program that uses a C# 12 primary constructor and a collection expression, and can run it with `dotnet run`.
 - A student can put `dotnet test` on every push with a GitHub Actions workflow, and can say what Azure Pipelines and Jenkins do that is the same job.
 - Later weeks can assume this floor and move to architecture, without re-teaching the SDK.
+- A student can name the one reason a type should change, and can pass an `IGradeStore` through a constructor instead of constructing the store inside the service.
+- A student can register that store as a singleton and the service as transient in `Microsoft.Extensions.DependencyInjection`, and can say which way the arrow points in MVC, MVVM, and Clean Architecture.
 
 ## Constraints
 - Each week is a 2-hour lecture plus a 1-hour lab.
@@ -18,6 +20,7 @@ Master's students at Sokhumi State University need to leave COMP M205-1 able to 
 - AI may explain an error. A student who cannot explain the code does not yet own it. Quizzes and exams are without tools.
 
 ## Out of scope
-- SOLID, UI frameworks, async, cloud deploy, EF Core, and API security. Those are later weeks.
+- UI frameworks, async, cloud deploy, EF Core, and API security. Those are later weeks. Week 3 names MVC and MVVM. It does not build a window or a website.
+- A second IoC container. Autofac and the rest stay names. The lab registers the built-in container.
 - Installing Jenkins, or standing up an Azure DevOps organization, in week 2.
 - A tour of C# 13 and C# 14. Name the version map. Teach the two C# 12 forms students will type.

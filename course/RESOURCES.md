@@ -30,6 +30,26 @@
   `--verify-no-changes` fails when formatting would edit files. Use for: the code-quality check.
 - [Article: GitHub Actions and .NET](https://learn.microsoft.com/en-us/dotnet/devops/github-actions-overview)
   Workflow, job, and step, and which `dotnet` commands belong in a step. Use for: vocabulary.
+- [Article: Solid Relevance (Robert C. Martin)](https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html)
+  One sentence each for SRP, OCP, LSP, ISP, and DIP, in the form this course repeats. Use for: week 3's definitions. The 1990s slogan "one method" is the thing this page corrects.
+- [Article: The Clean Architecture (Robert C. Martin)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+  The dependency rule: source code dependencies point inward. Use for: why `GradingService` does not name `MemoryGradeStore`.
+- [Article: Architectural principles (Microsoft Learn)](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles)
+  Separation of concerns, single responsibility, and dependency inversion, with the arrow drawn. Use for: the same two principles in Microsoft's words.
+- [Article: Common web application architectures (Microsoft Learn)](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)
+  Clean Architecture as the onion: core defines the interfaces, infrastructure implements them. Use for: the picture, not a four-project lab.
+- [Article: Overview of ASP.NET Core MVC](https://learn.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-10.0)
+  Model, view, controller, and which of them reference the model. Use for: the map. The website itself is a later week.
+- [Article: Model-View-ViewModel (Microsoft Learn)](https://learn.microsoft.com/en-us/dotnet/architecture/maui/mvvm)
+  The view knows the view model. The view model does not know the view. Use for: week 3's naming. The window is week 4.
+- [Article: Dependency injection in .NET](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection)
+  DI as the technique for IoC, constructor injection, and `IServiceProvider`. Use for: the lab's vocabulary. Their sample uses the Generic Host. The container underneath is the same `IServiceCollection`.
+- [Tutorial: Use dependency injection](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-usage)
+  Transient is new every time, scoped changes with the scope, singleton is one instance. Use for: the lifetime table. Checked against package 10.0.13 on 19 October 2026.
+- [Article: Dependency injection guidelines](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines)
+  Prefer the built-in container. Captive dependency is a singleton holding a scoped service. Use for: why the lab's store is singleton and the service is transient, and why Autofac stays a name.
+- [Article: Inversion of Control Containers and the Dependency Injection pattern (Martin Fowler)](https://martinfowler.com/articles/injection.html)
+  Where the name "dependency injection" comes from, and constructor injection as the form this course types. Use for: the one sentence that separates DI from IoC.
 
 ## Wisdom (Communities)
 

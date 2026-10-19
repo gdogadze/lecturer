@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>კვირა 3. არქიტექტურული შაბლონები და SOLID</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+  <header class="mast">
+    <div class="mast-inner">
+      <p class="mast-kicker">სოხუმის სახელმწიფო უნივერსიტეტი · ინფორმატიკა · COMP M205-1</p>
+      <p class="mast-week">კვირა 3 · ლექცია 2 სთ · ლაბორატორია 1 სთ</p>
+      <h1>არქიტექტურული შაბლონები და SOLID</h1>
+    </div>
+  </header>
+
+  <nav class="crumbs">
+    <a href="../index.html">კურსი</a>
+    <a href="0002-devops-cicd.html">წინა: CI/CD</a>
+    <a href="../reference/solid.html">ცნობარი: SOLID</a>
+  </nav>
+
+  <main class="sheet">
+    <p class="lead">არქიტექტურული შაბლონები და SOLID პრინციპები. MVC, MVVM და Clean Architecture-ის კონცეფციები, Dependency Injection და IoC კონტეინერების გამოყენება.</p>
+
+
+    <h2><span class="num">01</span>ხუთი პრინციპი</h2>
+    <p>SOLID ხუთი წესია. თითო ასოს ქვემოთ აქვს სრული სახელი, რას ნიშნავს, და კოდი. ჯერ კოდზე თქვით, რა არის ცუდი. „ასე არა“ ამ ახსნას ხსნის. შემდეგ იგივე ამოცანა წესის დაცვითაა.</p>
+
+    <h3>SRP. Single Responsibility Principle</h3>
+    <p>SRP = Single Responsibility Principle. ერთი პასუხისმგებლობის პრინციპი.</p>
+    <p>ერთად შეკრიბე ის, რაც ერთი მიზეზით იცვლება, და ერთმანეთისგან დააშორე ის, რაც სხვა მიზეზით იცვლება. წესი მეთოდების რაოდენობას არ ითვლის. წესი ცვლილების მიზეზს ითვლის.</p>
+    <pre><code>public static int Sum(int[] scores)
+{
+    int total = 0;
+    foreach (int score in scores)
+    {
+        total += score;
+        Console.WriteLine($"Added {score}, running total = {total}");
+    }
+    return total;
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> ერთი მეთოდი ჯამსაც ითვლის და ყოველ ნაბიჯზე ეკრანზეც ბეჭდავს.</p>
+    </div>
+    <p><strong>ასე.</strong> ჯამი ბიბლიოთეკაში რჩება. ბეჭდვა იქ ხდება, სადაც პროგრამა იწყება.</p>
+    <pre><code>public static class Grades
+{
+    public static int Sum(int[] scores)
+    {
+        int total = 0;
+        foreach (int score in scores)
+            total += score;
+        return total;
+    }
+}
+
+// Program.cs
+int[] scores = [10, 9, 8];
+int total = Grades.Sum(scores);
+Console.WriteLine(total);</code></pre>
+    <p>ცუდი მეთოდი ორი მიზეზით იცვლება: ან ჯამის წესი შეიცვლება, ან ტექსტი, რომელსაც ადამიანი კითხულობს. ამიტომ გამოთვლა და ეკრანი გაიყო. Microsoft იგივე აზრს ფენებზეც ავრცელებს: ბიზნესის წესი, მონაცემთა შენახვა და ეკრანი ცალ-ცალკე პროექტებშია.</p>
+    <p class="aside"><a href="https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html">Solid Relevance</a>. Microsoft-ის ფორმულირება: <a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">Architectural principles</a>.</p>
+
+    <section class="quiz" data-quiz data-answer="a">
+      <p class="prompt">SRP ამ კლასისგან რას მოითხოვს?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="სწორია. მიზეზი ერთია. მეთოდების რაოდენობა ამ წესს არ განსაზღვრავს.">ცვლილების მხოლოდ ერთი მიზეზი ჰქონდეს</button>
+        <button type="button" data-choice="b" data-why="მეთოდების რაოდენობა SRP არ არის. ერთ მეთოდსაც შეიძლება ორი მიზეზი ჰქონდეს: ჯამიც და ბეჭდვაც.">მხოლოდ ერთი მეთოდი ჰქონდეს</button>
+        <button type="button" data-choice="c" data-why="პროექტის საზღვარი სასარგებლოა, მაგრამ SRP კლასის ცვლილების მიზეზს ეხება და არა საქაღალდეს.">მხოლოდ ერთ პროექტში იყოს</button>
+        <button type="button" data-choice="d" data-why="ველების რაოდენობა წესი არ არის. ქულების სია ერთი ველია, მაგრამ მაინც შეიძლება ეკრანსაც ემსახურებოდეს.">მხოლოდ ერთ ველს ინახავდეს</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h3>OCP. Open-Closed Principle</h3>
+    <p>OCP = Open-Closed Principle. ღია-დახურული პრინციპი.</p>
+    <p>მოდული ღიაა გაფართოებისთვის და დახურულია იმ კოდის რედაქტირებისთვის, რომელიც უკვე სწორად მუშაობს. ახალი ქცევა ახალი ტიპია. უკვე სწორ მეთოდში ახალი ტოტი არ ემატება.</p>
+    <pre><code>public static int Average(int[] scores, string mode)
+{
+    if (scores.Length == 0)
+        return 0;
+
+    int total = 0;
+    foreach (int score in scores)
+        total += score;
+
+    int raw = total / scores.Length;
+    if (mode == "up" &amp;&amp; total % scores.Length != 0)
+        return raw + 1;
+    return raw;
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> დამრგვალების ყოველი ახალი წესი <code>Average</code>-ის შიგნით ახალ <code>if</code>-ს ამატებს.</p>
+    </div>
+    <p><strong>ასე.</strong> თითო წესი საკუთარი კლასია. <code>Average</code> მხოლოდ ჯამს სთხოვს დამრგვალებას.</p>
+    <pre><code>public interface IRounder
+{
+    int Round(int total, int count);
+}
+
+public class FloorRounder : IRounder
+{
+    public int Round(int total, int count)
+    {
+        if (count == 0)
+            return 0;
+        return total / count;
+    }
+}
+
+public class CeilingRounder : IRounder
+{
+    public int Round(int total, int count)
+    {
+        if (count == 0)
+            return 0;
+        if (total % count == 0)
+            return total / count;
+        return total / count + 1;
+    }
+}
+
+public static int Average(int[] scores, IRounder rounder)
+{
+    int total = 0;
+    foreach (int score in scores)
+        total += score;
+    return rounder.Round(total, scores.Length);
+}</code></pre>
+    <p>ცუდ კოდში მესამე წესი, მაგალითად უახლოეს მთელამდე, კვლავ <code>Average</code>-ის რედაქტირებას მოითხოვდა. ახლა ის ახალი კლასია, <code>IRounder</code>-ის კიდევ ერთი რეალიზაცია. <code>FloorRounder</code> და <code>Average</code> უცვლელი რჩება. დღევანდელ ლაბორატორიაში ეს ინტერფეისი არ გვჭირდება: საშუალო მთელ რიცხვზე იყოფა, როგორც <code>FloorRounder</code>.</p>
+
+    <h3>LSP. Liskov Substitution Principle</h3>
+    <p>LSP = Liskov Substitution Principle. ლისკოვის ჩანაცვლების პრინციპი.</p>
+    <p>ინტერფეისის რეალიზაციამ არ უნდა დააბნიოს ის კოდი, რომელიც ამ ინტერფეისს იყენებს. <code>Add</code>-ით შენახული ქულა <code>All</code>-ში უნდა დაბრუნდეს.</p>
+    <pre><code>public interface IGradeStore
+{
+    void Add(int score);
+    int[] All();
+}
+
+public class EvenDroppingStore : IGradeStore
+{
+    private readonly List&lt;int&gt; _scores = [];
+
+    public void Add(int score)
+    {
+        if (score % 2 != 0)
+            _scores.Add(score);
+    }
+
+    public int[] All()
+    {
+        return [.. _scores];
+    }
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> მაღაზია ლუწ ქულებს აგდებს. საშუალოს გამოთვლა ამას ვერ ხედავს და არასწორ რიცხვს იღებს.</p>
+    </div>
+    <p><strong>ასე.</strong> მაღაზია ინახავს ყველა ქულას, რომელსაც <code>Add</code> იღებს.</p>
+    <pre><code>public class MemoryGradeStore : IGradeStore
+{
+    private readonly List&lt;int&gt; _scores = [];
+
+    public void Add(int score)
+    {
+        _scores.Add(score);
+    }
+
+    public int[] All()
+    {
+        return [.. _scores];
+    }
+}</code></pre>
+    <p>10, 7 და 8 ჯამში 25-ია. 25 გაყოფილი 3-ზე მთელ რიცხვებში 8-ია. <code>EvenDroppingStore</code> 10-სა და 8-ს აგდებს, რჩება 7, და საშუალო 7 ხდება. <code>MemoryGradeStore</code> სამივეს აბრუნებს, ამიტომ საშუალო 8 რჩება. სერვისის კოდი არ შეცვლილა. შეიცვალა მაღაზია, რომელიც ინტერფეისის დაპირებას არღვევდა.</p>
+
+    <h3>ISP. Interface Segregation Principle</h3>
+    <p>ISP = Interface Segregation Principle. ინტერფეისის გამიჯვნის პრინციპი.</p>
+    <p>ინტერფეისი პატარა უნდა იყოს, რომ მომხმარებელი იმ მეთოდზე არ იყოს დამოკიდებული, რომელსაც არ იძახებს.</p>
+    <pre><code>public interface IGradeStore
+{
+    void Add(int score);
+    int[] All();
+    void Print(int average);
+}
+
+public class MemoryGradeStore : IGradeStore
+{
+    private readonly List&lt;int&gt; _scores = [];
+
+    public void Add(int score)
+    {
+        _scores.Add(score);
+    }
+
+    public int[] All()
+    {
+        return [.. _scores];
+    }
+
+    public void Print(int average)
+    {
+        Console.WriteLine(average);
+    }
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> შენახვის ინტერფეისში ბეჭდვაც დევს. მაღაზია იძულებულია <code>Print</code> დაწეროს, თუმცა ეკრანს არ ემსახურება.</p>
+    </div>
+    <p><strong>ასე.</strong> შენახვას თავისი ინტერფეისი აქვს. ეკრანს საკუთარი ტიპი.</p>
+    <pre><code>public interface IGradeStore
+{
+    void Add(int score);
+    int[] All();
+}
+
+public class ConsoleGradePrinter
+{
+    public void Print(int average)
+    {
+        Console.WriteLine(average);
+    }
+}</code></pre>
+    <p><code>GradingService</code> მხოლოდ <code>Add</code>-სა და <code>All</code>-ს იძახებს. ცუდ ინტერფეისზე ის მაინც <code>Print</code>-ზე იყო დამოკიდებული, რადგან ეს მეთოდი კონტრაქტში იდგა. ბეჭდვა ცალკე ტიპში გადავიდა. დღეს ლაბორატორიაში ეს ტიპი არ იწერება: ერთ სტრიქონს <code>Program.cs</code> ბეჭდავს.</p>
+
+    <h3>DIP. Dependency Inversion Principle</h3>
+    <p>DIP = Dependency Inversion Principle. დამოკიდებულების ინვერსიის პრინციპი.</p>
+    <p>მაღალი დონის კოდი დაბალი დონის დეტალზე არ უნდა იყოს დამოკიდებული. ორივე აბსტრაქციაზე უნდა იყოს დამოკიდებული. აქ მაღალი დონე საშუალოს გამოთვლის წესია. დაბალი დონე კლასია, რომელიც ქულებს სიაში ინახავს.</p>
+    <pre><code>public class GradingService
+{
+    private readonly MemoryGradeStore _store = new MemoryGradeStore();
+
+    public void Add(int score)
+    {
+        _store.Add(score);
+    }
+
+    public int Average()
+    {
+        int[] scores = _store.All();
+        if (scores.Length == 0)
+            return 0;
+
+        int total = 0;
+        foreach (int score in scores)
+            total += score;
+
+        return total / scores.Length;
+    }
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> სერვისი კონკრეტულ მაღაზიას თვითონ ქმნის. სხვა მაღაზიის ჩასასმელად ამ ფაილის რედაქტირებაა საჭირო.</p>
+    </div>
+    <p><strong>ასე.</strong> სერვისი მხოლოდ ინტერფეისს იცნობს. კონკრეტული მაღაზია გარედან მოდის. ეს სამი ტიპი ლაბორატორიის ბიბლიოთეკაა.</p>
+    <p>ინტერფეისი ის სახელია, რომლითაც სერვისს შენახვის მოთხოვნა შეუძლია. პირველადი კონსტრუქტორი პირველი კვირიდან გვახსოვს: პარამეტრი ტიპის სახელთან ერთად კონსტრუქტორში იწერება. მეთოდი ამ პარამეტრს უშუალოდ იყენებს.</p>
+    <pre><code>public interface IGradeStore
+{
+    void Add(int score);
+    int[] All();
+}
+
+public class MemoryGradeStore : IGradeStore
+{
+    private readonly List&lt;int&gt; _scores = [];
+
+    public void Add(int score)
+    {
+        _scores.Add(score);
+    }
+
+    public int[] All()
+    {
+        return [.. _scores];
+    }
+}
+
+public class GradingService(IGradeStore store)
+{
+    public void Add(int score)
+    {
+        store.Add(score);
+    }
+
+    public int Average()
+    {
+        int[] scores = store.All();
+        if (scores.Length == 0)
+            return 0;
+
+        int total = 0;
+        foreach (int score in scores)
+            total += score;
+
+        return total / scores.Length;
+    }
+}</code></pre>
+    <p>ცუდ კოდში სერვისი <code>MemoryGradeStore</code>-ს სახელს იცნობდა და თვითონ ქმნიდა. ტესტი სხვა მაღაზიას ვერ ჩასვამდა ამ ფაილის რედაქტირების გარეშე. კონსტრუქტორის პარამეტრი ამ რედაქტირებას ხსნის: სერვისი მხოლოდ <code>IGradeStore</code>-ს იცნობს, კონკრეტული მაღაზია კი ტესტში ან <code>Program.cs</code>-ში იქმნება.</p>
+    <p>საშუალო მთელი რიცხვია, ქულის მსგავსად. 10, 9 და 8 ჯამში 27-ს იძლევა, 27 გაყოფილი 3-ზე კი 9-ია. ცარიელი მაღაზია 0-ს აბრუნებს, რადგან ჩვენ ასე დავწერეთ. ეს მათემატიკის კანონი არ არის.</p>
+    <p class="aside"><a href="https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html">Solid Relevance</a>, DIP. Microsoft-ის ფორმულირება: <a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">Architectural principles</a>.</p>
+
+
+    <h2><span class="num">02</span>სამი შაბლონი</h2>
+    <p>MVC, MVVM და Clean Architecture ერთი იდეის სამი სახელია. წესი შიგნით რჩება. ეკრანი, ფაილი და კონტეინერი გარეთ. თითო შაბლონს ქვემოთ აქვს კოდი. ჯერ კოდზე თქვით, რა არის ცუდი. „ასე არა“ ამ ახსნას ხსნის. შემდეგ იგივე ამოცანა წესის დაცვითაა.</p>
+
+    <h3>MVC. Model-View-Controller</h3>
+    <p>MVC = Model-View-Controller. მოდელი-ხედი-კონტროლერი.</p>
+    <p>მოდელი ინახავს მდგომარეობას და წესს. ხედი აჩვენებს. კონტროლერი მოდელს ეძახის და ხედს ირჩევს. მოდელმა ეკრანი არ უნდა იცოდეს. ASP.NET Core MVC-ში ხედიც და კონტროლერიც მოდელზეა დამოკიდებული. დღეს ვებსაიტს არ ვქმნით. კონსოლში <code>Program.cs</code> კონტროლერი და ხედი ერთადაა: სერვისს სთხოვს რიცხვს და ბეჭდავს.</p>
+    <pre><code>public class GradingService(IGradeStore store)
+{
+    public void Add(int score) =&gt; store.Add(score);
+
+    public int Average()
+    {
+        int[] scores = store.All();
+        if (scores.Length == 0)
+            return 0;
+        int total = 0;
+        foreach (int score in scores)
+            total += score;
+        return total / scores.Length;
+    }
+
+    public void Report()
+    {
+        Console.WriteLine(Average());
+    }
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> მოდელი ეკრანზე თვითონ ბეჭდავს. ხედის შეცვლა, მაგალითად ვებგვერდით, მოდელის ფაილსაც შეცვლის.</p>
+    </div>
+    <p><strong>ასე.</strong> მოდელი მხოლოდ რიცხვს აბრუნებს. ბეჭდვა <code>Program.cs</code>-ში რჩება.</p>
+    <pre><code>public class GradingService(IGradeStore store)
+{
+    public void Add(int score) =&gt; store.Add(score);
+
+    public int Average()
+    {
+        int[] scores = store.All();
+        if (scores.Length == 0)
+            return 0;
+        int total = 0;
+        foreach (int score in scores)
+            total += score;
+        return total / scores.Length;
+    }
+}
+
+// Program.cs — კონტროლერი + ხედი
+GradingService grading = new GradingService(new MemoryGradeStore());
+grading.Add(10);
+grading.Add(9);
+grading.Add(8);
+Console.WriteLine(grading.Average());</code></pre>
+    <p>ცუდ კოდში <code>Report</code> მოდელს ეკრანთან აკავშირებდა. კარგ კოდში საშუალოს წესი ბიბლიოთეკაშია, ბეჭდვა კი პროგრამის დასაწყისში. ტესტი <code>Average</code>-ს ხედის გარეშე ამოწმებს. ეს იგივე SRP-ა დიდ მასშტაბზე: მოდელი წესია, ხედი დეტალი.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-10.0">Overview of ASP.NET Core MVC</a>.</p>
+
+    <section class="quiz" data-quiz data-answer="c">
+      <p class="prompt">MVC-ში რომელი კომპონენტია დამოკიდებული მოდელზე?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="ხედი მოდელზეა დამოკიდებული, მაგრამ კონტროლერიც. პასუხი კონტროლერს გამოტოვებს.">მხოლოდ ხედი, კონტროლერი არა</button>
+        <button type="button" data-choice="b" data-why="კონტროლერი მოდელზეა დამოკიდებული, მაგრამ ხედიც. პასუხი ხედს გამოტოვებს.">მხოლოდ კონტროლერი, ხედი არა</button>
+        <button type="button" data-choice="c" data-why="სწორია. ორივე მოდელზეა დამოკიდებული. მოდელმა არც ხედი იცის და არც კონტროლერი.">ხედიც და კონტროლერიც</button>
+        <button type="button" data-choice="d" data-why="თუ სამივე ერთმანეთზე იქნება დამოკიდებული, ხედის შეცვლა მოდელსაც გააფუჭებს. ისარი ერთი მიმართულებისაა.">სამივე ერთმანეთზე პირდაპირ და თავისუფლად</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h3>MVVM. Model-View-ViewModel</h3>
+    <p>MVVM = Model-View-ViewModel. მოდელი-ხედი-ხედის მოდელი.</p>
+    <p>მოდელი ისევ წესია. ხედი ფანჯარაა, მომავალ კვირაში XAML. ViewModel მათ შორის დგას: ხედს აწვდის იმას, რასაც ეკრანი აჩვენებს, და მოდელს ეძახის. ხედმა ViewModel იცის. ViewModel-მა ხედი, ღილაკი და <code>Console</code> არ უნდა იცოდეს.</p>
+    <pre><code>// Program.cs პირდაპირ მოდელს ეძახის და ტექსტსაც თვითონ წყვიტავს
+var grading = new GradingService(new MemoryGradeStore());
+grading.Add(10);
+grading.Add(9);
+grading.Add(8);
+int avg = grading.Average();
+Console.WriteLine($"საშუალო: {avg} ქულა");</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> ხედი მოდელს პირდაპირ ეძახის და პრეზენტაციის წესსაც ინახავს. ფანჯრის შეცვლა ამ ფაილსაც შეცვლის.</p>
+    </div>
+    <p><strong>ასე.</strong> ViewModel მოდელს ფარავს. ხედი მხოლოდ ViewModel-ის ველებს კითხულობს.</p>
+    <pre><code>public class GradeViewModel(GradingService grading)
+{
+    public void Add(int score) =&gt; grading.Add(score);
+    public int Average =&gt; grading.Average();
+}
+
+// Program.cs — ხედი
+var vm = new GradeViewModel(new GradingService(new MemoryGradeStore()));
+vm.Add(10);
+vm.Add(9);
+vm.Add(8);
+Console.WriteLine(vm.Average);</code></pre>
+    <p>ცუდ კოდში პროგრამა ერთდროულად იყო ხედი და მოდელის მომხმარებელი. კარგ კოდში <code>GradeViewModel</code> არ იცის, ბეჭდავთ თუ XAML-ში ჩანს. ტესტი ViewModel-ს ფანჯრის გარეშე ამოწმებს. დღეს ლაბორატორიაში ViewModel არ იწერება; საკმარისია გახსოვდეთ, რომ საშუალო ViewModel-ში უნდა ჩანდეს, არა ღილაკის კოდში.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/architecture/maui/mvvm">Model-View-ViewModel</a>.</p>
+
+    <section class="quiz" data-quiz data-answer="a">
+      <p class="prompt">რა იცის ViewModel-მა ხედის შესახებ?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="სწორია. ხედმა ViewModel იცის, ViewModel-მა ხედი არა. ამიტომ ის ფანჯრის გარეშე ტესტირდება.">არაფერი</button>
+        <button type="button" data-choice="b" data-why="ღილაკის გამოძახება ხედსა და ViewModel-ს ერთმანეთს მიაბამს. მაშინ ფანჯრის შეცვლა ViewModel-საც შეცვლის.">ხედის ღილაკებს პირდაპირ სახელით იძახებს</button>
+        <button type="button" data-choice="c" data-why="ფანჯარას ხედი ხატავს. ViewModel რიცხვებსა და ტექსტს ამზადებს.">ხედის ფანჯარას თვითონ ხატავს ეკრანზე</button>
+        <button type="button" data-choice="d" data-why="XAML ხედის ფაილია. ViewModel მას არ კითხულობს. ხედი კითხულობს ViewModel-ს.">ხედის XAML ფაილს თავად კითხულობს</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h3>Clean Architecture. სუფთა არქიტექტურა</h3>
+    <p>Clean Architecture = სუფთა არქიტექტურა. Uncle Bob-ის წრიული სურათი.</p>
+    <p>წესები ცენტრშია. დეტალები გარეთ: ეკრანი, ფაილი, ბაზა, კონტეინერი. dependency rule: დამოკიდებულება მხოლოდ შიგნით უნდა იყოს მიმართული. შიდა წრემ გარე კლასის სახელი არ უნდა იცოდეს. ინტერფეისი ცენტრში იწერება, რეალიზაცია გარეთ. Microsoft იგივე ფორმულას Onion Architecture-ს ეძახის.</p>
+    <pre><code>public class GradingService
+{
+    private readonly List&lt;int&gt; _scores = [];
+
+    public void Add(int score) =&gt; _scores.Add(score);
+
+    public int Average()
+    {
+        if (_scores.Count == 0)
+            return 0;
+        int total = 0;
+        foreach (int score in _scores)
+            total += score;
+        return total / _scores.Count;
+    }
+
+    public void SaveToFile(string path)
+    {
+        File.WriteAllText(path, string.Join(',', _scores));
+    }
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> საშუალოს წესი, სიის შენახვა და ფაილში ჩაწერა ერთ კლასშია. ბაზის დამატება ამ ფაილსაც შეცვლის.</p>
+    </div>
+    <p><strong>ასე.</strong> ცენტრში სერვისი და ინტერფეისი. გარეთ მაღაზია, ეკრანი და რეგისტრაცია.</p>
+    <pre><code>// GradeBook — შიდა წრე
+public interface IGradeStore
+{
+    void Add(int score);
+    int[] All();
+}
+
+public class GradingService(IGradeStore store) { /* Average, Add */ }
+
+// GradeBook.App — გარე წრე
+services.AddSingleton&lt;IGradeStore, MemoryGradeStore&gt;();
+GradingService grading = provider.GetRequiredService&lt;GradingService&gt;();
+Console.WriteLine(grading.Average());</code></pre>
+    <p>ცუდ კოდში ცენტრი ფაილს და <code>List</code>-ს იცნობდა. კარგ კოდში <code>GradingService</code> მხოლოდ <code>IGradeStore</code>-ს იცნობს. <code>MemoryGradeStore</code>, <code>Console.WriteLine</code> და <code>AddSingleton</code> აპის პროექტშია. ბიბლიოთეკა კონტეინერის პაკეტს არ მოიცავს. ფაილის მაღაზია მომავალში იგივე ინტერფეისს განახორციელებს; სერვისის ფაილი არ შეიცვლება.</p>
+    <p class="aside"><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a>. Microsoft: <a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures">Common web application architectures</a>.</p>
+
+    <h3>შიგნითაა თუ გარეთ?</h3>
+    <p>ჯერ პასუხი ხმამაღლა თქვით, მერე დააჭირეთ. სწორ ახსნას მხოლოდ სწორი ღილაკის არჩევის შემდეგ ნახავთ.</p>
+    <ul class="bins">
+      <li class="bin-item" data-expect="inner" data-yes="შიგნითაა. საშუალოს წესი ცენტრია. ეკრანი და მაღაზიის კლასი მისთვის უცნობია." data-no="ეს წესია და არა დეტალი. გარე წრე მასზეა დამოკიდებული და არა პირიქით.">
+        <p><code>GradingService.Average</code></p>
+        <div class="bin-actions">
+          <button type="button" data-pick="outer">გარეთ</button>
+          <button type="button" data-pick="inner">შიგნით</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+      <li class="bin-item" data-expect="outer" data-yes="გარეთაა. ეკრანი დეტალია. ხვალ კონსოლი ვებგვერდმა შეიძლება ჩაანაცვლოს, საშუალო კი იგივე დარჩეს." data-no="ბეჭდვა წესს არ განეკუთვნება. შიდა წრეში Console არ უნდა იყოს.">
+        <p><code>Console.WriteLine(grading.Average())</code></p>
+        <div class="bin-actions">
+          <button type="button" data-pick="inner">შიგნით</button>
+          <button type="button" data-pick="outer">გარეთ</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+      <li class="bin-item" data-expect="inner" data-yes="შიგნითაა. ინტერფეისი ცენტრში იწერება, რომ გარე კლასმა ის განახორციელოს." data-no="ინტერფეისი დეტალი არ არის. დეტალი ის კლასია, რომელიც სიას ინახავს.">
+        <p><code>IGradeStore</code></p>
+        <div class="bin-actions">
+          <button type="button" data-pick="inner">შიგნით</button>
+          <button type="button" data-pick="outer">გარეთ</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+      <li class="bin-item" data-expect="outer" data-yes="გარეთაა. ეს ერთ-ერთი რეალიზაციაა. ხვალ ფაილის მაღაზია იმავე ინტერფეისს განახორციელებს." data-no="კონკრეტული მაღაზია ცენტრში არ არის. ცენტრმა მისი სახელი არ იცის.">
+        <p><code>MemoryGradeStore</code></p>
+        <div class="bin-actions">
+          <button type="button" data-pick="outer">გარეთ</button>
+          <button type="button" data-pick="inner">შიგნით</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+      <li class="bin-item" data-expect="outer" data-yes="გარეთაა. რეგისტრაცია composition root-ია, ანუ Program.cs. სერვისმა ეს სტრიქონი არ იცის." data-no="კონტეინერში რეგისტრაცია წესი არ არის. წესი კონტეინერის გარეშეც ტესტირდება, როცა მაღაზიას ხელით გადასცემთ.">
+        <p><code>AddSingleton</code> <code>Program.cs</code>-ში</p>
+        <div class="bin-actions">
+          <button type="button" data-pick="inner">შიგნით</button>
+          <button type="button" data-pick="outer">გარეთ</button>
+        </div>
+        <p class="bin-feedback" hidden></p>
+      </li>
+    </ul>
+
+    <h2><span class="num">03</span>ინექცია და კონტეინერი</h2>
+    <p>DIP პრინციპია: დამოკიდებულობა ინტერფეისზე. Dependency Injection ხერხია: დამოკიდებულობა კონსტრუქტორში მოდის. IoC კი შედეგია: ობიექტების გრაფს თქვენი <code>new</code> კი არა, გარე კოდი აწყობს. ქვემოთ ორი თავია. თითოში იგივე თანმიმდევრობა, რაც SOLID-ში: კოდი, „ასე არა“, „ასე“, ახსნა.</p>
+
+    <h3>DI. Dependency Injection</h3>
+    <p>DI = Dependency Injection. დამოკიდებულების ინექცია.</p>
+    <p>კლასი დამოკიდებულობას თვითონ არ ქმნის. მას კონსტრუქტორში გადასცემენ. Martin Fowler-მა ამ ფორმას, კონსტრუქტორით გადაცემას, dependency injection უწოდა. DIP გეუბნებათ რასთან იყავით დამოკიდებული. DI გეუბნებათ როგორ მიიღოთ ეს დამოკიდებულობა.</p>
+    <pre><code>public class GradingService
+{
+    private readonly MemoryGradeStore _store = new MemoryGradeStore();
+
+    public void Add(int score) =&gt; _store.Add(score);
+
+    public int Average()
+    {
+        int[] scores = _store.All();
+        if (scores.Length == 0)
+            return 0;
+        int total = 0;
+        foreach (int score in scores)
+            total += score;
+        return total / scores.Length;
+    }
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> სერვისი კონკრეტულ მაღაზიას თვითონ ქმნის. სხვა მაღაზიის ჩასმა ამ ფაილის რედაქტირებას მოითხოვს.</p>
+    </div>
+    <p><strong>ასე.</strong> დამოკიდებულობა პარამეტრად მოდის. ტესტი და <code>Program.cs</code> მაღაზიას ირჩევენ.</p>
+    <pre><code>public class GradingService(IGradeStore store)
+{
+    public void Add(int score) =&gt; store.Add(score);
+
+    public int Average()
+    {
+        int[] scores = store.All();
+        if (scores.Length == 0)
+            return 0;
+        int total = 0;
+        foreach (int score in scores)
+            total += score;
+        return total / scores.Length;
+    }
+}
+
+// ტესტი — ინექცია ხელით
+var grading = new GradingService(new MemoryGradeStore());</code></pre>
+    <p>ცუდ კოდში სერვისი <code>MemoryGradeStore</code>-ის სახელს იცნობდა. კარგ კოდში ის მხოლოდ <code>IGradeStore</code>-ს იცნობს. პირველი ლაბორატორიის ტესტი სწორედ ამას ამოწმებს: კონტეინერი არ არის საჭირო, როცა მაღაზიას ხელით გადასცემთ.</p>
+    <p class="aside"><a href="https://martinfowler.com/articles/injection.html">Inversion of Control Containers and the Dependency Injection pattern</a>.</p>
+
+    <h3>IoC. Inversion of Control და კონტეინერი</h3>
+    <p>IoC = Inversion of Control. კონტროლის ინვერსია.</p>
+    <p>ჩვეულებრივ თქვენ ქმნით ობიექტებს. IoC-ში გრაფს გარე კოდი აწყობს. .NET-ის ჩაშენებული კონტეინერი <code>IServiceProvider</code>-ია. სიას <code>ServiceCollection</code>-ით ავსებთ, <code>BuildServiceProvider</code>-ით აგებთ, <code>GetRequiredService</code>-ით იღებთ. ამ სიის ადგილს composition root ჰქვია. დღეს ის <code>Program.cs</code>-ია.</p>
+    <pre><code>public class GradingService
+{
+    private readonly IGradeStore _store;
+
+    public GradingService(IServiceProvider provider)
+    {
+        _store = provider.GetRequiredService&lt;IGradeStore&gt;();
+    }
+
+    public void Add(int score) =&gt; _store.Add(score);
+    public int Average() { /* ... */ }
+}</code></pre>
+    <button type="button" class="reveal" aria-expanded="false">ასე არა</button>
+    <div class="reveal-body" hidden>
+    <p><strong>ასე არა.</strong> სერვისი კონტეინერს ეძებს და თვითონ იღებს მაღაზიას. Microsoft ასეთ მიდგომას service locator-ს უწოდებს და თავს არიდებს.</p>
+    </div>
+    <p><strong>ასე.</strong> რეგისტრაცია root-შია. სერვისი კონტეინერის სახელს არ იცის.</p>
+    <pre><code>var services = new ServiceCollection();
+services.AddSingleton&lt;IGradeStore, MemoryGradeStore&gt;();
+services.AddTransient&lt;GradingService&gt;();
+
+using ServiceProvider provider = services.BuildServiceProvider();
+GradingService grading = provider.GetRequiredService&lt;GradingService&gt;();</code></pre>
+    <p>კონტეინერი <code>GradingService</code>-ის კონსტრუქტორს ათვალიერებს, <code>IGradeStore</code>-ს ამჩნევს და რეგისტრაციის მიხედვით <code>MemoryGradeStore</code>-ს აწვდის. ეს DI-ის იგივე ინექციაა, მაგრამ <code>new GradingService(new MemoryGradeStore())</code> თქვენ აღარ წერთ — root წერს.</p>
+    <p>სიცოცხლის ხანგრძლივობა განსაზღვრავს, რამდენი ობიექტი შეიქმნება.</p>
+    <table>
+      <thead>
+        <tr><th></th><th>რამდენი ობიექტი</th><th>დღეს</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>transient</th><td>ყოველ მოთხოვნაზე ახალი</td><td><code>GradingService</code></td></tr>
+        <tr><th>scoped</th><td>თითო scope-ში ერთი; ახალ scope-ში ახალი</td><td>დღეს არ ვარეგისტრირებთ. ვებ-აპში scope ერთი მოთხოვნაა.</td></tr>
+        <tr><th>singleton</th><td>კონტეინერის არსებობის განმავლობაში ერთი</td><td><code>IGradeStore</code></td></tr>
+      </tbody>
+    </table>
+    <p>მოკლევადიანი სერვისი გრძელვადიან მაღაზიას იღებს. ორი <code>GradingService</code> ერთსა და იმავე ქულებს ხედავს. შებრუნებული მიმართულება, როცა singleton scoped ობიექტს იჭერს, captive dependency-ა. დღეს scoped არ გვაქვს.</p>
+    <p>საჭირო პაკეტია <code>Microsoft.Extensions.DependencyInjection</code>. ბიბლიოთეკის პროექტი ამ პაკეტს არ უნდა მოიცავდეს. სხვა კონტეინერებიც არსებობს: Autofac, DryIoc. დღეს ჩაშენებულით ვიფარგლებით.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">Dependency injection in .NET</a>. სიცოცხლის ხანგრძლივობა: <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-usage">Use dependency injection</a>. captive dependency: <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines">Dependency injection guidelines</a>.</p>
+
+    <section class="quiz" data-quiz data-answer="b">
+      <p class="prompt">რას ნიშნავს singleton lifetime კონტეინერში?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="ეს transient-ია. ყოველი GetRequiredService ახალ ობიექტს აბრუნებს.">ყოველ მოთხოვნაზე ახალი ობიექტი იქმნება და ბრუნდება</button>
+        <button type="button" data-choice="b" data-why="სწორია. ობიექტი პირველ მოთხოვნაზე იქმნება და კონტეინერის არსებობის განმავლობაში ყოველთვის იგივე ბრუნდება.">ერთი ობიექტი იქმნება და ყველა მოთხოვნას ემსახურება</button>
+        <button type="button" data-choice="c" data-why="ეს scoped-ია. ერთ scope-ში ობიექტი ერთია, შემდეგ scope-ში კი ახალი იქმნება.">ერთ scope-ში ერთი და იგივე ობიექტი რჩება</button>
+        <button type="button" data-choice="d" data-why="ტესტი კონტეინერის წესი არ არის. singleton ტესტის გარეთაც ერთი რჩება.">ობიექტი მხოლოდ ტესტში იქმნება ერთხელ და ინახება</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h3>დააჭირეთ იმ თანმიმდევრობით, რომლითაც root გრაფს აწყობს</h3>
+    <p>არასწორი ნაბიჯის შემთხვევაში ლოგი გეტყვით, რატომ ვერ აეწყობა გრაფი. სწორი თანმიმდევრობის შემდეგ, თუ გსურთ, დააჭირეთ „თავიდან“.</p>
+    <div class="runner" data-runner data-steps="store,service,build,resolve" data-done="გრაფი აწყობილია. მაღაზია singleton-ია, სერვისი transient-ია, კონტეინერმა კი კონსტრუქტორს მაღაზია გადასცა." data-retry="ამ თანმიმდევრობით გრაფი ვერ აეწყობა. წაიკითხეთ ლოგი და თავიდან სცადეთ.">
+      <div class="runner-choices">
+        <button type="button" data-step="resolve" data-ok="GetRequiredService-მა GradingService დააბრუნა." data-bad="ობიექტის მოთხოვნა ბოლო ნაბიჯია. მანამდე რეგისტრაცია და BuildServiceProvider გვჭირდება.">GetRequiredService</button>
+        <button type="button" data-step="store" data-ok="IGradeStore დარეგისტრირდა როგორც singleton MemoryGradeStore." data-bad="მაღაზიის რეგისტრაცია პირველი ნაბიჯია. ახლა სხვა ნაბიჯის ჯერია.">AddSingleton IGradeStore</button>
+        <button type="button" data-step="build" data-ok="BuildServiceProvider-მა კონტეინერი ააგო." data-bad="კონტეინერი ორივე რეგისტრაციის შემდეგ შენდება.">BuildServiceProvider</button>
+        <button type="button" data-step="service" data-ok="GradingService დარეგისტრირდა როგორც transient." data-bad="სერვისი მაღაზიის შემდეგ და კონტეინერის აგებამდე რეგისტრირდება.">AddTransient GradingService</button>
+      </div>
+      <ol class="runner-log"></ol>
+      <p class="runner-result" role="status"></p>
+      <button type="button" class="reset">თავიდან</button>
+    </div>
+
+    <h2><span class="num">04</span>ლაბორატორია</h2>
+    <p>ერთი საათი. ბოლოს <code>dotnet test</code>-ით სამივე ტესტი წარმატებით უნდა გავიდეს და <code>dotnet run --project GradeBook.App</code>-მა 9 უნდა დაბეჭდოს. ვებსაიტსა და ფანჯარას არ ვქმნით.</p>
+    <pre><code>mkdir GradeBook &amp;&amp; cd GradeBook
+dotnet new sln -n GradeBook
+dotnet new classlib -n GradeBook -f net10.0
+dotnet new console -n GradeBook.App -f net10.0
+dotnet new xunit -n GradeBook.Tests -f net10.0
+dotnet sln add GradeBook/GradeBook.csproj
+dotnet sln add GradeBook.App/GradeBook.App.csproj
+dotnet sln add GradeBook.Tests/GradeBook.Tests.csproj
+dotnet add GradeBook.App reference GradeBook
+dotnet add GradeBook.Tests reference GradeBook
+dotnet add GradeBook.App package Microsoft.Extensions.DependencyInjection
+dotnet add GradeBook.Tests package Microsoft.Extensions.DependencyInjection</code></pre>
+    <p>თუ SDK 8-ია, სამივე <code>-f</code> ჩაანაცვლეთ <code>net8.0</code>-ით. პაკეტის 10.0 ვერსია ამ შემთხვევაშიც გამოდგება. ბიბლიოთეკის პროექტს პაკეტს ნუ დაამატებთ.</p>
+    <p>შაბლონის <code>Class1.cs</code> და <code>UnitTest1.cs</code> წაშალეთ. ბიბლიოთეკაში DIP-ის სწორი მაგალითით სამი ფაილი შექმენით: <code>IGradeStore.cs</code>, <code>MemoryGradeStore.cs</code>, <code>GradingService.cs</code>. <code>All</code> სიის ასლს აბრუნებს, კვადრატული ფრჩხილებით.</p>
+    <p><code>GradeBook.Tests/GradingTests.cs</code>-ის პირველი ტესტი კონტეინერს არ იყენებს. სერვისს მაღაზიას ხელით გადასცემთ. ეს DIP-ის შემოწმებაა.</p>
+    <pre><code>[Fact]
+public void Average_of_three_scores_is_nine()
+{
+    var grading = new GradingService(new MemoryGradeStore());
+    grading.Add(10);
+    grading.Add(9);
+    grading.Add(8);
+    Assert.Equal(9, grading.Average());
+}</code></pre>
+    <p>მეორე ტესტი ცარიელ მაღაზიას ამოწმებს: <code>Assert.Equal(0, grading.Average())</code>. მესამე ტესტი კონტეინერს ამოწმებს. ფაილის თავში დაამატეთ <code>using Microsoft.Extensions.DependencyInjection;</code>. ორი transient სერვისი ერთ singleton მაღაზიას იზიარებს, ამიტომ პირველი სერვისის საშუალო 9-ია, თვით ობიექტები კი ერთმანეთისგან განსხვავდება.</p>
+    <pre><code>[Fact]
+public void Container_shares_one_store()
+{
+    var services = new ServiceCollection();
+    services.AddSingleton&lt;IGradeStore, MemoryGradeStore&gt;();
+    services.AddTransient&lt;GradingService&gt;();
+
+    using ServiceProvider provider = services.BuildServiceProvider();
+    GradingService first = provider.GetRequiredService&lt;GradingService&gt;();
+    first.Add(10);
+    GradingService second = provider.GetRequiredService&lt;GradingService&gt;();
+    second.Add(8);
+
+    Assert.Equal(9, first.Average());
+    Assert.NotSame(first, second);
+}</code></pre>
+    <p><code>GradeBook.App/Program.cs</code> მთლიანად ამ კოდით ჩაანაცვლეთ. გაუშვით <code>dotnet test</code>, შემდეგ კი <code>dotnet run --project GradeBook.App</code>. ეკრანზე 9 უნდა გამოჩნდეს.</p>
+    <pre><code>using Microsoft.Extensions.DependencyInjection;
+
+var services = new ServiceCollection();
+services.AddSingleton&lt;IGradeStore, MemoryGradeStore&gt;();
+services.AddTransient&lt;GradingService&gt;();
+
+using ServiceProvider provider = services.BuildServiceProvider();
+GradingService grading = provider.GetRequiredService&lt;GradingService&gt;();
+
+grading.Add(10);
+grading.Add(9);
+grading.Add(8);
+Console.WriteLine(grading.Average());</code></pre>
+
+    <h3>Program.cs-ის შემოწმება გაშვებამდე</h3>
+    <form class="checker" data-need="AddSingleton|AddSingleton,AddTransient|AddTransient,BuildServiceProvider|BuildServiceProvider,GetRequiredService|GetRequiredService,IGradeStore|IGradeStore" data-done="ხუთივე ნიშანი ადგილზეა. შეგიძლიათ გაუშვათ dotnet run.">
+      <p class="prompt">ჩასვით თქვენი <code>Program.cs</code>. ეს შემმოწმებელი კონტეინერს არ ამოწმებს, მხოლოდ ხუთ ნიშანს ეძებს.</p>
+      <textarea spellcheck="false" aria-label="Program.cs"></textarea>
+      <button type="submit">შეამოწმე</button>
+      <ul class="checker-list"></ul>
+      <p class="checker-result" role="status"></p>
+    </form>
+
+    <ol class="ticks" data-store="lesson-03">
+      <li><label><input type="checkbox"> <span>ბიბლიოთეკას კონტეინერის პაკეტი არ აქვს. პაკეტი კონსოლის პროექტსა და ტესტებს აქვს.</span></label></li>
+      <li><label><input type="checkbox"> <span><code>GradingService</code> კონსტრუქტორში <code>IGradeStore</code>-ს იღებს.</span></label></li>
+      <li><label><input type="checkbox"> <span>პირველი ტესტი მაღაზიას ხელით ქმნის და 9-ს ამოწმებს.</span></label></li>
+      <li><label><input type="checkbox"> <span>მესამე ტესტში ორი სერვისი ერთ მაღაზიას იზიარებს.</span></label></li>
+      <li><label><input type="checkbox"> <span><code>dotnet run --project GradeBook.App</code> 9-ს ბეჭდავს.</span></label></li>
+    </ol>
+
+    <h3>საშინაო დავალება</h3>
+    <ol>
+      <li><code>AddSingleton</code> შეცვალეთ <code>AddTransient</code>-ით, მხოლოდ მაღაზიისთვის. გაუშვით ტესტი. <code>Container_shares_one_store</code> წითლდება, რადგან მეორე სერვისი პირველის ქულას აღარ ხედავს. შემდეგ <code>AddSingleton</code> დააბრუნეთ.</li>
+      <li>დაწერეთ ტესტი ქულებისთვის 10 და 9. <code>Average</code> აბრუნებს 9-ს, რადგან 19 გაყოფილი 2-ზე მთელ რიცხვებში 9-ია. ტესტის დაწერამდე ეს წინადადება ხმამაღლა თქვით.</li>
+    </ol>
+
+    <h2><span class="num">05</span>მოკლე შეჯამება</h2>
+    <ol>
+      <li>SRP: კლასს ცვლილების ერთი მიზეზი აქვს. ჯამი და ეკრანი ცალ-ცალკეა.</li>
+      <li>OCP: ახალი დამრგვალება ახალი კლასია. <code>Average</code>-ის შიგნით ახალი ტოტი არ ემატება.</li>
+      <li>LSP: <code>Add</code>-ით შენახული ქულა <code>All</code>-ში ბრუნდება.</li>
+      <li>ISP: <code>Print</code> <code>IGradeStore</code>-ში არ დგას. ეკრანს საკუთარი ტიპი აქვს.</li>
+      <li>DIP: სერვისი ინტერფეისზეა დამოკიდებული. კონკრეტული მაღაზია გარეთ რჩება.</li>
+      <li>MVC: მოდელი არ ბეჭდავს. <code>Program.cs</code> ხედი და კონტროლერია.</li>
+      <li>MVVM: ViewModel ხედს არ იცის. ეკრანი ViewModel-ს კითხულობს.</li>
+      <li>Clean Architecture: წესი შიგნით, ფაილი და კონტეინერი გარეთ. დამოკიდებულობა შიგნით უნდა იყოს მიმართული.</li>
+      <li>DI: დამოკიდებულობა კონსტრუქტორში მოდის. კლასი <code>new</code> არ წერს.</li>
+      <li>IoC: გრაფს <code>Program.cs</code> აწყობს. მაღაზია singleton-ია, სერვისი transient.</li>
+    </ol>
+    <p>რუკა ერთ გვერდზე: <a href="../reference/solid.html">ცნობარი</a>. გასული კვირა: <a href="0002-devops-cicd.html">CI/CD</a>.</p>
+
+    <h3>წაიკითხეთ პირველწყარო</h3>
+    <p>ლაბორატორიის წყაროა <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">Dependency injection in .NET</a>. იქ host გამოიყენება, აქ კი <code>ServiceCollection</code>. სია იგივეა. პრინციპების ფორმულირებები კი <a href="https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html">Solid Relevance</a>-დან აიღეთ, თითო წინადადება თითო ასოსთვის.</p>
+    <p>თუ რეგისტრაცია გაეშვა, მაგრამ საშუალო მაინც უცნაურია, ტესტის წითელი ტექსტი თან წაიღეთ და კითხვა <a href="https://www.reddit.com/r/dotnet/">r/dotnet</a>-ზე დასვით. რეგისტრაციის კოდის გარეშე დასმულ კითხვას პასუხი არ მოჰყვება.</p>
+  </main>
+
+
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

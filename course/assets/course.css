@@ -378,6 +378,23 @@ pre code { background: transparent; padding: 0; color: inherit; }
 }
 
 .checker button, .reset { margin-top: 0.6rem; background: var(--navy); color: white; border-color: var(--navy); }
+
+button.reveal {
+  font: inherit;
+  font-weight: 600;
+  background: var(--navy);
+  color: white;
+  border: 1px solid var(--navy);
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  margin: 0.2rem 0 0.9rem;
+}
+
+button.reveal[aria-expanded="true"] {
+  background: transparent;
+  color: var(--navy);
+}
 .reset { background: transparent; color: var(--navy); }
 
 .ticks { list-style: none; padding: 0; }
@@ -431,6 +448,7 @@ details.lecturer p:last-child { margin-bottom: 0.3rem; }
   .mast { border-top: 0; background: white; color: black; padding: 0 0 1rem; }
   .mast h1, .mast-lead, .mast-week, .mast-kicker { color: black; }
   .crumbs, .lecturer, .teacher, button, .feedback, .bin-feedback { display: none !important; }
+  .reveal-body[hidden] { display: block !important; }
   body { background: white; font-size: 11pt; }
   pre { white-space: pre-wrap; }
   a { color: black; }
