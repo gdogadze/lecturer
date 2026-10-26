@@ -22,11 +22,10 @@
   </nav>
 
   <main class="sheet">
-    <p class="lead">არქიტექტურული შაბლონები და SOLID პრინციპები. MVC, MVVM და Clean Architecture-ის კონცეფციები, Dependency Injection და IoC კონტეინერების გამოყენება.</p>
+    <p class="lead">არქიტექტურული შაბლონები და SOLID პრინციპები. MVC, MVVM და Clean Architecture-ის კონცეფციები, Dependency Injection და კონტეინერის გამოყენება.</p>
 
 
     <h2><span class="num">01</span>ხუთი პრინციპი</h2>
-    <p>SOLID ხუთი წესია. თითო ასოს ქვემოთ აქვს სრული სახელი, რას ნიშნავს, და კოდი. ჯერ კოდზე თქვით, რა არის ცუდი. „ასე არა“ ამ ახსნას ხსნის. შემდეგ იგივე ამოცანა წესის დაცვითაა.</p>
 
     <h3>SRP. Single Responsibility Principle</h3>
     <p>SRP = Single Responsibility Principle. ერთი პასუხისმგებლობის პრინციპი.</p>
@@ -67,7 +66,7 @@ Console.WriteLine(total);</code></pre>
     <section class="quiz" data-quiz data-answer="a">
       <p class="prompt">SRP ამ კლასისგან რას მოითხოვს?</p>
       <div class="choices">
-        <button type="button" data-choice="a" data-why="სწორია. მიზეზი ერთია. მეთოდების რაოდენობა ამ წესს არ განსაზღვრავს.">ცვლილების მხოლოდ ერთი მიზეზი ჰქონდეს</button>
+        <button type="button" data-choice="a" data-why="სწორია. მიზეზი ერთია. მეთოდების რაოდენობა ამ წესს არ განსაზღვრავს.">ცვლილებას მხოლოდ ერთი მიზეზი ჰქონდეს</button>
         <button type="button" data-choice="b" data-why="მეთოდების რაოდენობა SRP არ არის. ერთ მეთოდსაც შეიძლება ორი მიზეზი ჰქონდეს: ჯამიც და ბეჭდვაც.">მხოლოდ ერთი მეთოდი ჰქონდეს</button>
         <button type="button" data-choice="c" data-why="პროექტის საზღვარი სასარგებლოა, მაგრამ SRP კლასის ცვლილების მიზეზს ეხება და არა საქაღალდეს.">მხოლოდ ერთ პროექტში იყოს</button>
         <button type="button" data-choice="d" data-why="ველების რაოდენობა წესი არ არის. ქულების სია ერთი ველია, მაგრამ მაინც შეიძლება ეკრანსაც ემსახურებოდეს.">მხოლოდ ერთ ველს ინახავდეს</button>
@@ -503,7 +502,7 @@ Console.WriteLine(grading.Average());</code></pre>
     </ul>
 
     <h2><span class="num">03</span>ინექცია და კონტეინერი</h2>
-    <p>DIP პრინციპია: დამოკიდებულობა ინტერფეისზე. Dependency Injection ხერხია: დამოკიდებულობა კონსტრუქტორში მოდის. IoC კი შედეგია: ობიექტების გრაფს თქვენი <code>new</code> კი არა, გარე კოდი აწყობს. ქვემოთ ორი თავია. თითოში იგივე თანმიმდევრობა, რაც SOLID-ში: კოდი, „ასე არა“, „ასე“, ახსნა.</p>
+    <p>DIP პრინციპია: დამოკიდებულობა ინტერფეისზე. Dependency Injection ხერხია: დამოკიდებულობა კონსტრუქტორში მოდის. ქვემოთ ორი თავია. თითოში იგივე თანმიმდევრობა, რაც SOLID-ში: კოდი, „ასე არა“, „ასე“, ახსნა.</p>
 
     <h3>DI. Dependency Injection</h3>
     <p>DI = Dependency Injection. დამოკიდებულების ინექცია.</p>
@@ -549,11 +548,10 @@ Console.WriteLine(grading.Average());</code></pre>
 // ტესტი — ინექცია ხელით
 var grading = new GradingService(new MemoryGradeStore());</code></pre>
     <p>ცუდ კოდში სერვისი <code>MemoryGradeStore</code>-ის სახელს იცნობდა. კარგ კოდში ის მხოლოდ <code>IGradeStore</code>-ს იცნობს. პირველი ლაბორატორიის ტესტი სწორედ ამას ამოწმებს: კონტეინერი არ არის საჭირო, როცა მაღაზიას ხელით გადასცემთ.</p>
-    <p class="aside"><a href="https://martinfowler.com/articles/injection.html">Inversion of Control Containers and the Dependency Injection pattern</a>.</p>
+    <p class="aside"><a href="https://martinfowler.com/articles/injection.html">Dependency Injection (Martin Fowler)</a>.</p>
 
-    <h3>IoC. Inversion of Control და კონტეინერი</h3>
-    <p>IoC = Inversion of Control. კონტროლის ინვერსია.</p>
-    <p>ჩვეულებრივ თქვენ ქმნით ობიექტებს. IoC-ში გრაფს გარე კოდი აწყობს. .NET-ის ჩაშენებული კონტეინერი <code>IServiceProvider</code>-ია. სიას <code>ServiceCollection</code>-ით ავსებთ, <code>BuildServiceProvider</code>-ით აგებთ, <code>GetRequiredService</code>-ით იღებთ. ამ სიის ადგილს composition root ჰქვია. დღეს ის <code>Program.cs</code>-ია.</p>
+    <h3>კონტეინერი</h3>
+    <p>.NET-ის ჩაშენებული კონტეინერი <code>IServiceProvider</code>-ია. სიას <code>ServiceCollection</code>-ით ავსებთ, <code>BuildServiceProvider</code>-ით აგებთ, <code>GetRequiredService</code>-ით იღებთ. ამ სიის ადგილს composition root ჰქვია. დღეს ის <code>Program.cs</code>-ია.</p>
     <pre><code>public class GradingService
 {
     private readonly IGradeStore _store;
@@ -618,80 +616,6 @@ GradingService grading = provider.GetRequiredService&lt;GradingService&gt;();</c
       <button type="button" class="reset">თავიდან</button>
     </div>
 
-    <h2><span class="num">04</span>ლაბორატორია</h2>
-    <p>ერთი საათი. ბოლოს <code>dotnet test</code>-ით სამივე ტესტი წარმატებით უნდა გავიდეს და <code>dotnet run --project GradeBook.App</code>-მა 9 უნდა დაბეჭდოს. ვებსაიტსა და ფანჯარას არ ვქმნით.</p>
-    <pre><code>mkdir GradeBook &amp;&amp; cd GradeBook
-dotnet new sln -n GradeBook
-dotnet new classlib -n GradeBook -f net10.0
-dotnet new console -n GradeBook.App -f net10.0
-dotnet new xunit -n GradeBook.Tests -f net10.0
-dotnet sln add GradeBook/GradeBook.csproj
-dotnet sln add GradeBook.App/GradeBook.App.csproj
-dotnet sln add GradeBook.Tests/GradeBook.Tests.csproj
-dotnet add GradeBook.App reference GradeBook
-dotnet add GradeBook.Tests reference GradeBook
-dotnet add GradeBook.App package Microsoft.Extensions.DependencyInjection
-dotnet add GradeBook.Tests package Microsoft.Extensions.DependencyInjection</code></pre>
-    <p>თუ SDK 8-ია, სამივე <code>-f</code> ჩაანაცვლეთ <code>net8.0</code>-ით. პაკეტის 10.0 ვერსია ამ შემთხვევაშიც გამოდგება. ბიბლიოთეკის პროექტს პაკეტს ნუ დაამატებთ.</p>
-    <p>შაბლონის <code>Class1.cs</code> და <code>UnitTest1.cs</code> წაშალეთ. ბიბლიოთეკაში DIP-ის სწორი მაგალითით სამი ფაილი შექმენით: <code>IGradeStore.cs</code>, <code>MemoryGradeStore.cs</code>, <code>GradingService.cs</code>. <code>All</code> სიის ასლს აბრუნებს, კვადრატული ფრჩხილებით.</p>
-    <p><code>GradeBook.Tests/GradingTests.cs</code>-ის პირველი ტესტი კონტეინერს არ იყენებს. სერვისს მაღაზიას ხელით გადასცემთ. ეს DIP-ის შემოწმებაა.</p>
-    <pre><code>[Fact]
-public void Average_of_three_scores_is_nine()
-{
-    var grading = new GradingService(new MemoryGradeStore());
-    grading.Add(10);
-    grading.Add(9);
-    grading.Add(8);
-    Assert.Equal(9, grading.Average());
-}</code></pre>
-    <p>მეორე ტესტი ცარიელ მაღაზიას ამოწმებს: <code>Assert.Equal(0, grading.Average())</code>. მესამე ტესტი კონტეინერს ამოწმებს. ფაილის თავში დაამატეთ <code>using Microsoft.Extensions.DependencyInjection;</code>. ორი transient სერვისი ერთ singleton მაღაზიას იზიარებს, ამიტომ პირველი სერვისის საშუალო 9-ია, თვით ობიექტები კი ერთმანეთისგან განსხვავდება.</p>
-    <pre><code>[Fact]
-public void Container_shares_one_store()
-{
-    var services = new ServiceCollection();
-    services.AddSingleton&lt;IGradeStore, MemoryGradeStore&gt;();
-    services.AddTransient&lt;GradingService&gt;();
-
-    using ServiceProvider provider = services.BuildServiceProvider();
-    GradingService first = provider.GetRequiredService&lt;GradingService&gt;();
-    first.Add(10);
-    GradingService second = provider.GetRequiredService&lt;GradingService&gt;();
-    second.Add(8);
-
-    Assert.Equal(9, first.Average());
-    Assert.NotSame(first, second);
-}</code></pre>
-    <p><code>GradeBook.App/Program.cs</code> მთლიანად ამ კოდით ჩაანაცვლეთ. გაუშვით <code>dotnet test</code>, შემდეგ კი <code>dotnet run --project GradeBook.App</code>. ეკრანზე 9 უნდა გამოჩნდეს.</p>
-    <pre><code>using Microsoft.Extensions.DependencyInjection;
-
-var services = new ServiceCollection();
-services.AddSingleton&lt;IGradeStore, MemoryGradeStore&gt;();
-services.AddTransient&lt;GradingService&gt;();
-
-using ServiceProvider provider = services.BuildServiceProvider();
-GradingService grading = provider.GetRequiredService&lt;GradingService&gt;();
-
-grading.Add(10);
-grading.Add(9);
-grading.Add(8);
-Console.WriteLine(grading.Average());</code></pre>
-
-    <h3>Program.cs-ის შემოწმება გაშვებამდე</h3>
-    <form class="checker" data-need="AddSingleton|AddSingleton,AddTransient|AddTransient,BuildServiceProvider|BuildServiceProvider,GetRequiredService|GetRequiredService,IGradeStore|IGradeStore" data-done="ხუთივე ნიშანი ადგილზეა. შეგიძლიათ გაუშვათ dotnet run.">
-      <p class="prompt">ჩასვით თქვენი <code>Program.cs</code>. ეს შემმოწმებელი კონტეინერს არ ამოწმებს, მხოლოდ ხუთ ნიშანს ეძებს.</p>
-      <textarea spellcheck="false" aria-label="Program.cs"></textarea>
-      <button type="submit">შეამოწმე</button>
-      <ul class="checker-list"></ul>
-      <p class="checker-result" role="status"></p>
-    </form>
-
-    <ol class="ticks" data-store="lesson-03">
-      <li><label><input type="checkbox"> <span>ბიბლიოთეკას კონტეინერის პაკეტი არ აქვს. პაკეტი კონსოლის პროექტსა და ტესტებს აქვს.</span></label></li>
-      <li><label><input type="checkbox"> <span><code>GradingService</code> კონსტრუქტორში <code>IGradeStore</code>-ს იღებს.</span></label></li>
-      <li><label><input type="checkbox"> <span>პირველი ტესტი მაღაზიას ხელით ქმნის და 9-ს ამოწმებს.</span></label></li>
-      <li><label><input type="checkbox"> <span>მესამე ტესტში ორი სერვისი ერთ მაღაზიას იზიარებს.</span></label></li>
-      <li><label><input type="checkbox"> <span><code>dotnet run --project GradeBook.App</code> 9-ს ბეჭდავს.</span></label></li>
-    </ol>
 
     <h3>საშინაო დავალება</h3>
     <ol>
@@ -710,7 +634,7 @@ Console.WriteLine(grading.Average());</code></pre>
       <li>MVVM: ViewModel ხედს არ იცის. ეკრანი ViewModel-ს კითხულობს.</li>
       <li>Clean Architecture: წესი შიგნით, ფაილი და კონტეინერი გარეთ. დამოკიდებულობა შიგნით უნდა იყოს მიმართული.</li>
       <li>DI: დამოკიდებულობა კონსტრუქტორში მოდის. კლასი <code>new</code> არ წერს.</li>
-      <li>IoC: გრაფს <code>Program.cs</code> აწყობს. მაღაზია singleton-ია, სერვისი transient.</li>
+      <li>კონტეინერი: გრაფს <code>Program.cs</code> აწყობს. მაღაზია singleton-ია, სერვისი transient.</li>
     </ol>
     <p>რუკა ერთ გვერდზე: <a href="../reference/solid.html">ცნობარი</a>. გასული კვირა: <a href="0002-devops-cicd.html">CI/CD</a>.</p>
 
