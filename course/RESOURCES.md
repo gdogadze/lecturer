@@ -50,11 +50,45 @@
   Prefer the built-in container. Captive dependency is a singleton holding a scoped service. Use for: why the lab's store is singleton and the service is transient, and why Autofac stays a name.
 - [Article: Inversion of Control Containers and the Dependency Injection pattern (Martin Fowler)](https://martinfowler.com/articles/injection.html)
   Where the name "dependency injection" comes from, and constructor injection as the form this course types. Use for: the one sentence that separates DI from IoC.
+- [FAQ: Windows developer FAQ](https://learn.microsoft.com/en-us/windows/apps/get-started/windows-developer-faq)
+  Which window to start: WinUI 3 for a new general-purpose Windows desktop app, WPF and WinForms still supported, UWP not formally deprecated, MAUI on Windows is WinUI 3 underneath. Also names Microsoft Photos, Visual Studio, React Native for Desktop, and Blazor Hybrid. Use for: week 4's choice. Re-check before a later semester.
+- [Video: What Is The BEST Windows UI Framework For Your Project](https://www.youtube.com/watch?v=vlrHb5sQk-8)
+  Pros, limits, and the four questions that pick a framework. Use for: the shape of the week-4 talk. The March 2025 claim that WinForms has no dark mode is out of date on .NET 10.
+- [Article: WinUI 3](https://learn.microsoft.com/en-us/windows/apps/winui/winui3/)
+  The recommended native Windows UI. C# or C++, Windows 10 1809 and later, Fluent, DirectX. Use for: the WinUI section.
+- [Article: Windows Forms overview](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/overview/?view=netdesktop-10.0)
+  A form, controls, and a handler for the user's action. Use for: the WinForms side of the comparison.
+- [Article: What's new in WinForms for .NET 10](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/whats-new/net100)
+  `Application.SetColorMode` is no longer experimental. Dark mode is Windows 11 only and does not track a live theme change. Use for: correcting the 2025 video.
+- [Article: WPF overview](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-10.0)
+  Resolution-independent, vector-based, hardware-accelerated XAML. Use for: the WPF side of the comparison.
+- [Article: x:Bind markup extension](https://learn.microsoft.com/en-us/windows/apps/develop/platform/xaml/x-bind-markup-extension)
+  WinUI compiled binding. Default mode is OneTime. Use for: why `Mode=OneWay` is in the one XAML line.
+- [Article: Migrate from UWP to the Windows App SDK](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/migrate-to-windows-app-sdk-ovw)
+  UWP and WinUI 3 share XAML ideas and do not share a project. Use for: the one paragraph on migration.
+- [Article: Design principles](https://learn.microsoft.com/en-us/windows/apps/design/design-principles)
+  Effortless, Calm, Personal, Familiar, Complete + Coherent. Use for: the Fluent names.
+- [Article: Typography in Windows](https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/typography)
+  The Windows 11 type ramp. Use for: why a click handler does not pick a font size.
+- [Article: XAML theme resources](https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources)
+  `{ThemeResource}` updates when the theme changes. `{StaticResource}` does not. Use for: light, dark, and contrast.
+- [Article: What is .NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-10.0)
+  One C# and XAML UI, four platforms. Use for: the MAUI definition.
+- [Article: Supported platforms for .NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/supported-platforms?view=net-maui-10.0)
+  Minimum OS versions for `net-maui-10.0`. Checked 2 November 2026. Use for: the platform table. Re-check before a later semester.
+- [Article: Handlers](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/handlers/?view=net-maui-10.0)
+  A MAUI control maps to a native control. Use for: the one sentence on Android, iOS, and macOS.
+- [Policy: .NET MAUI support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
+  MAUI's support clock is not the .NET clock, because of Xcode and the Android SDK. Use for: why the lesson does not copy the .NET LTS date onto MAUI.
+- [Page: .NET desktop frameworks](https://dotnet.microsoft.com/en-us/apps/desktop)
+  Official blurbs for MAUI, WinUI, and Uno. Use for: Uno's target list.
+- [Site: Avalonia](https://avaloniaui.net/)
+  The WPF-like cross-platform UI, including Linux. Use for: the Avalonia paragraph.
 
 ## Wisdom (Communities)
 
 - [r/dotnet](https://www.reddit.com/r/dotnet/)
-  Working .NET developers. Use for: "does this project shape make sense?" after a student has a building repo.
+  Working .NET developers. Use for: "does this project shape make sense?" after a student has a building repo, and for which of WinUI, WPF, and MAUI fits once the student has said Windows-only or four platforms.
 - [r/csharp](https://www.reddit.com/r/csharp/)
   Language questions. Use for: a C# 12 form that compiled but still looks wrong.
 - [.NET community page](https://dotnet.microsoft.com/en-us/platform/community)
@@ -65,3 +99,4 @@
 ## Gaps
 - A current Georgian textbook that uses the `dotnet` SDK and top-level statements. The Georgian companion the week-1 deck mentions is on Visual Studio 2019 and shows `Main`. Lesson 1 says that out loud.
 - A single official page that compares GitHub Actions, Azure Pipelines, and Jenkins for .NET. The comparison in lesson 2 is assembled from the three primary docs above.
+- A single official page that names a famous WinForms product the way the FAQ names Visual Studio for WPF and Photos for WinUI 3. The lesson says internal tools and the control market, and does not invent a product.

@@ -100,9 +100,31 @@
         }
         list.appendChild(item);
       });
+      var forbid = form.dataset.forbid || "";
+      if (forbid.length > 0) {
+        forbid.split(",").forEach(function (pair) {
+          var parts = pair.split("|");
+          var token = parts[0];
+          var label = parts[1] || token;
+          if (!token) return;
+          var item = document.createElement("li");
+          if (text.indexOf(token) === -1) {
+            item.textContent = label + " — არ ჩანს.";
+            item.className = "is-right";
+          } else {
+            item.textContent = label + " — ჩანს. ეს ფანჯრის ტიპია.";
+            item.className = "is-wrong";
+            missing.push(label);
+          }
+          list.appendChild(item);
+        });
+      }
       var result = form.querySelector(".checker-result");
+      var retry = form.dataset.forbid
+        ? "სია ჯერ არ ემთხვევა. შეასწორეთ და ისევ შეამოწმეთ."
+        : "ჯერ ეს დაამატეთ, მერე ისევ შეამოწმეთ.";
       result.textContent = missing.length
-        ? "ჯერ ეს დაამატეთ, მერე ისევ შეამოწმეთ."
+        ? retry
         : form.dataset.done || "ფორმა სწორია.";
     });
   });

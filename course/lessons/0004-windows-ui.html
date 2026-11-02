@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>კვირა 4. Windows აპლიკაციები</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+  <header class="mast">
+    <div class="mast-inner">
+      <p class="mast-kicker">სოხუმის სახელმწიფო უნივერსიტეტი · ინფორმატიკა · COMP M205-1</p>
+      <p class="mast-week">კვირა 4 · ლექცია 2 სთ · ლაბორატორია 1 სთ</p>
+      <h1>Windows აპლიკაციები</h1>
+    </div>
+  </header>
+
+  <nav class="crumbs">
+    <a href="../index.html">კურსი</a>
+    <a href="0003-solid-architecture.html">წინა: SOLID</a>
+    <a href="../reference/windows-ui.html">ცნობარი: ფანჯარა</a>
+  </nav>
+
+  <main class="sheet">
+    <p class="lead">Windows აპლიკაციების განვითარება: WinUI, WPF, MAUI. WinForms და WPF-ის შედარება, MAUI-ს შესაძლებლობები, Fluent Design System და UWP თანამედროვე დიზაინში.</p>
+    <p>ერთი და იგივე ფანჯარა რამდენიმე ფრეიმვორკით იწერება. დღეს თითოეულს ცალკე გავდივართ. რას აკეთებს კარგად, სად აქვს საზღვარი, და რომელი ცნობილი პროგრამა დგას მასზე.</p>
+    <p>პროექტს დღეს არ ვქმნით. WinUI, WPF და WinForms მხოლოდ Windows-ზე იგება, დარბაზში კი Mac-იც დგას. საათი არჩევანს ეთმობა.</p>
+
+    <details class="lecturer">
+      <summary>ლექტორისთვის</summary>
+      <p>მოდელი არის <a href="https://www.youtube.com/watch?v=vlrHb5sQk-8">ეს ვიდეო</a>. ჯერ სამი Windows-ის ფრეიმვორკი, მერე ვინ იყენებს, მერე კითხვები, რომლითაც გუნდი ირჩევს. „ასე არა“, ლაბორატორია და საშინაო ამ გვერდზე არ არის.</p>
+      <p>თუ საათი წაიწელა, წაიკითხეთ სამი ფრეიმვორკის ცხრილი და ბოლოს ოთხი კითხვა. Uno, Avalonia, React Native და PWA გამოტოვეთ. Fluent-ის ხუთი სახელი ერთ წინადადებაში დატოვეთ.</p>
+      <p>ვიდეო 2025 წლის მარტს ეკუთვნის და WinForms-ზე ამბობს, რომ მუქი რეჟიმი არ აქვს. .NET 10-ში <code>Application.SetColorMode</code> უკვე ჩვეულებრივი API-ა. მაინც თქვით საზღვარი. მუქი რეჟიმი Windows 11-ზეა, კონტრასტულ თემაში ითიშება, და სისტემის თემის შეცვლა გახსნილ აპს თავისით არ გადაჰყავს.</p>
+      <p>სახელები, რომლებიც დოკუმენტაციაში წერია და შეიძლება ხმამაღლა თქვათ: Microsoft Photos WinUI 3-ზეა, PowerToys-ის პარამეტრები და Command Palette WinUI 3-ზეა, Visual Studio-ს ინტერფეისის დიდი ნაწილი WPF-ა. სხვა პროდუქტი მეხსიერებიდან ნუ დაამატებთ.</p>
+      <p> <a href="https://www.youtube.com/watch?v=rZdClY3Yx7s">XAML explanation</a>, <a href="https://www.youtube.com/watch?v=vlrHb5sQk-8&t=24s">
+        What Is The BEST Windows UI Framework For Your Project </a> </p>
+    
+    </details>
+
+    <h2><span class="num">01</span>საიდან მოვიდა ეს სია</h2>
+    <p>WinForms Visual Basic-ის ფორმების მემკვიდრეა და .NET-ის პირველი დესკტოპის ფანჯარა იყო. ეკრანს დიზაინერში აწყობდი, ღილაკს კი მეთოდი ჰქონდა.</p>
+    <p>WPF 2006 წელს გამოვიდა. ეს იყო Microsoft-ის პირველი XAML. XAML არის ტექსტური ფაილი, რომელიც ფანჯარას აღწერს, სანამ პროგრამა გაეშვება. ღილაკი, წარწერა, სტილი და მიბმა იმ ფაილში წერია.</p>
+    <p>2015 წელს Windows 10-თან ერთად მოვიდა UWP, Universal Windows Platform. იგივე აპი დესკტოპზე, Xbox-სა და HoloLens-ზე გადიოდა. მისი კონტროლების ბიბლიოთეკას WinUI 2 ჰქვია.</p>
+    <p>WinUI 3 იმავე XAML-ს Windows App SDK-ში დებს. განახლება ოპერაციული სისტემის ახალ ვერსიას აღარ ელოდება. MAUI 2022 წელს გამოვიდა, Xamarin.Forms-ის ადგილას, ერთი კოდით რამდენიმე სისტემისთვის.</p>
+    <p>გასულ კვირას MVVM-ში ხედი მოდელს კითხულობდა. XAML-ის binding, ქართულად მიბმა, სწორედ ის კითხვაა. წარწერა ViewModel-ის ველს მიჰყვება, და ველის შეცვლისას ეკრანი თავიდან იხატება. ღილაკის მეთოდს წარწერის სახელი აღარ სჭირდება.</p>
+
+    <h2><span class="num">02</span>WinUI 3</h2>
+    <p>ახალი ზოგადი Windows დესკტოპ აპისთვის Microsoft WinUI 3-ს ასახელებს. ის Windows App SDK-ის ფანჯარაა. namespace არის <code>Microsoft.UI.Xaml</code>. აპი მუშაობს Windows 10-ის ვერსია 1809-ზე და Windows 11-ზე, შეფუთულიც და შეუფუთავიც.</p>
+    <p>ენა არის C# ან C++. პროცესორი არის x86, x64 ან Arm. F# და Visual Basic ამ ფანჯარაში არ იწერება.</p>
+    <p>XAML-ში წერია სამი რამ, რაც ფორმის მეთოდს ცალკე კოდად მოჰქონდა. მიბმა წარწერას ველზე ამაგრებს. სტილი ზომას და ფერს ერთხელ აღწერს. რესურსი იმ სტილს სახელით ტვირთავს, ამიტომ ნარინჯისფერი თითოეულ წარწერაზე არ მეორდება.</p>
+    <pre><code>&lt;TextBlock Text="{x:Bind AverageText, Mode=OneWay}"
+           Style="{StaticResource BodyTextBlockStyle}" /&gt;</code></pre>
+    <p><code>{x:Bind}</code> მიბმას აწყობის დროს ამოწმებს. ველს თუ სახელი გადაარქვი, პროექტი იგებს და შეცდომას მაშინ გიჩვენებს, როცა მომხმარებელს ცარიელი წარწერა ჯერ არ უნახავს. ჩვეულებრივი <code>{Binding}</code> იმ შეცდომას გაშვებისას წერს. <code>{x:Bind}</code> ნაგულისხმევად მნიშვნელობას ერთხელ კითხულობს. რომ წარწერა საშუალოს ცვლილებასაც მიჰყვეს, <code>Mode=OneWay</code> სჭირდება.</p>
+    <p>Visual Studio 2026-ში XAML Hot Reload განლაგებას და სტილს გაშვებულ აპში ცვლის. პროგრამა თავიდან არ ეშვება. WinUI 3-ს დიზაინერის ზედაპირი არ აქვს. ეკრანს Live Visual Tree-ში უყურებ, თვისებებს კი Live Property Explorer-ში.</p>
+    <p>დახატვა DirectX-ით მიდის, ამიტომ გრძელი სია და მოძრაობა გლუვია. სამი Windows-ის ფრეიმვორკიდან კალამს და შეხებას ყველაზე სრულად აქ იღებ.</p>
+    <p>Fluent Design System ამ კონტროლებს თან მოაქვს, Windows 10-ზეც და Windows 11-ზეც. ღია თემა, მუქი თემა და სისტემის აქცენტი აპს Windows-ის პარამეტრებიდან გადმოჰყვება. Mica Windows 11-ის მასალაა, ფონი სამუშაო მაგიდის ფერს ერევა. Windows 10-ზე ის ერთ ფერად ბრუნდება. Acrylic Windows 10 1809-ზეც მუშაობს. გამოყენებამდე კოდი ამოწმებს, მოწყობილობა იმ მასალას იღებს თუ არა.</p>
+    <p>Microsoft Photos ამ მოდელის საჯარო მაგალითია. აპი UWP-დან Windows App SDK-ზე გადავიდა და WinUI 3-ზე დარჩა. PowerToys-ის პარამეტრების ფანჯარა და Command Palette WinUI 3-ზეა აწყობილი. Windows-ის გარსის ნაწილი და ჩაშენებული აპებიც WinUI-ს იყენებს. კონტროლების სრული სია ცალკე აპში დევს, WinUI 3 Gallery, Microsoft Store-ში.</p>
+    <p>საზღვარი XAML-ის სწავლაა, თუ გუნდს აქამდე მხოლოდ ფორმის დიზაინერი უნახავს. მეორე საზღვარი ის არის, რომ UWP-ის პროექტში Windows App SDK არ იტვირთება. WinUI 2 და WinUI 3 ერთ პროექტში არ ჯდება, და გადასვლა მხოლოდ namespace-ის შეცვლა არ არის. ფანჯრის ძველი ტიპები, მაგალითად <code>Window.Current</code>, WinUI 3-ში აღარ დგას.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/windows/apps/winui/winui3/">WinUI 3</a>. არჩევანი: <a href="https://learn.microsoft.com/en-us/windows/apps/get-started/windows-developer-faq">Windows developer FAQ</a>. <code>{x:Bind}</code>: <a href="https://learn.microsoft.com/en-us/windows/apps/develop/platform/xaml/x-bind-markup-extension">x:Bind markup extension</a>. Photos-ის გადასვლა იმავე FAQ-ში წერია, კითხვაზე „Who is building apps with WinUI 3 today?“</p>
+
+    <h2><span class="num">03</span>WPF</h2>
+    <p>WPF, Windows Presentation Foundation, ისევ მხოლოდ Windows-ზე იგება და ისევ მხარდაჭერილია. სამიზნე დღევანდელ .NET-ზეა, <code>net10.0-windows</code>. ეს .NET Framework-ის ძველი პროექტი არ არის.</p>
+    <p>ფანჯარა აქაც XAML-ია, ამიტომ მიბმა, სტილი და Hot Reload აქაც გაქვს. Visual Studio ცალკე ფანჯარაში აგროვებს binding-ის შეცდომებს, სანამ აპს აწყობ. დახატვა აქაც DirectX-ით მიდის, ამიტომ ტექსტი და ფორმა გადიდებაზე მკაფიო რჩება.</p>
+    <p>.NET 9-იდან WPF-ს Fluent თემა აქვს, და ის .NET 10-ზეც დარჩა. ჩართული თემა აპს Windows 11-ის იერს აძლევს, ღია რეჟიმით, მუქი რეჟიმით და სისტემის აქცენტის ფერით.</p>
+    <p>WPF-ს დიდი ბაზარი აქვს მზა კონტროლების. ცხრილი, დიაგრამა, ლენტი და რთული რედაქტორი წლებია იყიდება. თუ კონკრეტული კონტროლი WinUI-ში ჯერ არ არის, გუნდი ხშირად WPF-ზე რჩება სწორედ ამ ბაზრის გამო. იგივე გამყიდველები WinForms-ის კონტროლებსაც ყიდიან, ამიტომ ძველ ფორმასაც იშვიათად უწევს ღილაკის ნულიდან ხატვა.</p>
+    <p>Visual Studio-ს ინტერფეისის დიდი ნაწილი WPF-ა. დიდი პროგრამა, რომელსაც ეს ფრეიმვორკი დღესაც უძლებს.</p>
+    <p>ენა აქ C#-იც არის და Visual Basic-იც. ახალი ზოგადი აპის პირველი რჩევა მაინც WinUI 3-ია. თუ პროექტი უკვე WPF-ზეა დაწერილი, Microsoft მას იქ ტოვებს. გადატანა მაშინ იწყება, როცა გუნდს WinUI-ს კონკრეტული შესაძლებლობა სჭირდება. WPF გაუქმებული არ არის.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-10.0">WPF overview</a>. Fluent თემა: <a href="https://learn.microsoft.com/en-us/windows/apps/get-started/windows-developer-faq">Windows developer FAQ</a>, კითხვა ახალი WPF აპის იერზე.</p>
+
+    <section class="quiz" data-quiz data-answer="b">
+      <p class="prompt">Visual Studio-ს ინტერფეისის დიდი ნაწილი რომელ ფრეიმვორკზე დგას?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="WinUI 3 ახალი ზოგადი აპის რჩევაა. Visual Studio ამ რჩევაზე არ გადასულა. მისი ეკრანის დიდი ნაწილი WPF-ა.">WinUI 3-ზე, რადგან ის ახალი რჩევაა</button>
+        <button type="button" data-choice="b" data-why="სწორია. Windows developer FAQ პირდაპირ ასახელებს Visual Studio-ს, როგორც დიდ WPF პროგრამას.">WPF-ზე</button>
+        <button type="button" data-choice="c" data-why="WinForms დიზაინერით სწრაფ ფორმას აწყობს. Visual Studio-ს გარსი ის ფორმა არ არის.">WinForms-ზე, დიზაინერში აწყობილი ფორმებით</button>
+        <button type="button" data-choice="d" data-why="MAUI Windows-ზე WinUI 3-ს იყენებს და ოთხ სისტემაზე გადის. Visual Studio Windows-ის დესკტოპის პროგრამაა და WPF-ზეა.">MAUI-ზე, რომ Mac-ზეც გაიხსნას</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h2><span class="num">04</span>WinForms</h2>
+    <p>WinForms, Windows Forms, მაშინ ირჩევა, როცა ფანჯარა დღეს უნდა გავიდეს და გუნდს XAML არ სურს. ღილაკს დიზაინერში სვამ, მეთოდი კი იმ ღილაკის დაჭერაზე იწერება. წარწერის ტექსტს ის მეთოდი თვითონ ანიჭებს.</p>
+    <p>მზა კონტროლების ბაზარი აქ ისეთივე ძველია, როგორც თავად ფორმა. შიდა პროგრამა, რომელსაც რამდენიმე ადამიანი იყენებს, ხშირად სწორედ ასე იწყება. Visual Basic კვლავ სრულად იწერება. WinUI-ში და MAUI-ში Visual Basic არ გაქვს.</p>
+    <p>.NET 10-ში მუქი რეჟიმი ჩვეულებრივი API-ა, <code>Application.SetColorMode</code>. .NET 9-ში ის ჯერ საცდელი იყო და კომპილატორი გაფრთხილებას ითხოვდა. ახლა ის გაფრთხილება აღარ არის. რეჟიმს სვამ მანამ, სანამ პირველ ფორმას შექმნი. არჩევანია მუქი, ღია, ან სისტემის პარამეტრი.</p>
+    <p>საზღვარი მაინც დარჩა. მუქი რეჟიმი Windows 11-ზე ჩანს. კონტრასტულ თემაში ის ითიშება. თუ სისტემის რეჟიმს აირჩევ, Windows-ის თემის შეცვლა გახსნილ აპს თავისით არ გადაიყვანს, აპი თავიდან უნდა გაეშვას. ზოგი კონტროლი მუქ რეჟიმში უსწორმასწოროდ იხატება, რადგან ქვეშ Win32-ის კონტროლებია. Microsoft-ის დოკუმენტაცია ამ განსხვავებას ცნობილ შეზღუდვად წერს და მას შეცდომად არ აგდებს.</p>
+    <p>WinForms კონტროლს DirectX-ით არ ხატავს. კალამი და შეხება აქ სუსტად მუშაობს. Fluent-ის მასალები, Mica და Acrylic, აქ არ მოდის. იერი კლასიკურ Windows-ს ჰგავს მაშინაც, როცა ფონი მუქია.</p>
+    <p>თუ გუნდმა ეს ფორმა იცის და პროგრამას ის ჰყოფნის, Microsoft გადასვლას არ ითხოვს. ბოლო წლებში აქვე დაემატა ასინქრონული დიალოგი, მუქი რეჟიმი, მაღალი DPI და დიზაინერის გაუმჯობესება.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/overview/?view=netdesktop-10.0">Windows Forms overview</a>. მუქი რეჟიმი: <a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/whats-new/net100">What's new in WinForms for .NET 10</a>.</p>
+
+    <table>
+      <thead>
+        <tr><th></th><th>WinUI 3</th><th>WPF</th><th>WinForms</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>ენა</th><td>C#, C++</td><td>C#, Visual Basic</td><td>C#, Visual Basic</td></tr>
+        <tr><th>ეკრანი</th><td>XAML, დიზაინერის გარეშე</td><td>XAML</td><td>დიზაინერი და ღილაკის მეთოდი</td></tr>
+        <tr><th>დახატვა</th><td>DirectX</td><td>DirectX</td><td>Win32 კონტროლი</td></tr>
+        <tr><th>თემა</th><td>Fluent, ღია და მუქი</td><td>Fluent .NET 9-იდან</td><td>მუქი რეჟიმი .NET 10-ზე, Windows 11</td></tr>
+        <tr><th>სად იგება</th><td>Windows 10 1809 და 11</td><td>მხოლოდ Windows</td><td>მხოლოდ Windows</td></tr>
+        <tr><th>ცნობილი პროგრამა</th><td>Photos, PowerToys-ის პარამეტრები</td><td>Visual Studio</td><td>შიდა ფორმები, მზა კონტროლების ბაზრით</td></tr>
+        <tr><th>როდის</th><td>ახალი ზოგადი Windows აპი</td><td>უკვე WPF პროექტი, ან კონტროლი მხოლოდ აქ არის</td><td>ფორმა სწრაფად უნდა გავიდეს</td></tr>
+      </tbody>
+    </table>
+
+    <section class="quiz" data-quiz data-answer="c">
+      <p class="prompt">სამ კოლეგას ხვალ შიდა ფორმა სჭირდება. გუნდი Visual Basic-ს წერს. მომხმარებელი მხოლოდ Windows-ზეა. რას ირჩევთ?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="WinUI 3-ში Visual Basic არ იწერება, და XAML-ის სწავლა ხვალინდელ ვადაში არ ეტევა.">WinUI 3-ს, რადგან ის ახალი ზოგადი რჩევაა</button>
+        <button type="button" data-choice="b" data-why="MAUI ოთხ სისტემაზე გადის და ცალკე workload-ია. აქ სისტემა ერთია, ვადა კი ხვალინდელია.">MAUI-ს, რომ მოგვიანებით ტელეფონზეც გავიდეს</button>
+        <button type="button" data-choice="c" data-why="სწორია. ცოტა მომხმარებელი, მოკლე ვადა და Visual Basic WinForms-ს ერგება. Microsoft ასეთ გუნდს გადასვლას არ სთხოვს.">WinForms-ს</button>
+        <button type="button" data-choice="d" data-why="UWP Xbox-ზე, HoloLens-სა და Surface Hub-ის ჩვეულებრივ გარემოზე რჩება. შიდა ფორმას ეს მოწყობილობა არ სჭირდება.">UWP-ს, რომ Store-ში შეფუთვა მზად იყოს</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h2><span class="num">05</span>UWP და Fluent</h2>
+    <p>UWP ფორმალურად გაუქმებული არ არის. Visual Studio 2026 მას თანამედროვე .NET-ზე ხსნის, Native AOT-ით. კონტროლები WinUI 2-ია, namespace <code>Windows.UI.Xaml</code>. WinUI 3-ის namespace <code>Microsoft.UI.Xaml</code>-ია. ეს ორი ბიბლიოთეკა ერთმანეთში არ ერევა.</p>
+    <p>ახალი ზოგადი დესკტოპ აპი აქ აღარ იწყება. UWP რჩება იქ, სადაც მოწყობილობა ამ მოდელს ითხოვს. Xbox-ის აპი UWP-ა. HoloLens-ის 2D აპი UWP-ა. Surface Hub-ის ჩვეულებრივი გარემოც UWP-ს ითხოვს. ამ სამიდან WinUI 3-ზე გადასვლა შეუძლებელია, მაშინაც კი, თუ Store-ში იგივე იდენტიფიკატორს ინახავ. დესკტოპის UWP კი შეიძლება იმავე იდენტიფიკატორით WinUI 3-ზე გამოვიდეს, და მომხმარებელს განახლება ჩვეულებრივად დაუჯდება.</p>
+    <p>Microsoft Photos სწორედ ასე წავიდა UWP-დან WinUI 3-ზე. არსებული UWP, თუ გუნდს ჰყოფნის და მოწყობილობა დესკტოპია, შეიძლება იქვე დარჩეს.</p>
+    <p>Fluent Design System არის Windows-ის დიზაინის ენა. WinUI 3 მას კონტროლებით იღებს. WPF მას .NET 9-ის თემით იღებს. UWP-მ ეს ენა Windows-ზე WinUI 2-ით შემოიტანა. ახალი პროექტი Fluent-ის გამო UWP-ზე აღარ იწყება.</p>
+    <p>Windows 11 ამ ენას ხუთი პრინციპით აღწერს.</p>
+    <table>
+      <thead>
+        <tr><th></th><th>რას ნიშნავს ეკრანზე</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>Effortless</th><td>საქმე ცოტა ნაბიჯით სრულდება</td></tr>
+        <tr><th>Calm</th><td>ეკრანზე ზედმეტი ელემენტი არ ხმაურობს</td></tr>
+        <tr><th>Personal</th><td>თემა და აქცენტი მომხმარებლის Windows-ს მიჰყვება</td></tr>
+        <tr><th>Familiar</th><td>კონტროლი ნაცნობია, რადგან სისტემის სხვა აპებშიც ასეთია</td></tr>
+        <tr><th>Complete + Coherent</th><td>ერთი იერი რჩება ფანჯარაშიც და სისტემის დანარჩენ ზედაპირზეც</td></tr>
+      </tbody>
+    </table>
+    <p>ხილული ნაწილი არის ფერი, სიმაღლე, მასალა, ფორმა, შრიფტი, მოძრაობა და ხატულა. ფერს, რომელიც თემასთან ერთად იცვლება, <code>{ThemeResource}</code> კითხულობს. ის თავიდან ფასდება აპის გახსნისას და მერეც, როცა მომხმარებელი ღია, მუქ ან კონტრასტულ თემაზე გადადის. <code>{StaticResource}</code> რესურსს ჩატვირთვისას ერთხელ კითხულობს და თემის შეცვლას აღარ მიჰყვება. შრიფტის ზომას type ramp-ის მზა სტილი ირჩევს, მაგალითად <code>BodyTextBlockStyle</code>, და არა ღილაკის მეთოდში ჩაწერილი რიცხვი.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/windows/apps/design/design-principles">Design principles</a>. თემის რესურსი: <a href="https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources">XAML theme resources</a>. UWP-ის დარჩენილი ადგილი: <a href="https://learn.microsoft.com/en-us/windows/apps/get-started/windows-developer-faq">Windows developer FAQ</a>.</p>
+
+    <h2><span class="num">06</span>MAUI</h2>
+    <p>MAUI, .NET Multi-platform App UI, ერთი C# პროექტია ოთხი სისტემისთვის. Android, iOS, macOS Mac Catalyst-ით, და Windows. Linux ოფიციალურ სამიზნეში არ არის. ენა მხოლოდ C#-ია. Visual Basic, F# და C++ აქ არ იწერება.</p>
+    <p>ეკრანი შეიძლება იყოს XAML, ან C# კოდში აღწერილი განლაგება. ვინც Flutter-იდან მოდის, MAUI-ში ცალკე მოდელსაც ნახავს, სადაც ეკრანი მდგომარეობიდან თავიდან იგება. XAML თუ იცი, MAUI-ს ეკრანი სწრაფად იკითხება.</p>
+    <p>Windows-ზე აწყობილი MAUI აპის ფანჯარა WinUI 3-ია. დანარჩენ სამ სისტემაზე handler ერთ MAUI კონტროლს იმ სისტემის კონტროლზე რუკავს. ღილაკი Android-ზე Android-ის ღილაკია, iOS-ზე კი iOS-ის. ამიტომ აპს შეუძლია იმ სისტემის იერი მიიღოს, სადაც გახსნილია. საერთო API საკმარისია ფაილის, ქსელის და სენსორის ჩვეულებრივი საქმისთვის. კამერა, გაზიარების ფანჯარა ან სისტემის დიალოგი ხშირად მაინც ითხოვს პატარა ფაილს კონკრეტული სისტემისთვის. ასეთი ფაილი MAUI-ში ჩვეულებრივია.</p>
+    <p>აწყობა შეიძლება Visual Studio-ში Windows-ზე, ან VS Code-ში Windows-ზე და Mac-ზე. შაბლონი ცალკე workload-ია. <code>dotnet new console</code> მას არ ქმნის. ამ კვირის გვერდი იმ workload-ს არ აყენებს.</p>
+    <p>თუ დღეს მხოლოდ Windows გინდა და მოგვიანებით ტელეფონიც შეიძლება დაგჭირდეს, Microsoft ამბობს, რომ WinUI 3-იდან MAUI-ში გადმოსვლა მზა გზა არ არის. ასეთი გუნდი თავიდანვე MAUI-ზე იწყებს. თუ მომხმარებელი მხოლოდ Windows-ზე რჩება, პირდაპირი WinUI 3 აპი საკმარისია.</p>
+    <p>.NET 10-ის გვერდი, 2 ნოემბერი 2026, ამ მინიმუმებს ასახელებს. MAUI-ს მხარდაჭერის ვადა .NET-ის ვადას არ ემთხვევა, რადგან შუაში Xcode და Android SDK დგას. ახალი პროექტის წინ ის გვერდი თავიდან უნდა შემოწმდეს.</p>
+    <table>
+      <thead>
+        <tr><th>სამიზნე</th><th>მინიმუმი .NET 10-ზე</th><th>რა ხატავს</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Android</td><td>5.0, API 21</td><td>handler, ადგილობრივი კონტროლი</td></tr>
+        <tr><td>iOS</td><td>12.2</td><td>handler, ადგილობრივი კონტროლი</td></tr>
+        <tr><td>macOS</td><td>12, Mac Catalyst</td><td>handler, ადგილობრივი კონტროლი</td></tr>
+        <tr><td>Windows</td><td>10 1809, ან 11</td><td>WinUI 3</td></tr>
+      </tbody>
+    </table>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-10.0">What is .NET MAUI</a>. პლატფორმები: <a href="https://learn.microsoft.com/en-us/dotnet/maui/supported-platforms?view=net-maui-10.0">Supported platforms</a>. handler: <a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/handlers/?view=net-maui-10.0">Handlers</a>.</p>
+
+    <section class="quiz" data-quiz data-answer="a">
+      <p class="prompt">.NET MAUI Windows-ზე ფანჯარას რით ხატავს?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="სწორია. Windows-ის გამოსავალი WinUI 3-ია. დანარჩენ სამ სისტემაზე handler ადგილობრივ კონტროლს რუკავს.">WinUI 3-ით</button>
+        <button type="button" data-choice="b" data-why="WinForms MAUI-ს Windows-ის ფანჯარა არ არის. იქ WinUI 3 მუშაობს.">WinForms-ის დიზაინერით</button>
+        <button type="button" data-choice="c" data-why="WPF მხოლოდ Windows-ზე იგება და MAUI-ს Mac-ის სამიზნე არ არის. macOS Mac Catalyst-ზე ადგილობრივ კონტროლს იყენებს.">WPF-ის XAML-ით, Mac-ზეც</button>
+        <button type="button" data-choice="d" data-why="Android-ზე WinUI 3 არ დგას. იქ handler ადგილობრივ კონტროლს რუკავს. WinUI 3 Windows-ის სამიზნის ქვედა ფენაა.">WinUI 3-ით, Android-ზეც</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h2><span class="num">07</span>Uno და Avalonia</h2>
+    <p>MAUI-ს სიის გარეთ Linux დგას. იქ ორი .NET ფრეიმვორკი შედის, და ორივეს თავისი XAML აქვს.</p>
+    <p>Uno Platform WinUI-ს XAML-ს სხვა სისტემაზე მიჰყავს. სამიზნე არის Windows, macOS, Linux, iOS, Android და ბრაუზერი WebAssembly-ით. ეკრანი სისტემიდან სისტემაზე ერთნაირი რჩება. ეს არის გზა, როცა გუნდს WinUI უკვე დაწერილი აქვს და მერე Linux ან ვები დაემატა.</p>
+    <p>Avalonia WPF-ს უფრო ჰგავს, ვიდრე WinUI-ს. ისიც გადის Windows-ზე, macOS-ზე, Linux-ზე, ტელეფონზე და ბრაუზერში. კონტროლს ყველგან თავად ხატავს, Skia-თი. სურათი სისტემიდან სისტემაზე ერთნაირი რჩება. გუნდი, რომელმაც WPF იცის, აქ უფრო ადვილად შედის, ვიდრე Uno-ში.</p>
+    <p>ორივე Microsoft Store-ში გამოსაქვეყნებლად ვარგისია, ისევე როგორც WinUI, WPF, WinForms და MAUI. არჩევანის წინ კითხვა ერთია. ის API, რომელიც აპს სჭირდება, ამ ფრეიმვორკში საერთოდ არის თუ არა. თუ არ არის, ჯობს დარჩე WinUI-ზე, WPF-ზე ან WinForms-ზე, თუნდაც მეორე სისტემა გენდომებოდეს.</p>
+    <p class="aside">Uno: <a href="https://dotnet.microsoft.com/en-us/apps/desktop">.NET desktop frameworks</a>. Avalonia: <a href="https://avaloniaui.net/">avaloniaui.net</a>.</p>
+
+    <h2><span class="num">08</span>React Native, PWA და Blazor</h2>
+    <p>აქამდე ენა C# იყო. ზოგი გუნდი ფანჯარას JavaScript-ით წერს, და Windows ამასაც იღებს.</p>
+    <p>React Native Meta-ს ფრეიმვორკია. Facebook და Instagram ამ მოდელზე დგას. კომპონენტი და hook Windows-ზე React Native for Windows-ით მოდის, Mac-ზე კი React Native for macOS-ით. ეკრანი ადგილობრივ კონტროლად იხატება. Windows developer FAQ ვებგუნდს სწორედ აქ გზავნის, როცა დესკტოპის პროგრამა სჭირდებათ და React უკვე იციან.</p>
+    <p>PWA, Progressive Web App, საიტია, რომელიც აპივით ყენდება. ენა არის HTML, CSS და JavaScript. React, Vue, Angular ან ჩვეულებრივი JavaScript, რომელსაც გუნდი უკვე წერს. Edge-დან დაყენებული PWA იღებს ფანჯარას, Start მენიუს ხატულას, ფაილურ სისტემას, სათაურის ზოლს, მალსახმობს და კალამს. Microsoft Store ამ აპსაც იღებს.</p>
+    <p>Blazor Hybrid მაშინ გამოდგება, როცა ეკრანი უკვე ვებზეა დაწერილი და ფანჯარა .NET-ზე გინდა. Blazor-ის გვერდი შედის MAUI-ს აპში, და ასევე WPF-სა და WinForms-ში, თუ პროექტი თანამედროვე .NET-ზეა. .NET Framework-ის ძველი WPF და WinForms ამ ჰოსტს არ იღებს. .NET 9-იდან <code>HybridWebView</code> Blazor-ის გარდა სხვა JavaScript ეკრანსაც სვამს, მათ შორის Angular-ს, React-ს და Vue-ს. C# და JavaScript ერთმანეთს იძახებს. ერთი ეკრანი შეიძლება MAUI-ს კონტროლი იყოს, მეზობელი კი ვების გვერდი.</p>
+    <p class="aside">ვებგუნდის არჩევანი: <a href="https://learn.microsoft.com/en-us/windows/apps/get-started/windows-developer-faq">Windows developer FAQ</a>, React Native for Desktop და Blazor Hybrid.</p>
+
+    <h2><span class="num">09</span>რომელს ირჩევთ</h2>
+    <p>ერთი სწორი პასუხი არ არის. ოთხი კითხვა სიას ამოკლებს.</p>
+    <ol>
+      <li>ყველა მომხმარებელი Windows-ზეა? თუ კი, სია არის WinUI 3, WPF და WinForms. თუ ტელეფონი, Mac ან Linuxაც გინდა, ჯერ შეამოწმე, საჭირო API არის თუ არა MAUI-ში, Uno-ში, Avalonia-ში ან React Native-ში. დაკარგული API გიბრუნებს Windows-ის სამ ფრეიმვორკთან.</li>
+      <li>ვინ იყენებს და როდის უნდა გავიდეს? რამდენიმე ადამიანი და ხვალინდელი ვადა WinForms-ს ერგება, მით უმეტეს თუ გუნდი Visual Basic-ს წერს. საჯარო აპი, რომელსაც დღევანდელი Windows-ის იერი უნდა, WinUI 3-ს ერგება. WPF ერგება მაშინ, როცა კოდი უკვე WPF-აა, ან კონტროლი ჯერ მხოლოდ იქ იყიდება.</li>
+      <li>რა იცის გუნდმა? C# და XAML მიგიყვანს WinUI-ზე, WPF-ზე, MAUI-ზე, Uno-ზე ან Avalonia-ზე. React მიგიყვანს React Native-ზე. მზა საიტი მიგიყვანს PWA-ზე, ან Blazor Hybrid-ზე ნატიურ ფანჯარაში.</li>
+      <li>გჭირდება Windows-ის API, რომელსაც ნატიური ფრეიმვორკი კარგად ხსნის? მაშინ WinUI, WPF და WinForms არჩევანში რჩება მაშინაც, როცა მეორე სისტემაც გინდა.</li>
+    </ol>
+    <p>ბიზნესის პროგრამებში გუნდი ხშირად იმ ენას ირჩევს, რომელსაც უკვე წერს. დოკუმენტაციაც ასე ამბობს.</p>
+
+    <section class="quiz" data-quiz data-answer="d">
+      <p class="prompt">ახალი ზოგადი Windows დესკტოპ აპი, მხოლოდ Windows-ის მომხმარებლით, სად იწყება?</p>
+      <div class="choices">
+        <button type="button" data-choice="a" data-why="არსებული WinForms შეიძლება დარჩეს. ახალი ზოგადი აპის პირველი რჩევა მაინც WinUI 3-ია.">არსებული WinForms აუცილებლად WinUI-ზე გადადის</button>
+        <button type="button" data-choice="b" data-why="UWP Xbox-ზე, HoloLens-სა და Surface Hub-ზე რჩება. ახალი ზოგადი დესკტოპ აპი იქ აღარ იწყება.">ახალი აპი UWP პროექტით იწყება</button>
+        <button type="button" data-choice="c" data-why="WPF მხარდაჭერილია და Visual Studio მასზე დგას. ახალი ზოგადი აპის პირველი რჩევა მაინც WinUI 3-ია.">ახალ პროექტში WPF აღარ იწერება</button>
+        <button type="button" data-choice="d" data-why="სწორია. Windows developer FAQ ახალ ზოგად დესკტოპ აპს WinUI 3-სა და Windows App SDK-ს ურჩევს.">WinUI 3-ზე</button>
+      </div>
+      <p class="feedback" hidden></p>
+    </section>
+
+    <h2><span class="num">10</span>მოკლე შეჯამება</h2>
+    <ol>
+      <li>ახალი ზოგადი Windows აპი WinUI 3-ზე იწყება. Microsoft Photos და PowerToys-ის პარამეტრები ამ მოდელზეა.</li>
+      <li>Visual Studio-ს ინტერფეისის დიდი ნაწილი WPF-ა. WPF რჩება, როცა პროექტი უკვე WPF-აა, ან კონტროლი ჯერ მხოლოდ იქ არის. .NET 9-იდან Fluent თემაც აქვს.</li>
+      <li>WinForms ხვალინდელ შიდა ფორმას აწყობს, Visual Basic-ითაც. .NET 10-ზე მუქი რეჟიმი Windows 11-ს ეყრდნობა და Fluent-ის მასალა არ არის.</li>
+      <li>UWP რჩება Xbox-ზე, HoloLens-ის 2D აპზე და Surface Hub-ის ჩვეულებრივ გარემოზე. namespace არის <code>Windows.UI.Xaml</code>.</li>
+      <li>MAUI ერთი C# კოდით მიდის Android-ზე, iOS-ზე, macOS-ზე და Windows-ზე. Windows-ზე ქვეშ WinUI 3-ია. Linux აქ არ არის.</li>
+      <li>Linux-სა და ბრაუზერს Uno და Avalonia ფარავს. React გუნდი React Native-ს უყურებს. საიტი Edge-დან PWA-დაც ყენდება.</li>
+      <li>ჯერ იკითხეთ, ყველა მომხმარებელი Windows-ზეა თუ არა, რამდენი დრო გაქვთ, და რა ენა იცის გუნდმა.</li>
+    </ol>
+    <p>რუკა ერთ გვერდზე: <a href="../reference/windows-ui.html">ცნობარი</a>. გასული კვირა: <a href="0003-solid-architecture.html">SOLID</a>.</p>
+
+    <h3>წაიკითხეთ პირველწყარო</h3>
+    <p>ეს ლექცია მიჰყვება საუბარს <a href="https://www.youtube.com/watch?v=vlrHb5sQk-8">What Is The BEST Windows UI Framework For Your Project</a>. სახელებს და რჩევას ვამოწმებთ <a href="https://learn.microsoft.com/en-us/windows/apps/get-started/windows-developer-faq">Windows developer FAQ</a>-ში. იქ ერთმანეთის გვერდით წერია WinUI 3, WPF, WinForms, UWP, MAUI, React Native და Blazor.</p>
+    <p>გაუგებარი ადგილი ლექტორს ჰკითხეთ. თუ ორი ფრეიმვორკი მაინც გრჩებათ, კითხვა <a href="https://www.reddit.com/r/dotnet/">r/dotnet</a>-ზე დასვით და პირველ წინადადებაში დაწერეთ, მომხმარებელი მხოლოდ Windows-ზეა თუ ტელეფონიც გინდათ.</p>
+  </main>
+
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

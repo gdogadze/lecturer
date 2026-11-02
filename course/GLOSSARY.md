@@ -125,3 +125,53 @@ _Avoid_: a four-project template, when you mean the dependency rule
 **dependency rule**:
 Code in an inner circle does not name a type from an outer circle.
 _Avoid_: layer, when the direction is missing
+
+## Windows UI
+
+**WinForms**:
+A Windows-only window whose click handler sets control properties in code.
+_Avoid_: WPF, when you mean the form
+
+**WPF**:
+A Windows-only XAML window. The view binds to a view model. Not deprecated.
+_Avoid_: WinUI, .NET Framework, when you mean today's WPF
+
+**XAML**:
+The markup file that describes a window.
+_Avoid_: HTML
+
+**binding**:
+A control property that reads a view model property and updates when that property changes.
+_Avoid_: assigning `label.Text` in the click handler
+
+**code-behind**:
+The C# file paired with a XAML or WinForms view. It may set `DataContext`. It does not own the average.
+_Avoid_: view model
+
+**WinUI**:
+WinUI 3, the native Windows UI in the Windows App SDK. Namespace `Microsoft.UI.Xaml`. The recommendation for a new general-purpose Windows desktop app.
+_Avoid_: UWP, WinUI 2
+
+**UWP**:
+The older packaged Windows app model. Its controls are WinUI 2, namespace `Windows.UI.Xaml`. Not formally deprecated. Not the start of a new general-purpose desktop app.
+_Avoid_: WinUI 3, deprecated
+
+**MAUI**:
+One C# and XAML UI for Android, iOS, Mac Catalyst, and Windows. On Windows the window is WinUI 3. Linux is not an official target.
+_Avoid_: WPF on a Mac
+
+**Uno Platform**:
+WinUI XAML on Windows, macOS, Linux, iOS, Android, and the browser. The window stays consistent across those systems.
+_Avoid_: MAUI, when the target is Linux
+
+**Avalonia**:
+A cross-platform .NET UI closer to WPF. It draws its own controls with Skia, including on Linux.
+_Avoid_: WinUI, when you mean the same control on every system
+
+**Fluent Design System**:
+The Windows design language. WinUI controls carry it. A color that must follow the theme is a theme resource.
+_Avoid_: `ForeColor` or a hex color chosen in the click handler
+
+**PropertyChanged**:
+The event a view model raises so a binding can refresh one named property.
+_Avoid_: naming a label, button, or window

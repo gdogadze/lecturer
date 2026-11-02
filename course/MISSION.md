@@ -10,6 +10,7 @@ Master's students at Sokhumi State University need to leave COMP M205-1 able to 
 - Later weeks can assume this floor and move to architecture, without re-teaching the SDK.
 - A student can name the one reason a type should change, and can pass an `IGradeStore` through a constructor instead of constructing the store inside the service.
 - A student can register that store as a singleton and the service as transient in `Microsoft.Extensions.DependencyInjection`, and can say which way the arrow points in MVC, MVVM, and Clean Architecture.
+- A student can tell WinForms, WPF, WinUI 3, UWP, and MAUI apart, can say which one fits a Windows-only app, a phone-and-desktop app, or an existing WPF codebase, and can name Visual Studio as a WPF app and Microsoft Photos as a WinUI 3 app.
 
 ## Constraints
 - Each week is a 2-hour lecture plus a 1-hour lab.
@@ -20,7 +21,7 @@ Master's students at Sokhumi State University need to leave COMP M205-1 able to 
 - AI may explain an error. A student who cannot explain the code does not yet own it. Quizzes and exams are without tools.
 
 ## Out of scope
-- UI frameworks, async, cloud deploy, EF Core, and API security. Those are later weeks. Week 3 names MVC and MVVM. It does not build a window or a website.
+- Async, cloud deploy, EF Core, and API security. Those are later weeks. Week 4 compares the Windows UI frameworks and does not install the MAUI workload or create a WPF, WinUI, or WinForms project. A website is still later.
 - A second IoC container. Autofac and the rest stay names. The lab registers the built-in container.
 - Installing Jenkins, or standing up an Azure DevOps organization, in week 2.
 - A tour of C# 13 and C# 14. Name the version map. Teach the two C# 12 forms students will type.

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ცნობარი. ფანჯარა</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+  <header class="mast">
+    <div class="mast-inner">
+      <p class="mast-kicker">COMP M205-1 · ცნობარი</p>
+      <h1>ფანჯარა, ერთ გვერდზე</h1>
+      <p class="mast-lead">კვირა 4. რომელი ფრეიმვორკი, რა ღირს, და ვინ დგას მასზე. პროექტი ამ კვირაში არ იქმნება.</p>
+    </div>
+  </header>
+  <nav class="crumbs">
+    <a href="../index.html">კურსი</a>
+    <a href="../lessons/0004-windows-ui.html">გაკვეთილი</a>
+    <a href="solid.html">ცნობარი: SOLID</a>
+  </nav>
+  <main class="sheet">
+    <h2>მხოლოდ Windows</h2>
+    <table>
+      <thead>
+        <tr><th></th><th>რა არის</th><th>როდის</th><th>ვინ დგას მასზე</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>WinUI 3</td><td>Windows App SDK, <code>Microsoft.UI.Xaml</code>, Fluent, DirectX</td><td>ახალი ზოგადი დესკტოპ აპი. Windows 10 1809 და 11</td><td>Microsoft Photos. PowerToys-ის პარამეტრები და Command Palette</td></tr>
+        <tr><td>WPF</td><td>XAML, ვიდეოკარტა, Fluent .NET 9-იდან</td><td>უკვე WPF პროექტი, ან კონტროლი ჯერ მხოლოდ აქ არის</td><td>Visual Studio-ს ინტერფეისის დიდი ნაწილი</td></tr>
+        <tr><td>WinForms</td><td>დიზაინერი და ღილაკის მეთოდი. Visual Basic რჩება</td><td>შიდა ფორმა სწრაფად უნდა გავიდეს</td><td>შიდა პროგრამები. მუქი რეჟიმი .NET 10-ზე, Windows 11</td></tr>
+        <tr><td>UWP</td><td>WinUI 2, <code>Windows.UI.Xaml</code></td><td>Xbox, HoloLens-ის 2D აპი, Surface Hub-ის ჩვეულებრივი გარემო</td><td>Photos აქედან წავიდა WinUI 3-ზე</td></tr>
+      </tbody>
+    </table>
+    <p>WinUI 2 და WinUI 3 ერთ პროექტში არ ჯდება. WinUI 3-ს დიზაინერი არ აქვს, ცვლილებას XAML Hot Reload აჩვენებს. <code>{x:Bind}</code> შეცდომას აწყობისას ამოწმებს და ნაგულისხმევად ერთხელ კითხულობს. განახლებას <code>Mode=OneWay</code> სჭირდება.</p>
+    <p class="aside"><a href="https://learn.microsoft.com/en-us/windows/apps/get-started/windows-developer-faq">Windows developer FAQ</a></p>
+
+    <h2>ერთზე მეტი სისტემა</h2>
+    <table>
+      <thead>
+        <tr><th></th><th>სად გადის</th><th>რით ჰგავს დანარჩენს</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>MAUI</td><td>Android, iOS, macOS, Windows. Linux არა</td><td>Windows-ზე ქვეშ WinUI 3-ია. დანარჩენზე handler ადგილობრივ კონტროლს რუკავს. ენა მხოლოდ C#</td></tr>
+        <tr><td>Uno</td><td>Windows, macOS, Linux, iOS, Android, ბრაუზერი</td><td>WinUI-ს XAML. ეკრანი სისტემიდან სისტემაზე ერთნაირი რჩება</td></tr>
+        <tr><td>Avalonia</td><td>Windows, macOS, Linux, ტელეფონი, ბრაუზერი</td><td>WPF-ს ახლოს. ყველგან თავად ხატავს, Skia-თი</td></tr>
+        <tr><td>React Native</td><td>Windows, macOS, iOS, Android</td><td>React-ის კომპონენტი, ადგილობრივი კონტროლი. Facebook და Instagram ამ მოდელზეა</td></tr>
+        <tr><td>PWA</td><td>ბრაუზერი, და Edge-დან დაყენებული ფანჯარა</td><td>HTML, CSS, JavaScript. Store-შიც გამოდის</td></tr>
+      </tbody>
+    </table>
+
+    <h2>MAUI, .NET 10</h2>
+    <table>
+      <thead><tr><th>სამიზნე</th><th>მინიმუმი</th></tr></thead>
+      <tbody>
+        <tr><td>Android</td><td>5.0, API 21</td></tr>
+        <tr><td>iOS</td><td>12.2</td></tr>
+        <tr><td>macOS</td><td>12, Mac Catalyst</td></tr>
+        <tr><td>Windows</td><td>10 1809, ან 11, WinUI 3</td></tr>
+      </tbody>
+    </table>
+    <p>შემოწმებულია 2 ნოემბერი 2026, <code>net-maui-10.0</code>. მხარდაჭერის ვადა .NET-ს არ ემთხვევა. workload ამ კვირაში არ ვაყენებთ.</p>
+
+    <h2>Fluent</h2>
+    <p>Effortless, Calm, Personal, Familiar, Complete + Coherent. ფერს <code>{ThemeResource}</code> კითხულობს, სტილს <code>{StaticResource BodyTextBlockStyle}</code>. Mica Windows 11-ზეა და Windows 10-ზე ერთ ფერზე ბრუნდება.</p>
+
+    <h2>ოთხი კითხვა</h2>
+    <ol>
+      <li>ყველა მომხმარებელი Windows-ზეა?</li>
+      <li>ვინ იყენებს, და როდის უნდა გავიდეს პირველი ვერსია?</li>
+      <li>გუნდი C#-ს წერს, React-ს, თუ უკვე საიტი აქვს?</li>
+      <li>საჭირო Windows-ის API ამ ფრეიმვორკში არის?</li>
+    </ol>
+    <p class="aside">საუბარი, რომელსაც ლექცია მიჰყვება: <a href="https://www.youtube.com/watch?v=vlrHb5sQk-8">What Is The BEST Windows UI Framework For Your Project</a>.</p>
+  </main>
+</body>
+</html>
